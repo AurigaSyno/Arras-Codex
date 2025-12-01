@@ -1,0 +1,2229 @@
+{
+    "wz": {
+        "online": true,
+        "name": "wz",
+        "uptime": 1441.088,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.83,
+        "code": "ovh-hil-e0z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5090"
+    },
+    "wph": {
+        "online": true,
+        "name": "wph",
+        "uptime": 4468.055,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.03,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5107",
+        "hidden": true
+    },
+    "wpt": {
+        "online": true,
+        "name": "wpt",
+        "uptime": 2352.43,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.03,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5119",
+        "hidden": true
+    },
+    "epz": {
+        "online": true,
+        "name": "epz",
+        "uptime": 9031.404,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5125",
+        "hidden": true
+    },
+    "cpg": {
+        "online": true,
+        "name": "cpg",
+        "uptime": 2652.196,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5106",
+        "hidden": true
+    },
+    "opx": {
+        "online": true,
+        "name": "opx",
+        "uptime": 148254.667,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5123",
+        "hidden": true
+    },
+    "ed": {
+        "online": true,
+        "name": "ed",
+        "uptime": 33109.651,
+        "clients": 15,
+        "maxClients": 0,
+        "mspt": 7.23,
+        "code": "hetzner-fsn-gac",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5003"
+    },
+    "epu": {
+        "online": true,
+        "name": "epu",
+        "uptime": 18958.188,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5120",
+        "hidden": true
+    },
+    "wc": {
+        "online": true,
+        "name": "wc",
+        "uptime": 370.071,
+        "clients": 11,
+        "maxClients": 0,
+        "mspt": 4.53,
+        "code": "ovh-hil-a1sx18fortress",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5002"
+    },
+    "epi": {
+        "online": true,
+        "name": "epi",
+        "uptime": 118.506,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5108",
+        "hidden": true
+    },
+    "wu": {
+        "online": true,
+        "name": "wu",
+        "uptime": 3107.212,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.26,
+        "code": "ovh-hil-f",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5070",
+        "hidden": true
+    },
+    "cpa": {
+        "online": true,
+        "name": "cpa",
+        "uptime": 6158.776,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5100",
+        "hidden": true
+    },
+    "opc": {
+        "online": true,
+        "name": "opc",
+        "uptime": 921.309,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5102",
+        "hidden": true
+    },
+    "oc": {
+        "online": true,
+        "name": "oc",
+        "uptime": 208.165,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.56,
+        "code": "ovh-syd-m2ax18branches",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5002"
+    },
+    "ei": {
+        "online": true,
+        "name": "ei",
+        "uptime": 3285.911,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.26,
+        "code": "hetzner-fsn-w33olds5forge",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5030",
+        "hidden": true
+    },
+    "wpy": {
+        "online": true,
+        "name": "wpy",
+        "uptime": 5342.008,
+        "clients": 2,
+        "maxClients": 0,
+        "mspt": 1,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5124",
+        "hidden": true
+    },
+    "opg": {
+        "online": true,
+        "name": "opg",
+        "uptime": 1121.215,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5106",
+        "hidden": true
+    },
+    "opa": {
+        "online": true,
+        "name": "opa",
+        "uptime": 49205.743,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5100",
+        "hidden": true
+    },
+    "oqe": {
+        "online": true,
+        "name": "oqe",
+        "uptime": 69187.55,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5130",
+        "hidden": true
+    },
+    "cps": {
+        "online": true,
+        "name": "cps",
+        "uptime": 6009.104,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5118",
+        "hidden": true
+    },
+    "wpp": {
+        "online": true,
+        "name": "wpp",
+        "uptime": 2726.36,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5115",
+        "hidden": true
+    },
+    "oqb": {
+        "online": true,
+        "name": "oqb",
+        "uptime": 44778.924,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5127",
+        "hidden": true
+    },
+    "wpc": {
+        "online": true,
+        "name": "wpc",
+        "uptime": 5847.602,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5102",
+        "hidden": true
+    },
+    "epl": {
+        "online": true,
+        "name": "epl",
+        "uptime": 1954.235,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5111",
+        "hidden": true
+    },
+    "ou": {
+        "online": true,
+        "name": "ou",
+        "uptime": 601.203,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.66,
+        "code": "ovh-syd-f",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5070",
+        "hidden": true
+    },
+    "epc": {
+        "online": true,
+        "name": "epc",
+        "uptime": 1684.73,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5102",
+        "hidden": true
+    },
+    "ez": {
+        "online": true,
+        "name": "ez",
+        "uptime": 162.924,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.9,
+        "code": "hetzner-fsn-e0z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5090"
+    },
+    "cph": {
+        "online": true,
+        "name": "cph",
+        "uptime": 5638.21,
+        "clients": 8,
+        "maxClients": 0,
+        "mspt": 1.76,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5107",
+        "hidden": true
+    },
+    "cqd": {
+        "online": true,
+        "name": "cqd",
+        "uptime": 84633.394,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5129",
+        "hidden": true
+    },
+    "cpz": {
+        "online": true,
+        "name": "cpz",
+        "uptime": 5962.181,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5125",
+        "hidden": true
+    },
+    "wqc": {
+        "online": true,
+        "name": "wqc",
+        "uptime": 13926.999,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5128",
+        "hidden": true
+    },
+    "wd": {
+        "online": true,
+        "name": "wd",
+        "uptime": 5497.518,
+        "clients": 23,
+        "maxClients": 0,
+        "mspt": 5.46,
+        "code": "ovh-hil-ga2b",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5003"
+    },
+    "cd": {
+        "online": true,
+        "name": "cd",
+        "uptime": 17880.114,
+        "clients": 7,
+        "maxClients": 0,
+        "mspt": 5.93,
+        "code": "wsi-kci-e9labyrinth",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5003"
+    },
+    "ab": {
+        "online": true,
+        "name": "ab",
+        "uptime": 951.361,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.7,
+        "code": "incubatec-sgp-m2c",
+        "host": "vt4qbg8si1fd411n-c.uvwx.xyz:8443/5001"
+    },
+    "wqa": {
+        "online": true,
+        "name": "wqa",
+        "uptime": 1429.346,
+        "clients": 2,
+        "maxClients": 0,
+        "mspt": 2.16,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5126",
+        "hidden": true
+    },
+    "wn": {
+        "online": true,
+        "name": "wn",
+        "uptime": 761.157,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.43,
+        "code": "ovh-hil-e5nexus",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5040",
+        "hidden": true
+    },
+    "wpg": {
+        "online": true,
+        "name": "wpg",
+        "uptime": 4581.642,
+        "clients": 1,
+        "maxClients": 0,
+        "mspt": 2.86,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5106",
+        "hidden": true
+    },
+    "cqb": {
+        "online": true,
+        "name": "cqb",
+        "uptime": 72639.061,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5127",
+        "hidden": true
+    },
+    "cqa": {
+        "online": true,
+        "name": "cqa",
+        "uptime": 8125.541,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5126",
+        "hidden": true
+    },
+    "eh": {
+        "online": true,
+        "name": "eh",
+        "uptime": 14005.392,
+        "clients": 5,
+        "maxClients": 0,
+        "mspt": 2.83,
+        "code": "hetzner-fsn-ge7manhuntmf",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5007"
+    },
+    "ej": {
+        "online": true,
+        "name": "ej",
+        "uptime": 3795.682,
+        "clients": 2,
+        "maxClients": 0,
+        "mspt": 3.56,
+        "code": "hetzner-fsn-w33olds9labyrinth",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5031",
+        "hidden": true
+    },
+    "eu": {
+        "online": true,
+        "name": "eu",
+        "uptime": 1213.257,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.46,
+        "code": "hetzner-fsn-f",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5070",
+        "hidden": true
+    },
+    "cpj": {
+        "online": true,
+        "name": "cpj",
+        "uptime": 2009.07,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5109",
+        "hidden": true
+    },
+    "eph": {
+        "online": true,
+        "name": "eph",
+        "uptime": 933.937,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.23,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5107",
+        "hidden": true
+    },
+    "ope": {
+        "online": true,
+        "name": "ope",
+        "uptime": 23.97,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5104",
+        "hidden": true
+    },
+    "cpd": {
+        "online": true,
+        "name": "cpd",
+        "uptime": 6123.865,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5103",
+        "hidden": true
+    },
+    "oqd": {
+        "online": true,
+        "name": "oqd",
+        "uptime": 10379.174,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5129",
+        "hidden": true
+    },
+    "em": {
+        "online": true,
+        "name": "em",
+        "uptime": 3161.561,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.8,
+        "code": "hetzner-fsn-m2m",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5033"
+    },
+    "cqe": {
+        "online": true,
+        "name": "cqe",
+        "uptime": 84494.043,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5130",
+        "hidden": true
+    },
+    "aa": {
+        "online": true,
+        "name": "aa",
+        "uptime": 33734.805,
+        "clients": 59,
+        "maxClients": 0,
+        "mspt": 22.83,
+        "code": "incubatec-sgp-ga2",
+        "host": "vt4qbg8si1fd411n-c.uvwx.xyz:8443/5000"
+    },
+    "epr": {
+        "online": true,
+        "name": "epr",
+        "uptime": 14510.839,
+        "clients": 2,
+        "maxClients": 0,
+        "mspt": 1.8,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5117",
+        "hidden": true
+    },
+    "wpr": {
+        "online": true,
+        "name": "wpr",
+        "uptime": 2009.075,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5117",
+        "hidden": true
+    },
+    "cpo": {
+        "online": true,
+        "name": "cpo",
+        "uptime": 54.985,
+        "clients": 1,
+        "maxClients": 0,
+        "mspt": 0.43,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5114",
+        "hidden": true
+    },
+    "opv": {
+        "online": true,
+        "name": "opv",
+        "uptime": 45605.012,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5121",
+        "hidden": true
+    },
+    "wpq": {
+        "online": true,
+        "name": "wpq",
+        "uptime": 2552.911,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5116",
+        "hidden": true
+    },
+    "epp": {
+        "online": true,
+        "name": "epp",
+        "uptime": 4232.196,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5115",
+        "hidden": true
+    },
+    "ce": {
+        "online": true,
+        "name": "ce",
+        "uptime": 94821.259,
+        "clients": 79,
+        "maxClients": 0,
+        "mspt": 16.76,
+        "code": "wsi-kci-gae7manhuntmf",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5004"
+    },
+    "ov": {
+        "online": true,
+        "name": "ov",
+        "uptime": 556.828,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.9,
+        "code": "ovh-syd-af",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5080",
+        "hidden": true
+    },
+    "ef": {
+        "online": true,
+        "name": "ef",
+        "uptime": 13174.463,
+        "clients": 5,
+        "maxClients": 0,
+        "mspt": 2.13,
+        "code": "hetzner-fsn-w33oldscdreadnoughts",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5005"
+    },
+    "cn": {
+        "online": true,
+        "name": "cn",
+        "uptime": 2466.548,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.86,
+        "code": "wsi-kci-e5nexus",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5040",
+        "hidden": true
+    },
+    "wb": {
+        "online": true,
+        "name": "wb",
+        "uptime": 2400.997,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.66,
+        "code": "ovh-hil-c",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5001"
+    },
+    "cu": {
+        "online": true,
+        "name": "cu",
+        "uptime": 3181.724,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.4,
+        "code": "wsi-kci-f",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5070",
+        "hidden": true
+    },
+    "oe": {
+        "online": true,
+        "name": "oe",
+        "uptime": 3364.644,
+        "clients": 2,
+        "maxClients": 0,
+        "mspt": 1.76,
+        "code": "ovh-syd-w33oldscdreadnoughts",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5004"
+    },
+    "epn": {
+        "online": true,
+        "name": "epn",
+        "uptime": 4354.817,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5113",
+        "hidden": true
+    },
+    "wpv": {
+        "online": true,
+        "name": "wpv",
+        "uptime": 1814.989,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5121",
+        "hidden": true
+    },
+    "wqd": {
+        "online": true,
+        "name": "wqd",
+        "uptime": 13749.836,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5129",
+        "hidden": true
+    },
+    "wqb": {
+        "online": true,
+        "name": "wqb",
+        "uptime": 13628.604,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5127",
+        "hidden": true
+    },
+    "opn": {
+        "online": true,
+        "name": "opn",
+        "uptime": 27637.087,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5113",
+        "hidden": true
+    },
+    "opj": {
+        "online": true,
+        "name": "opj",
+        "uptime": 22701.271,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5109",
+        "hidden": true
+    },
+    "eps": {
+        "online": true,
+        "name": "eps",
+        "uptime": 15378.087,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5118",
+        "hidden": true
+    },
+    "cpb": {
+        "online": true,
+        "name": "cpb",
+        "uptime": 6127.679,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5101",
+        "hidden": true
+    },
+    "cqc": {
+        "online": true,
+        "name": "cqc",
+        "uptime": 72734.634,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5128",
+        "hidden": true
+    },
+    "oqf": {
+        "online": true,
+        "name": "oqf",
+        "uptime": 85960.257,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5131",
+        "hidden": true
+    },
+    "cc": {
+        "online": true,
+        "name": "cc",
+        "uptime": 251.294,
+        "clients": 22,
+        "maxClients": 0,
+        "mspt": 4.63,
+        "code": "wsi-kci-am2ax17booster",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5002"
+    },
+    "ob": {
+        "online": true,
+        "name": "ob",
+        "uptime": 6225.094,
+        "clients": 1,
+        "maxClients": 0,
+        "mspt": 2.4,
+        "code": "ovh-syd-gf",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5001"
+    },
+    "wpe": {
+        "online": true,
+        "name": "wpe",
+        "uptime": 5636.957,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5104",
+        "hidden": true
+    },
+    "epo": {
+        "online": true,
+        "name": "epo",
+        "uptime": 3899.329,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5114",
+        "hidden": true
+    },
+    "wpu": {
+        "online": true,
+        "name": "wpu",
+        "uptime": 2106.34,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5120",
+        "hidden": true
+    },
+    "cb": {
+        "online": true,
+        "name": "cb",
+        "uptime": 2434.628,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 2.7,
+        "code": "wsi-kci-rf",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5001"
+    },
+    "opq": {
+        "online": true,
+        "name": "opq",
+        "uptime": 46991.914,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5116",
+        "hidden": true
+    },
+    "wpx": {
+        "online": true,
+        "name": "wpx",
+        "uptime": 77.783,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5123",
+        "hidden": true
+    },
+    "ca": {
+        "online": true,
+        "name": "ca",
+        "uptime": 7266.829,
+        "clients": 3,
+        "maxClients": 0,
+        "mspt": 3.23,
+        "code": "wsi-kci-m4",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5000"
+    },
+    "el": {
+        "online": true,
+        "name": "el",
+        "uptime": 58501.623,
+        "clients": 7,
+        "maxClients": 0,
+        "mspt": 5.96,
+        "code": "hetzner-fsn-e9labyrinth",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5042"
+    },
+    "wpa": {
+        "online": true,
+        "name": "wpa",
+        "uptime": 1171.615,
+        "clients": 1,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5100",
+        "hidden": true
+    },
+    "wps": {
+        "online": true,
+        "name": "wps",
+        "uptime": 1430.56,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5118",
+        "hidden": true
+    },
+    "cpm": {
+        "online": true,
+        "name": "cpm",
+        "uptime": 1123.482,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5112",
+        "hidden": true
+    },
+    "epa": {
+        "online": true,
+        "name": "epa",
+        "uptime": 10796.805,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5100",
+        "hidden": true
+    },
+    "od": {
+        "online": true,
+        "name": "od",
+        "uptime": 344.001,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.9,
+        "code": "ovh-syd-ae7manhuntmf",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5003"
+    },
+    "opk": {
+        "online": true,
+        "name": "opk",
+        "uptime": 28497.346,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5110",
+        "hidden": true
+    },
+    "cpf": {
+        "online": true,
+        "name": "cpf",
+        "uptime": 2302.42,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5105",
+        "hidden": true
+    },
+    "epw": {
+        "online": true,
+        "name": "epw",
+        "uptime": 19462.337,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5122",
+        "hidden": true
+    },
+    "wqf": {
+        "online": true,
+        "name": "wqf",
+        "uptime": 11593.038,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5131",
+        "hidden": true
+    },
+    "epd": {
+        "online": true,
+        "name": "epd",
+        "uptime": 1632.342,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5103",
+        "hidden": true
+    },
+    "ac": {
+        "online": true,
+        "name": "ac",
+        "uptime": 5859.729,
+        "clients": 7,
+        "maxClients": 0,
+        "mspt": 7.56,
+        "code": "extravm-sgp-1sx15blitz",
+        "host": "6pmuj9k9p1q6pgr1-c.uvwx.xyz:8443/5000"
+    },
+    "epv": {
+        "online": true,
+        "name": "epv",
+        "uptime": 19404.624,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5121",
+        "hidden": true
+    },
+    "wpl": {
+        "online": true,
+        "name": "wpl",
+        "uptime": 3813.589,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5111",
+        "hidden": true
+    },
+    "wpk": {
+        "online": true,
+        "name": "wpk",
+        "uptime": 4344.505,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5110",
+        "hidden": true
+    },
+    "wqe": {
+        "online": true,
+        "name": "wqe",
+        "uptime": 3370.92,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5130",
+        "hidden": true
+    },
+    "on": {
+        "online": true,
+        "name": "on",
+        "uptime": 845.563,
+        "clients": 2,
+        "maxClients": 0,
+        "mspt": 0.96,
+        "code": "ovh-syd-e5nexus",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5040",
+        "hidden": true
+    },
+    "cpe": {
+        "online": true,
+        "name": "cpe",
+        "uptime": 6105.809,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5104",
+        "hidden": true
+    },
+    "wj": {
+        "online": true,
+        "name": "wj",
+        "uptime": 4972.807,
+        "clients": 1,
+        "maxClients": 0,
+        "mspt": 2.86,
+        "code": "ovh-hil-w33olds9labyrinth",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5031",
+        "hidden": true
+    },
+    "ek": {
+        "online": true,
+        "name": "ek",
+        "uptime": 193.891,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.56,
+        "code": "hetzner-fsn-m2c",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5032"
+    },
+    "epq": {
+        "online": true,
+        "name": "epq",
+        "uptime": 11386.231,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5116",
+        "hidden": true
+    },
+    "cqf": {
+        "online": true,
+        "name": "cqf",
+        "uptime": 168035.301,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5131",
+        "hidden": true
+    },
+    "cpi": {
+        "online": true,
+        "name": "cpi",
+        "uptime": 1516.106,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5108",
+        "hidden": true
+    },
+    "opt": {
+        "online": true,
+        "name": "opt",
+        "uptime": 46980.643,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5119",
+        "hidden": true
+    },
+    "epe": {
+        "online": true,
+        "name": "epe",
+        "uptime": 12430.366,
+        "clients": 5,
+        "maxClients": 0,
+        "mspt": 1.03,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5104",
+        "hidden": true
+    },
+    "eqe": {
+        "online": true,
+        "name": "eqe",
+        "uptime": 25357.979,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5130",
+        "hidden": true
+    },
+    "opf": {
+        "online": true,
+        "name": "opf",
+        "uptime": 2651.215,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5105",
+        "hidden": true
+    },
+    "epb": {
+        "online": true,
+        "name": "epb",
+        "uptime": 2979.019,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.26,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5101",
+        "hidden": true
+    },
+    "oj": {
+        "online": true,
+        "name": "oj",
+        "uptime": 5588.715,
+        "clients": 1,
+        "maxClients": 0,
+        "mspt": 3.33,
+        "code": "ovh-syd-w33olds9labyrinth",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5031",
+        "hidden": true
+    },
+    "ec": {
+        "online": true,
+        "name": "ec",
+        "uptime": 1971.66,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 28.3,
+        "code": "hetzner-fsn-arf",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5002"
+    },
+    "cv": {
+        "online": true,
+        "name": "cv",
+        "uptime": 4470.896,
+        "clients": 1,
+        "maxClients": 0,
+        "mspt": 1.5,
+        "code": "wsi-kci-f",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5080",
+        "hidden": true
+    },
+    "cpx": {
+        "online": true,
+        "name": "cpx",
+        "uptime": 5961.741,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5123",
+        "hidden": true
+    },
+    "epf": {
+        "online": true,
+        "name": "epf",
+        "uptime": 737.614,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5105",
+        "hidden": true
+    },
+    "wv": {
+        "online": true,
+        "name": "wv",
+        "uptime": 8450.517,
+        "clients": 5,
+        "maxClients": 0,
+        "mspt": 5.3,
+        "code": "ovh-hil-af",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5080",
+        "hidden": true
+    },
+    "cz": {
+        "online": true,
+        "name": "cz",
+        "uptime": 3173.25,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.3,
+        "code": "wsi-kci-e0z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5090"
+    },
+    "epk": {
+        "online": true,
+        "name": "epk",
+        "uptime": 5429.653,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5110",
+        "hidden": true
+    },
+    "opw": {
+        "online": true,
+        "name": "opw",
+        "uptime": 148218.383,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5122",
+        "hidden": true
+    },
+    "cpu": {
+        "online": true,
+        "name": "cpu",
+        "uptime": 3877.932,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5120",
+        "hidden": true
+    },
+    "cpt": {
+        "online": true,
+        "name": "cpt",
+        "uptime": 5997.864,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5119",
+        "hidden": true
+    },
+    "wi": {
+        "online": true,
+        "name": "wi",
+        "uptime": 5864.688,
+        "clients": 1,
+        "maxClients": 0,
+        "mspt": 0.5,
+        "code": "ovh-hil-w33olds5forge",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5030",
+        "hidden": true
+    },
+    "oz": {
+        "online": true,
+        "name": "oz",
+        "uptime": 1124.887,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1,
+        "code": "ovh-syd-e0z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5090"
+    },
+    "oqc": {
+        "online": true,
+        "name": "oqc",
+        "uptime": 44690.577,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5128",
+        "hidden": true
+    },
+    "opy": {
+        "online": true,
+        "name": "opy",
+        "uptime": 115766.247,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5124",
+        "hidden": true
+    },
+    "opo": {
+        "online": true,
+        "name": "opo",
+        "uptime": 26825.209,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5114",
+        "hidden": true
+    },
+    "we": {
+        "online": true,
+        "name": "we",
+        "uptime": 1772.254,
+        "clients": 5,
+        "maxClients": 0,
+        "mspt": 2.76,
+        "code": "ovh-hil-w33oldscdreadnoughts",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5004"
+    },
+    "opp": {
+        "online": true,
+        "name": "opp",
+        "uptime": 47353.464,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5115",
+        "hidden": true
+    },
+    "ew": {
+        "online": true,
+        "name": "ew",
+        "uptime": 3598.207,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 2.29,
+        "code": "hetzner-fsn-e5limbo",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5081",
+        "hidden": true
+    },
+    "eqb": {
+        "online": true,
+        "name": "eqb",
+        "uptime": 22176.352,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5127",
+        "hidden": true
+    },
+    "opz": {
+        "online": true,
+        "name": "opz",
+        "uptime": 44754.942,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5125",
+        "hidden": true
+    },
+    "wf": {
+        "online": true,
+        "name": "wf",
+        "uptime": 1045.832,
+        "clients": 3,
+        "maxClients": 0,
+        "mspt": 2.03,
+        "code": "ovh-hil-gm2d",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5005"
+    },
+    "cpv": {
+        "online": true,
+        "name": "cpv",
+        "uptime": 5972.337,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5121",
+        "hidden": true
+    },
+    "oph": {
+        "online": true,
+        "name": "oph",
+        "uptime": 1040.72,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5107",
+        "hidden": true
+    },
+    "of": {
+        "online": true,
+        "name": "of",
+        "uptime": 2520.634,
+        "clients": 1,
+        "maxClients": 0,
+        "mspt": 0.6,
+        "code": "ovh-syd-aom3t",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5005"
+    },
+    "opm": {
+        "online": true,
+        "name": "opm",
+        "uptime": 27161.275,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5112",
+        "hidden": true
+    },
+    "wa": {
+        "online": true,
+        "name": "wa",
+        "uptime": 94774.142,
+        "clients": 5,
+        "maxClients": 0,
+        "mspt": 2.63,
+        "code": "ovh-hil-g2",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5000"
+    },
+    "wpw": {
+        "online": true,
+        "name": "wpw",
+        "uptime": 1797.188,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5122",
+        "hidden": true
+    },
+    "epm": {
+        "online": true,
+        "name": "epm",
+        "uptime": 4577.282,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.23,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5112",
+        "hidden": true
+    },
+    "cpw": {
+        "online": true,
+        "name": "cpw",
+        "uptime": 5961.328,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.03,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5122",
+        "hidden": true
+    },
+    "eqf": {
+        "online": true,
+        "name": "eqf",
+        "uptime": 105964.008,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5131",
+        "hidden": true
+    },
+    "ea": {
+        "online": true,
+        "name": "ea",
+        "uptime": 2805.64,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.73,
+        "code": "hetzner-fsn-m4",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5000"
+    },
+    "ee": {
+        "online": true,
+        "name": "ee",
+        "uptime": 7003.776,
+        "clients": 79,
+        "maxClients": 0,
+        "mspt": 24.9,
+        "code": "hetzner-fsn-gam2ax18trenches",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5004"
+    },
+    "cpn": {
+        "online": true,
+        "name": "cpn",
+        "uptime": 1817.129,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5113",
+        "hidden": true
+    },
+    "wpm": {
+        "online": true,
+        "name": "wpm",
+        "uptime": 95.513,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5112",
+        "hidden": true
+    },
+    "oa": {
+        "online": true,
+        "name": "oa",
+        "uptime": 18737.675,
+        "clients": 21,
+        "maxClients": 0,
+        "mspt": 9.83,
+        "code": "ovh-syd-ga4",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5000"
+    },
+    "wpn": {
+        "online": true,
+        "name": "wpn",
+        "uptime": 2199.851,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5113",
+        "hidden": true
+    },
+    "opb": {
+        "online": true,
+        "name": "opb",
+        "uptime": 23.483,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5101",
+        "hidden": true
+    },
+    "epx": {
+        "online": true,
+        "name": "epx",
+        "uptime": 17802.149,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5123",
+        "hidden": true
+    },
+    "opl": {
+        "online": true,
+        "name": "opl",
+        "uptime": 27837.421,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5111",
+        "hidden": true
+    },
+    "ops": {
+        "online": true,
+        "name": "ops",
+        "uptime": 46959.743,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5118",
+        "hidden": true
+    },
+    "epy": {
+        "online": true,
+        "name": "epy",
+        "uptime": 18654.025,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5124",
+        "hidden": true
+    },
+    "eqd": {
+        "online": true,
+        "name": "eqd",
+        "uptime": 22021.063,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5129",
+        "hidden": true
+    },
+    "wpi": {
+        "online": true,
+        "name": "wpi",
+        "uptime": 2853.564,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5108",
+        "hidden": true
+    },
+    "ev": {
+        "online": true,
+        "name": "ev",
+        "uptime": 1542.243,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.76,
+        "code": "hetzner-fsn-af",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5080",
+        "hidden": true
+    },
+    "oqa": {
+        "online": true,
+        "name": "oqa",
+        "uptime": 44648.165,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5126",
+        "hidden": true
+    },
+    "opd": {
+        "online": true,
+        "name": "opd",
+        "uptime": 3220.73,
+        "clients": 1,
+        "maxClients": 0,
+        "mspt": 2.26,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5103",
+        "hidden": true
+    },
+    "eb": {
+        "online": true,
+        "name": "eb",
+        "uptime": 3779.158,
+        "clients": 3,
+        "maxClients": 0,
+        "mspt": 2.86,
+        "code": "hetzner-fsn-am2",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5001"
+    },
+    "cpl": {
+        "online": true,
+        "name": "cpl",
+        "uptime": 1892.578,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5111",
+        "hidden": true
+    },
+    "opi": {
+        "online": true,
+        "name": "opi",
+        "uptime": 1017.182,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.06,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5108",
+        "hidden": true
+    },
+    "ept": {
+        "online": true,
+        "name": "ept",
+        "uptime": 15210.487,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5119",
+        "hidden": true
+    },
+    "epj": {
+        "online": true,
+        "name": "epj",
+        "uptime": 5179.254,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5109",
+        "hidden": true
+    },
+    "eqc": {
+        "online": true,
+        "name": "eqc",
+        "uptime": 21612.009,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5128",
+        "hidden": true
+    },
+    "cpk": {
+        "online": true,
+        "name": "cpk",
+        "uptime": 4537.37,
+        "clients": 1,
+        "maxClients": 0,
+        "mspt": 0.36,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5110",
+        "hidden": true
+    },
+    "cpc": {
+        "online": true,
+        "name": "cpc",
+        "uptime": 6137.68,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5102",
+        "hidden": true
+    },
+    "cpr": {
+        "online": true,
+        "name": "cpr",
+        "uptime": 170.818,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5117",
+        "hidden": true
+    },
+    "cpq": {
+        "online": true,
+        "name": "cpq",
+        "uptime": 235.698,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5116",
+        "hidden": true
+    },
+    "opr": {
+        "online": true,
+        "name": "opr",
+        "uptime": 46891.967,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5117",
+        "hidden": true
+    },
+    "cpy": {
+        "online": true,
+        "name": "cpy",
+        "uptime": 5960.884,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5124",
+        "hidden": true
+    },
+    "ad": {
+        "online": true,
+        "name": "ad",
+        "uptime": 8307.794,
+        "clients": 2,
+        "maxClients": 0,
+        "mspt": 4.16,
+        "code": "extravm-sgp-e9labyrinth",
+        "host": "6pmuj9k9p1q6pgr1-c.uvwx.xyz:8443/5001"
+    },
+    "opu": {
+        "online": true,
+        "name": "opu",
+        "uptime": 45563.916,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "ovh-syd-z",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5120",
+        "hidden": true
+    },
+    "wpz": {
+        "online": true,
+        "name": "wpz",
+        "uptime": 2143.811,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.16,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5125",
+        "hidden": true
+    },
+    "epg": {
+        "online": true,
+        "name": "epg",
+        "uptime": 1127.748,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.13,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5106",
+        "hidden": true
+    },
+    "wpd": {
+        "online": true,
+        "name": "wpd",
+        "uptime": 5856.955,
+        "clients": 31,
+        "maxClients": 0,
+        "mspt": 10.93,
+        "code": "ovh-hil-z",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5103",
+        "hidden": true
+    },
+    "eg": {
+        "online": true,
+        "name": "eg",
+        "uptime": 3102.504,
+        "clients": 13,
+        "maxClients": 0,
+        "mspt": 9.4,
+        "code": "hetzner-fsn-g1sx17citadel",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5006"
+    },
+    "cpp": {
+        "online": true,
+        "name": "cpp",
+        "uptime": 402.99,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.1,
+        "code": "wsi-kci-z",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5115",
+        "hidden": true
+    },
+    "en": {
+        "online": true,
+        "name": "en",
+        "uptime": 2066.454,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.83,
+        "code": "hetzner-fsn-e5nexus",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5040",
+        "hidden": true
+    },
+    "et": {
+        "online": true,
+        "name": "et",
+        "uptime": 3587.194,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 1.33,
+        "code": "hetzner-fsn-e8tartarus",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5043",
+        "hidden": true
+    },
+    "eqa": {
+        "online": true,
+        "name": "eqa",
+        "uptime": 12222.195,
+        "clients": 0,
+        "maxClients": 0,
+        "mspt": 0.2,
+        "code": "hetzner-fsn-z",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5126",
+        "hidden": true
+    },
+    "apm": {
+        "online": false,
+        "name": "apm",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5112"
+    },
+    "aqb": {
+        "online": false,
+        "name": "aqb",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5127"
+    },
+    "aqe": {
+        "online": false,
+        "name": "aqe",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5130"
+    },
+    "aqc": {
+        "online": false,
+        "name": "aqc",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5128"
+    },
+    "apf": {
+        "online": false,
+        "name": "apf",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5105"
+    },
+    "apd": {
+        "online": false,
+        "name": "apd",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5103"
+    },
+    "api": {
+        "online": false,
+        "name": "api",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5108"
+    },
+    "apg": {
+        "online": false,
+        "name": "apg",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5106"
+    },
+    "av": {
+        "online": false,
+        "name": "av",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5080"
+    },
+    "au": {
+        "online": false,
+        "name": "au",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5070"
+    },
+    "aqf": {
+        "online": false,
+        "name": "aqf",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5131"
+    },
+    "apx": {
+        "online": false,
+        "name": "apx",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5123"
+    },
+    "apk": {
+        "online": false,
+        "name": "apk",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5110"
+    },
+    "wpb": {
+        "online": false,
+        "name": "wpb",
+        "code": "ovh-hil-%",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5101"
+    },
+    "apy": {
+        "online": false,
+        "name": "apy",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5124"
+    },
+    "az": {
+        "online": false,
+        "name": "az",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5090"
+    },
+    "apr": {
+        "online": false,
+        "name": "apr",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5117"
+    },
+    "apb": {
+        "online": false,
+        "name": "apb",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5101"
+    },
+    "aqd": {
+        "online": false,
+        "name": "aqd",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5129"
+    },
+    "af": {
+        "online": false,
+        "name": "af",
+        "code": "incubatec-sgp-%",
+        "host": "plo6qd39pek0uttv-c.uvwx.xyz:8443/5000"
+    },
+    "eo": {
+        "online": false,
+        "name": "eo",
+        "code": "hetzner-fsn-%",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5041"
+    },
+    "eux": {
+        "online": false,
+        "name": "eux",
+        "code": "hetzner-fsn-%",
+        "host": "qrp6ujau11f36bnm-c.uvwx.xyz:8443/5071"
+    },
+    "apz": {
+        "online": false,
+        "name": "apz",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5125"
+    },
+    "apt": {
+        "online": false,
+        "name": "apt",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5119"
+    },
+    "apu": {
+        "online": false,
+        "name": "apu",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5120"
+    },
+    "apa": {
+        "online": false,
+        "name": "apa",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5100"
+    },
+    "wpj": {
+        "online": false,
+        "name": "wpj",
+        "code": "ovh-hil-%",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5109"
+    },
+    "aqa": {
+        "online": false,
+        "name": "aqa",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5126"
+    },
+    "oi": {
+        "online": false,
+        "name": "oi",
+        "code": "ovh-syd-%",
+        "host": "t4mebdah2ksfasgi-c.uvwx.xyz:8443/5030"
+    },
+    "apw": {
+        "online": false,
+        "name": "apw",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5122"
+    },
+    "wpo": {
+        "online": false,
+        "name": "wpo",
+        "code": "ovh-hil-%",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5114"
+    },
+    "ape": {
+        "online": false,
+        "name": "ape",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5104"
+    },
+    "apo": {
+        "online": false,
+        "name": "apo",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5114"
+    },
+    "apn": {
+        "online": false,
+        "name": "apn",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5113"
+    },
+    "apq": {
+        "online": false,
+        "name": "apq",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5116"
+    },
+    "ae": {
+        "online": false,
+        "name": "ae",
+        "code": "extravm-sgp-%",
+        "host": "6pmuj9k9p1q6pgr1-c.uvwx.xyz:8443/5002"
+    },
+    "an": {
+        "online": false,
+        "name": "an",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5040"
+    },
+    "apv": {
+        "online": false,
+        "name": "apv",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5121"
+    },
+    "apj": {
+        "online": false,
+        "name": "apj",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5109"
+    },
+    "apl": {
+        "online": false,
+        "name": "apl",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5111"
+    },
+    "apc": {
+        "online": false,
+        "name": "apc",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5102"
+    },
+    "wpf": {
+        "online": false,
+        "name": "wpf",
+        "code": "ovh-hil-%",
+        "host": "kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/5105"
+    },
+    "aph": {
+        "online": false,
+        "name": "aph",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5107"
+    },
+    "app": {
+        "online": false,
+        "name": "app",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5115"
+    },
+    "aps": {
+        "online": false,
+        "name": "aps",
+        "code": "contabo-sgp-%",
+        "host": "fsas4nob1arq32ll-c.uvwx.xyz:8443/5118"
+    },
+    "cf": {
+        "online": false,
+        "name": "cf",
+        "code": "wsi-kci-%",
+        "host": "ak7oqfc2u4qqcu6i-c.uvwx.xyz:8443/5005"
+    },
+    "aex": {
+        "online": false,
+        "name": "aex",
+        "code": "incubatec-sgp-%",
+        "host": "ivplcp69h56ooj6s-c.uvwx.xyz:8443/5002"
+    },
+    "adx": {
+        "online": false,
+        "name": "adx",
+        "code": "incubatec-sgp-%",
+        "host": "ivplcp69h56ooj6s-c.uvwx.xyz:8443/5001"
+    },
+    "acx": {
+        "online": false,
+        "name": "acx",
+        "code": "incubatec-sgp-%",
+        "host": "ivplcp69h56ooj6s-c.uvwx.xyz:8443/5000"
+    }
+}

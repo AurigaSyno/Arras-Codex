@@ -1,0 +1,17 @@
+Arras server entry
+{
+    server_code:
+    id: "wa"
+    updated: "142823525252" UNIX TIME
+
+    codes: {
+        red: {
+            code: 9521
+            added_by: grasiss
+        }
+        ...
+    }
+
+}
+
+

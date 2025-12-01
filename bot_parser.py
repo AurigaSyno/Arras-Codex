@@ -79,12 +79,12 @@ region_map = {
 #============Game Code============
 
 game_modes_map = {
-    "f": [GameMode.FFA, "FFA", False],
-    "1": [GameMode.TDM1, "1TDM", False],
     "2": [GameMode.TDM2, "2TDM", True],
     "3": [GameMode.TDM3, "3TDM", True],
     "4": [GameMode.TDM4, "4TDM", True],
-    "c": [GameMode.CLANWARS, "Clan Wars", False],
+    "1": [GameMode.TDM1, "1TDM", False],
+    "f": [GameMode.FFA, "FFA", False],
+    "c": [GameMode.CLANWARS, "Clan Wars", False]
     #"w": "words",
     #"e": "word"
 }
@@ -202,7 +202,22 @@ def parse_status():
             if code_string[-1] == '%':
                 #this server game mode is not set/unknown
                 continue
-            if code_string[-1] == 'z':
+            #We should have parsed out all sandboxes, offline, and unknown servers by now
+            #Begin parsing the codes
+
+            #wsi-kci-4, 4TDM, this code is Host-Region-Gamecode, this code splits that apart
+            strip_code = code_string #using this so I can slice various parts off
+            index = strip_code.index('-')
+            if index:
+                host_str = strip_code[:index]
+                location_strip = strip_code[(index+1):]
+                index2 = location_strip.index('-')
+                if index2:
+                    location_str = location_strip[:index]
+                    strip_code = location_strip[(index+1):]
+                    gamecode_str = strip_code
+
+            if gamecode_str == "z":
                 #this is a sandbox
                 clients = server.get("clients")
                 # if clients <= 0:
@@ -219,20 +234,6 @@ def parse_status():
                 sandbox["server_code"] = code_string
                 sandboxes.append(sandbox)
                 continue
-            #We should have parsed out all sandboxes, offline, and unknown servers by now
-            #Begin parsing the codes
-
-            #wsi-kci-4, 4TDM, this code is Host-Region-Gamecode, this code splits that apart
-            strip_code = code_string #using this so I can slice various parts off
-            index = strip_code.index('-')
-            if index:
-                host_str = strip_code[:index]
-                location_strip = strip_code[(index+1):]
-                index2 = location_strip.index('-')
-                if index2:
-                    location_str = location_strip[:index]
-                    strip_code = location_strip[(index+1):]
-                    gamecode_str = strip_code
 
             #aom4e, Arms Race Elimination, (Arms Race Open 4TDM Elimination), this code parses gamecodes, details in code_examples.txt
             if gamecode_str:
@@ -240,11 +241,15 @@ def parse_status():
                 game_mode_char = ""
                 game_mode_char_index = -1
                 e_index = -1
+                game_mode_e = ""
                 w_index = -1
+                game_mode_w = ""
                 game_modifiers_str = ""
                 game_varients_str = ""
                 game_varient_char = ""
                 game_varients_ignore = []
+                is_siege = False
+                is_assault = False
                 #Find the core game mode "4,2,c,f...", then divide into three parts
                 game_slice_str = gamecode_str
                 for index in range(len(game_slice_str)):
@@ -267,6 +272,14 @@ def parse_status():
                 # if not game_mode_char:
                 #     print("No game mode found, assuming e or w")
                 if game_mode_char:
+                    if game_mode_char == "1": #This is a siege server, most likely
+                        if len(game_slice_str) > game_mode_char_index + 1:
+                            if game_slice_str[game_mode_char_index+1] == "s": #Siege Server
+                                is_siege = True
+                    if game_mode_char == "2":
+                        if len(game_slice_str) > game_mode_char_index + 1:
+                            if game_slice_str[game_mode_char_index+1] == "a": #Assault Server
+                                is_assault = True
                     is_coded = get_game_mode_coded(game_mode_char)
                     #Now split off the modifiers and varients
                     game_modifiers_str = game_slice_str[:game_mode_char_index]
@@ -331,17 +344,24 @@ def parse_status():
                             skip_num = e_len+1
                             continue
                 
-                if game_mode_char and game_mode_char not in game_varients_ignore and e_index < 0 and w_index < 0:
-                    full_game_str += get_game_mode_name(game_mode_char) + " "
+                if is_assault or is_siege:
+                    map_name = game_slice_str[game_mode_char_index+5:].capitalize()
+                    if is_assault:
+                        full_game_str += "Assault " + map_name
+                    if is_siege:
+                        full_game_str += "Siege " + map_name
+                else:
+                    if game_mode_char and game_mode_char not in game_varients_ignore and e_index < 0 and w_index < 0:
+                        full_game_str += get_game_mode_name(game_mode_char) + " "
 
-                if game_varient_char:
-                    full_game_str += get_game_varient_name(game_varient_char)
-            
-                if not full_game_str and game_mode_w:
-                    full_game_str += game_mode_w
+                    if game_varient_char:
+                        full_game_str += get_game_varient_name(game_varient_char)
+                
+                    if not full_game_str and game_mode_w:
+                        full_game_str += game_mode_w
 
-                if not full_game_str and game_mode_e:
-                    full_game_str += game_mode_e.capitalize()
+                    if not full_game_str and game_mode_e:
+                        full_game_str += game_mode_e.capitalize()
 
                 #Parsing complete, save server
                 name_string = server.get("name")

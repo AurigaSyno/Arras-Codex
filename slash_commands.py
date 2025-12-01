@@ -4,7 +4,7 @@ import constants
 from bot_instance import bot
 from bot_logger import get_logger
 
-from parser import servers, fetch_status_then_parse
+from bot_parser import servers, fetch_status_then_parse
 
 logger = get_logger("commands")
 
@@ -19,6 +19,8 @@ async def status_command(interaction: Interaction, code: str):
             embed.add_field(name="Status", value="Ok")
             embed.add_field(name="Clients", value=server.get("clients"))
             embed.add_field(name="Mspt", value=server.get("mspt"))
+            embed.add_field(name="Code String", value=server.get("server_code"))
+            embed.add_field(name="Has Codes", value=server.get("coded"))
             await interaction.response.send_message(embed=embed, ephemeral=True)
             return
     

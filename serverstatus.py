@@ -3,7 +3,7 @@ import os
 import json
 
 STATUS_URL = "https://kvn3s3cpcdk4fl6j-c.uvwx.xyz:8443/2222/status"
-STATUS_FILE = "status.json"
+STATUS_FILE = "raw_status.json"
 
 raw_status = None
 raw_servers = None
@@ -20,6 +20,8 @@ def fetch_status():
 
     except requests.exceptions.RequestException as e:
         print(f"Error downloading status: {e}")
+
+
 
 def load_status():
     global raw_status

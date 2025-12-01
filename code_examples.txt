@@ -1,0 +1,85 @@
+"wsi-kci-4", #4 TDM
+"incubatec-sgp-m2c", #Capture the Flag
+"hetzner-fsn-gac", #Growth Arms Race Clan Wars
+"hetzner-fsn-2b", #Soccer
+"ovh-syd-aom3t", #Arms Race Maze 3 Team Tag
+"ovh-hil-g2d", #Growth 2 Team Domination
+"ovh-syd-aom4e", Arms Race Elimination
+
+
+"hetzner-fsn-2m", Mothership
+"hetzner-fsn-m2m", #Maze Mothership
+
+
+"wsi-kci-am2ax18trenches", Arms Race Assault Trenches
+"hetzner-fsn-gam2ax17booster", Grown Arms Race Assault Booster
+"ovh-syd-m2ax19acropolis" #Assault Acropolis
+"extravm-sgp-1sx15blitz" Siege Blitz
+"hetzner-fsn-g1sx15blitz" Growth Siege Blitz
+"ovh-hil-a1sx17citadel", #Arms Race Siege Citadel
+"extravm-sgp-1sx18fortress", Siege Fortress
+
+
+"ovh-syd-w33oldscdreadnoughts" Old Dreadnoughts
+"hetzner-fsn-w33oldscdreadnoughts" Old Dreadnoughts
+"hetzner-fsn-w33olds5forge", Old forge
+
+
+"wsi-kci-gae7manhuntmf", Growth Arms Race Manhunt Maze
+"wsi-kci-gae7manhuntmf" Growth Arms Race Manhunt Maze
+"ovh-syd-ae7manhuntmf" Arms Race Manhunt Maze
+"ovh-syd-ae7manhuntmf" #Arms Race Manhunt Maze
+
+
+"extravm-sgp-e9labyrinth" Labyrinth
+"hetzner-fsn-e9labyrinth" Labyrinth
+
+
+"hetzner-fsn-e5nexus" Nexus
+
+modifiers:mode:variants
+
+mode modifiers:
+r    Rock
+g    Growth
+a    Arms Race
+m    Maze
+o    Open
+
+
+game modes:
+f   FFA
+1   must be Siege or Assault or something weird
+2   2TDM
+4   4TDM
+c   Clan Wars
+e = word,#letters
+e9labyrinth = Labyrinth
+e7manhunt = Manhunt
+
+w33oldscdreadnoughts = Old Dreadnoughts
+w33olds5forge = Old Forge
+
+
+game variants:
+b   Soccer
+t   Tag
+d   Domination
+m   Mothership
+c   Capturetheflag
+e   Elimination
+ax##  Assault
+sx##  Siege
+
+
+Notes: There must be a certain order to finding the game mode, for example
+both clan wars and ctf are denoted by c, but ctf is 2c, so if I search for 2 first, we won't have an issue
+
+Unknowns:
+Portal, Tetromino, Zombies, and Squads somehow fit into this, 
+
+Siege Blitz = 1sx15blitz
+1 team, siege, ???, map Blitz
+What the 15 represents is still unknown
+
+what "w" means
