@@ -21,6 +21,17 @@ def save_listing(listing, id):
     server_listings.append(listing)
     return
 
+def server_is_valid(id):
+    if not get_listing_for_server(id):
+        return False
+    return True
+
+def coded_for_server(id):
+    listing = get_listing_for_server(id)
+    if listing:
+        return listing.get("coded_num", 0)
+    return 0
+
 def get_code_for_server_team(id, team):
     for server_listing in server_listings:
         if server_listing.get("id", None) == id:
@@ -33,18 +44,22 @@ def get_code_for_server_team(id, team):
             if team == TeamColor.Purple:
                 return server_listing.get("purple_code", None)
 
-def add_code_to_listing(id, code, team):
+def add_code_to_listing(id, code, team, user_id):
     server_listing = get_listing_for_server(id)
 
     if server_listing:
         if team == TeamColor.Red:
             server_listing["red_code"] = code
+            server_listing["red_submitted"] = user_id
         if team == TeamColor.Blue:
             server_listing["blue_code"] = code
+            server_listing["blue_submitted"] = user_id
         if team == TeamColor.Green:
             server_listing["green_code"] = code
+            server_listing["green_submitted"] = user_id
         if team == TeamColor.Purple:
             server_listing["purple_code"] = code
+            server_listing["purple_submitted"] = user_id
 
         save_listing(server_listing, id)
         return True
@@ -59,7 +74,8 @@ def add_code_to_listing(id, code, team):
 
 def update_all_server_listings():
     for server in servers:
-        if server.get("coded"):
+        coded_num = server.get("coded")
+        if coded_num > 0:
             server_id = server.get("id")
             server_listing = get_listing_for_server(server_id)
 
@@ -72,6 +88,7 @@ def update_all_server_listings():
                 new_listing["name"] = server.get("server_name")
                 new_listing["server_code"] = server.get("server_code")
                 new_listing["server_uptime"] = server.get("uptime")
+                new_listing["coded_num"] = coded_num
                 save_listing(new_listing, server_id)
                 print(f"Added listing for {server_id}")
 
@@ -83,6 +100,7 @@ def server_listing_builder():
         "name": None,
         "server_code": None,
         "server_uptime": None,
+        "coded_num": None,
         "red_code": None, #Code ####
         "blue_code": None,
         "green_code": None,
@@ -120,42 +138,40 @@ class ListingButtonView(discord.ui.View):
             button = discord.ui.Button(emoji="🟪", url=url)
             self.add_item(button)
 
-def listing_embed_builder(listing):
+async def listing_embed_builder(listing):
     id = listing.get("id", "?")
     name = listing.get("name", "?")
     red_code = listing.get("red_code", None)
+    if red_code:
+        red_supplier = await bot.fetch_user(listing.get("red_submitted", None))
     blue_code = listing.get("blue_code", None)
+    if blue_code:
+        blue_supplier = await bot.fetch_user(listing.get("blue_submitted", None))
     green_code = listing.get("green_code", None)
+    if green_code:
+        green_supplier = await bot.fetch_user(listing.get("green_submitted", None))
     purple_code = listing.get("purple_code", None)
+    if purple_code:
+        purple_supplier = await bot.fetch_user(listing.get("purple_submitted", None))
 
-    red_str = f"🟥 Red: https://arras.io/#{id}{red_code}\n" if red_code else ""
-    blue_str = f"🟦 Blue: https://arras.io/#{id}{blue_code}\n" if blue_code else ""
-    green_str = f"🟩 Green: https://arras.io/#{id}{green_code}\n" if green_code else ""
-    purple_str = f"🟪 Purple: https://arras.io/#{id}{purple_code}\n" if purple_code else ""
+    red_str = f"🟥 Red: #{id}{red_code}   ({red_supplier.name})\n" if red_code else ""
+    blue_str = f"🟦 Blue: #{id}{blue_code}   ({blue_supplier.name})\n" if blue_code else ""
+    green_str = f"🟩 Green: #{id}{green_code}   ({green_supplier.name})\n" if green_code else ""
+    purple_str = f"🟪 Purple: #{id}{purple_code}   ({purple_supplier.name})\n" if purple_code else ""
 
     description_str = red_str + blue_str + green_str + purple_str
     if not description_str:
         description_str = "No codes have been submitted"
 
-    embed = discord.Embed(title=f"#{id} {name}", description=description_str)
+    embed = discord.Embed(title=f"{name} #{id}", description=description_str)
     view = ListingButtonView(listing)
     return [embed, view]
-    #TODO: Add buttons
 
-# #wa, US West Arms Race 4TDM
-# 🟥 Green: arras.io/wa4523
-# 🟦 Green: arras.io/wa4523
-# 🟩 Green: arras.io/wa4523
-# 🟪 Green: arras.io/wa4523
-
-# 🟥     🟦      🟩      🟪
-
-
-def get_listing_embed_for_server(id):
+async def get_listing_embed_for_server(id):
     server_listing = get_listing_for_server(id)
 
     if server_listing:
-        embed = listing_embed_builder(server_listing)
+        embed = await listing_embed_builder(server_listing)
         return embed
     else:
         return None

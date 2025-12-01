@@ -79,14 +79,12 @@ region_map = {
 #============Game Code============
 
 game_modes_map = {
-    "2": [GameMode.TDM2, "2TDM", True],
-    "3": [GameMode.TDM3, "3TDM", True],
-    "4": [GameMode.TDM4, "4TDM", True],
-    "1": [GameMode.TDM1, "1TDM", False],
-    "f": [GameMode.FFA, "FFA", False],
-    "c": [GameMode.CLANWARS, "Clan Wars", False]
-    #"w": "words",
-    #"e": "word"
+    "2": [GameMode.TDM2, "2TDM", 2],
+    "3": [GameMode.TDM3, "3TDM", 3],
+    "4": [GameMode.TDM4, "4TDM", 4],
+    "1": [GameMode.TDM1, "1TDM", 0],
+    "f": [GameMode.FFA, "FFA", 0],
+    "c": [GameMode.CLANWARS, "Clan Wars", 0]
 }
 def get_game_mode_int(game_mode):
     tuple = game_modes_map.get(game_mode, 0)
@@ -97,7 +95,7 @@ def get_game_mode_name(game_mode):
     return tuple[1]
 
 def get_game_mode_coded(game_mode):
-    tuple = game_modes_map.get(game_mode, False)
+    tuple = game_modes_map.get(game_mode, 0)
     return tuple[2]
 
 game_modifiers_map = {
@@ -287,7 +285,7 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
                     #print(f"Game Modifiers: {game_modifiers_str}")
                     #print(f"Game Varients: {game_varients_str}")
                 else:
-                    is_coded = False
+                    is_coded = 0
 
                 #Parse varient first to get the ignore vars and name
                 if e_index >= 0:
@@ -376,8 +374,8 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
                 saved_server["uptime"] = server.get("uptime")
                 saved_server["server_code"] = code_string
                 saved_server["server_name"] = full_game_str
-                if is_coded:
-                    saved_server["coded"] = True
+                if is_coded > 0:
+                    saved_server["coded"] = is_coded
 
                 servers.append(saved_server)
                 continue
