@@ -7,7 +7,8 @@ import constants
 import slash_commands
 from bot_instance import bot
 
-from parser import fetch_status_then_parse
+from bot_parser import fetch_status_then_parse
+from server_listings import update_all_server_listings
 
 from dotenv import load_dotenv
 from bot_logger import get_logger
@@ -15,6 +16,7 @@ from bot_logger import get_logger
 @discord.ext.tasks.loop(seconds=30)
 async def update_server_list_task():
     fetch_status_then_parse()
+    update_all_server_listings()
 
 async def init_on_ready():
     print("Bot initializing...")

@@ -11,10 +11,36 @@ def new_config_builder():
     config = {
             "guild_name": None,
             "codes_channel_id": None,
-            "is_blacklisted": False
+            "is_blacklisted": False,
+            "blacklist_reason": ""
         }
 
     return config
+
+def save_blacklist(blacklist):
+    blacklist_file = constants.BLACKLIST_FILE
+    with open(blacklist_file, "w", encoding="utf-8") as f:
+        json.dump(blacklist, f, indent=2, ensure_ascii=False)
+
+def create_blacklist():
+    blacklist_file = constants.BLACKLIST_FILE
+    blacklist = []
+    with open(blacklist_file, "w", encoding="utf-8") as f:
+        json.dump(blacklist, f, indent=2, ensure_ascii=False)
+
+def load_blacklist():
+    blacklist_file = constants.BLACKLIST_FILE
+    if os.path.exists(blacklist_file): #load blacklist
+        with open(blacklist_file, "r", encoding="utf-8") as f:
+            blacklist = json.load(f)
+            return blacklist
+    else:
+        create_blacklist()
+
+        if os.path.exists(blacklist_file): #load blacklist
+            with open(blacklist_file, "r", encoding="utf-8") as f:
+                blacklist = json.load(f)
+                return blacklist
 
 def load_config_file(guild_id):
     config_path = os.path.join(constants.GUILDS_CONFIG_PATH, f"{guild_id}.json")

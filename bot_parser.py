@@ -184,7 +184,7 @@ def fetch_status_then_parse():
     fetch_status()
     parse_status()
 
-def parse_status():
+def parse_status(): #FIXME: some Siege and Assault servers are still not displayed right, also some #a$ servers don't even get parsed
     raw_status = load_status()
     # pretty_status = json.dumps(raw_status, indent=4)
     # print(pretty_status)
