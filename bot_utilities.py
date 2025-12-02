@@ -17,6 +17,7 @@ def new_config_builder():
 
     return config
 
+#================Blacklist Block================
 def save_blacklist(blacklist):
     blacklist_file = constants.BLACKLIST_FILE
     with open(blacklist_file, "w", encoding="utf-8") as f:
@@ -41,7 +42,34 @@ def load_blacklist():
             with open(blacklist_file, "r", encoding="utf-8") as f:
                 blacklist = json.load(f)
                 return blacklist
+            
+#================Privilege Block================
+def save_privilege(privilege):
+    privilege_file = constants.PRIVILEGE_FILE
+    with open(privilege_file, "w", encoding="utf-8") as f:
+        json.dump(privilege, f, indent=2, ensure_ascii=False)
 
+def create_privilege():
+    privilege_file = constants.PRIVILEGE_FILE
+    privilege = []
+    with open(privilege_file, "w", encoding="utf-8") as f:
+        json.dump(privilege, f, indent=2, ensure_ascii=False)
+
+def load_privilege():
+    privilege_file = constants.PRIVILEGE_FILE
+    if os.path.exists(privilege_file): #load privilege
+        with open(privilege_file, "r", encoding="utf-8") as f:
+            privilege = json.load(f)
+            return privilege
+    else:
+        create_privilege()
+
+        if os.path.exists(privilege_file): #load privilege
+            with open(privilege_file, "r", encoding="utf-8") as f:
+                privilege = json.load(f)
+                return privilege
+
+#================Config Block================
 def load_config_file(guild_id):
     config_path = os.path.join(constants.GUILDS_CONFIG_PATH, f"{guild_id}.json")
     if os.path.exists(config_path): #load server config

@@ -1,11 +1,34 @@
+import os
+import json
 import discord
 from bot_parser import servers
 from bot_instance import bot
 from bot_utilities import load_config_file
 
-from constants import TeamColor
+from constants import TeamColor, LISTINGS_FILE
+from bot_logger import get_logger
 
-server_listings = []
+logger = get_logger("listings")
+
+print("Loading listings into memory...")
+try:
+    if os.path.exists(LISTINGS_FILE):
+        with open(LISTINGS_FILE, "r", encoding="utf-8") as f:
+            server_listings = json.load(f)
+        logger.info(f"Loaded {len(server_listings)} listings from {LISTINGS_FILE}.")
+    else:
+        logger.warning(f"❌{LISTINGS_FILE} does not exist, creating blank file.")
+        matches = []
+        with open(LISTINGS_FILE, "w", encoding="utf-8") as f:
+            json.dump(matches, f, indent=2, ensure_ascii=False)
+except Exception:
+    server_listings = []
+
+def save_listings_file():
+    if os.path.exists(LISTINGS_FILE):
+        with open(LISTINGS_FILE, "w", encoding="utf-8") as f:
+            json.dump(server_listings, f, indent=2, ensure_ascii=False)
+        logger.info(f"Saved {len(server_listings)} listings to {LISTINGS_FILE}.")
 
 def get_listing_for_server(id):
     for server_listing in server_listings:
@@ -70,9 +93,23 @@ def add_code_to_listing(id, code, team, user_id):
 # def update_server_listing(id):
 #     for guild in bot.guilds:
 
-#def update_server_listing(guild, id):
+async def update_server_listing_embeds(server_id):
+    server_listing = get_listing_for_server(server_id)
+    guild_embeds = server_listing.get("guild_embeds", [])
+    if guild_embeds:
+        for guild_id in guild_embeds:
+            guild_embed_data = guild_embeds[f"{guild_id}"]
+            msg_id = guild_embed_data[0]
+            channel_id = guild_embed_data[1]
+            channel = await bot.fetch_channel(channel_id)
+            if channel:
+                message = await channel.fetch_message(msg_id)
+                if message:
+                    code_embed = await get_listing_embed_for_server(server_id)
+                    if code_embed:
+                        await message.edit(embed=code_embed[0], view=code_embed[1])
 
-def update_all_server_listings():
+async def update_all_server_listings():
     for server in servers:
         coded_num = server.get("coded")
         if coded_num > 0:
@@ -80,22 +117,81 @@ def update_all_server_listings():
             server_listing = get_listing_for_server(server_id)
 
             if server_listing:
-                has_server_changed = not (server.get("server_code") == server_listing.get("server_code"))
+                server_changed = not (server.get("server_code") == server_listing.get("server_code"))
+                if server_changed:
+                    new_listing = server_listing_builder()
+                    new_listing["id"] = server_id
+                    new_listing["name"] = server.get("server_name")
+                    new_listing["server_code"] = server.get("server_code")
+                    new_listing["server_uptime"] = server.get("uptime")
+                    new_listing["coded_num"] = coded_num
+
+                    # guild_embeds = server_listing.get("guild_embeds", []) #Disabled until I get it working
+                    # if guild_embeds:
+                    #     for guild_id in guild_embeds.items():
+                    #         guild_embed_data = guild_embeds[f"{guild_id}"]
+                    #         msg_id = guild_embed_data[0]
+                    #         channel_id = guild_embed_data[1]
+                    #         channel = await bot.fetch_channel(channel_id)
+                    #         if channel:
+                    #             message = await channel.fetch_message(msg_id)
+                    #             if message:
+                    #                 code_embed = await get_listing_embed_for_server(server_id)
+                    #                 if code_embed:
+                    #                     await message.edit(embed=code_embed[0], view=code_embed[1])
+
+                    save_listing(new_listing, server_id)
+                    print(f"Reset listing for {server_id}")
+                    continue
             
-            if not server_listing or has_server_changed: #we need a new listing
+            if not server_listing or server_changed: #we need a new listing
                 new_listing = server_listing_builder()
                 new_listing["id"] = server_id
                 new_listing["name"] = server.get("server_name")
                 new_listing["server_code"] = server.get("server_code")
                 new_listing["server_uptime"] = server.get("uptime")
                 new_listing["coded_num"] = coded_num
+                save_listing(new_listing, server_id) #FIXME: I have to save it twice because get_listing_embed needs this listing to already exist!
+                guild_embeds = []
+                # for guild in bot.guilds: #Disabled until I can get it working
+                #     config = load_config_file(guild.id)
+                #     if config:
+                #         code_channel_id = config.get("codes_channel_id", None)
+                #         print(f"Got code id: {code_channel_id}")
+                #         if code_channel_id:
+                #             code_channel = await bot.fetch_channel(code_channel_id)
+                            
+                #             if code_channel:
+                #                 print("got code channel")
+                #                 code_embed = await get_listing_embed_for_server(server_id)
+                #                 if code_embed:
+                #                     print("sending embed")
+                #                     message = await code_channel.send(embed=code_embed[0], view=code_embed[1])
+                #                     embed_dict = {guild.id: [code_channel_id, message.id]}
+                #                     guild_embeds.append(embed_dict)
+
+                new_listing["guild_embeds"] = guild_embeds
                 save_listing(new_listing, server_id)
                 print(f"Added listing for {server_id}")
+                continue
 
+    save_listings_file()
+
+    #TODO: Delete listings whose server is no longer coded
+
+# How guild embed is stored:
+# #wa server listing:
+# listing {
+#     "guild_embeds" : [
+#         guild_id: [code_channel_id, msg_id]
+#         guild_id: [code_channel_id, msg_id]
+#         ...
+#     ]
+# }
 
 def server_listing_builder():
     server_listing = {
-        # "message_id": None, #FIXME, this can't be here, it needs to be per server, not per listing
+        "guild_embeds": None,
         "id": None, #wpd
         "name": None,
         "server_code": None,
@@ -171,7 +267,7 @@ async def get_listing_embed_for_server(id):
     server_listing = get_listing_for_server(id)
 
     if server_listing:
-        embed = await listing_embed_builder(server_listing)
-        return embed
+        embedtuple = await listing_embed_builder(server_listing)
+        return embedtuple
     else:
         return None

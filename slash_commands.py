@@ -1,23 +1,57 @@
 import discord
 from discord import Interaction, Guild
 import constants
-from bot_utilities import load_blacklist, save_blacklist, load_config_file, save_config_file
-from server_listings import add_code_to_listing, get_listing_embed_for_server, get_code_for_server_team, server_is_valid, coded_for_server
+from bot_utilities import load_blacklist, save_blacklist, load_config_file, save_config_file, load_privilege, save_privilege
+from server_listings import add_code_to_listing, get_listing_embed_for_server, get_code_for_server_team, update_server_listing_embeds
+from server_listings import server_is_valid, coded_for_server, update_all_server_listings
 from bot_instance import bot
 from bot_logger import get_logger
 
-from bot_parser import servers, fetch_status_then_parse
+from bot_parser import servers, sandboxes, fetch_status_then_parse
 
 logger = get_logger("commands")
 
 def setup(bot):
     tree = bot.tree
 
+def is_operator(user_id):
+    if user_id not in constants.OPERATOR_IDS:
+        return False
+    else:
+        return True #return true if bot operator
+
+async def operator_fail_message(interaction: Interaction):
+    embed = discord.Embed(title="Permission Denied", description="You don't have bot administrator permissions.", color=0xff0000)
+    await interaction.response.send_message(embed=embed, ephemeral=True)
+
+def is_admin(interaction: Interaction):
+    if is_operator(interaction):
+        return True #FIXME: operators probably should NOT get this permission
+    
+    if not interaction.user.guild_permissions.administrator:
+        return False
+    else:
+        return True #return true if admin
+
+async def admin_fail_message(interaction: Interaction):
+    embed = discord.Embed(title="Permission Denied", description="You do not have administrator permissions.", color=0xff0000)
+    await interaction.response.send_message(embed=embed, ephemeral=True)
+
 def user_is_blacklisted(id):
     blacklist = load_blacklist()
     if id in blacklist:
         return True
     return False
+
+def blacklist_user(id):
+    blacklist = load_blacklist()
+    blacklist.append(id)
+    save_blacklist(blacklist)
+
+def unblacklist_user(id):
+    blacklist = load_blacklist()
+    blacklist.remove(id)
+    save_blacklist(blacklist)
 
 async def send_user_is_blacklisted_msg(interaction):
     embed = discord.Embed(title="Blacklisted", description="You have been blacklisted from the codex.", color=0xff0000)
@@ -41,12 +75,177 @@ def get_blacklist_reason(guild_id):
         return config.get("blacklist_reason")
     return "Database Error"
 
+def user_is_privileged(id):
+    if is_operator(id):
+        return True
+    
+    privilege = load_privilege()
+    if id in privilege:
+        return True
+    return False
+
+def privilege_user(id):
+    privilege = load_privilege()
+    privilege.append(id)
+    save_privilege(privilege)
+
+def unprivilege_user(id):
+    privilege = load_privilege()
+    privilege.remove(id)
+    save_privilege(privilege)
+
+async def send_user_is_unprivileged_msg(interaction):
+    embed = discord.Embed(title="Permissions Error", description="You don't have permission to use this command.", color=0xff0000)
+    await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+    return
+
 
 #==================Command Block==================
 
-#TODO: blacklist server
-#TODO: blacklist user
+@bot.tree.command(name="blacklistserver", description="Blacklist Servers")
+async def blacklistserver_command(interaction: Interaction, action: constants.AddRemove, server: str, reason : str = None):
+    if not is_operator(interaction.user.id):
+        await operator_fail_message(interaction)
+        return
+    
+    valid_id = False
+    for guild in bot.guilds:
+        if guild.id == server:
+            valid_id = True
 
+    if not valid_id:
+        embed = discord.Embed(title="Invalid Arguments", description=f"Invalid Server ID!", color=0xff0000)
+        await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+        return
+    
+    config = load_config_file(server)
+    if config:
+        is_blacklisted = config.get("is_blacklisted", False)
+    
+        if action == constants.AddRemove.Add:
+            if not reason:
+                embed = discord.Embed(title="Invalid Arguments", description=f"You must set a reason!", color=0xff0000)
+                await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+                return
+            if is_blacklisted:
+                embed = discord.Embed(title="No Action", description=f"This server is already blacklisted!", color=0xff0000)
+                await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+                return
+            else:
+                config["is_blacklisted"] = True
+                config["blacklist_reason"] = reason
+                save_config_file(server, config)
+                embed = discord.Embed(title="Server Blacklisted", description=f"Server ID: {server} was blacklisted.", color=0x00ff00)
+                await interaction.response.send_message(embed=embed, delete_after=30)
+                return
+        
+        if action == constants.AddRemove.Remove:
+            if not is_blacklisted:
+                embed = discord.Embed(title="No Action", description=f"This server is not blacklisted!", color=0xff0000)
+                await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+                return
+            else:
+                config["is_blacklisted"] = False
+                config["blacklist_reason"] = ""
+                save_config_file(server, config)
+                embed = discord.Embed(title="Server Unblacklisted", description=f"Server ID: {server} was unblacklisted.", color=0x00ff00)
+                await interaction.response.send_message(embed=embed, delete_after=30)
+                return
+
+@bot.tree.command(name="setcodeschannel", description="Sets the channel codes are automatically posted to")
+async def setcodeschannel_command(interaction: Interaction, channel: discord.TextChannel):
+    if not is_admin(interaction):
+        await admin_fail_message(interaction)
+        return
+
+    config = load_config_file(interaction.guild.id)
+    if config:
+        config["codes_channel_id"] = channel.id
+    
+    save_config_file(interaction.guild.id, config)
+
+    embed = discord.Embed(title="Channel Set", description=f"Successfully set code channel", color=0x00ff00)
+    await interaction.response.send_message(embed=embed, delete_after=30)
+    return
+
+@bot.tree.command(name="blacklistuser", description="Blacklist Users")
+async def blacklistuser_command(interaction: Interaction, action: constants.AddRemove, user: discord.User):
+    if not is_operator(interaction.user.id):
+        await operator_fail_message(interaction)
+        return
+    
+    if action == constants.AddRemove.Add:
+        if user_is_blacklisted(user.id):
+            embed = discord.Embed(title="No Action", description=f"This user is already blacklisted!", color=0xff0000)
+            await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+            return
+        else:
+            blacklist_user(user.id)
+            embed = discord.Embed(title="User Blacklisted", description=f"{user.name} was blacklisted from the codex by {interaction.user.name}", color=0x00ff00)
+            await interaction.response.send_message(embed=embed, delete_after=30)
+            return
+    
+    if action == constants.AddRemove.Remove:
+        if not user_is_blacklisted(user.id):
+            embed = discord.Embed(title="No Action", description=f"This user is not blacklisted!", color=0xff0000)
+            await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+            return
+        else:
+            blacklist_user(user.id)
+            embed = discord.Embed(title="User Unblacklisted", description=f"{user.name} was removed from the codex blacklist by {interaction.user.name}", color=0x00ff00)
+            await interaction.response.send_message(embed=embed, delete_after=30)
+            return
+
+@bot.tree.command(name="privilegeuser", description="Privilege Users")
+async def privilege_command(interaction: Interaction, action: constants.AddRemove, user: discord.User):
+    if not is_operator(interaction.user.id):
+        await operator_fail_message(interaction)
+        return
+    
+    if action == constants.AddRemove.Add:
+        if user_is_privileged(user.id):
+            embed = discord.Embed(title="No Action", description=f"This user is already privileged!", color=0xff0000)
+            await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+            return
+        else:
+            privilege_user(user.id)
+            embed = discord.Embed(title="User Privileged", description=f"{user.name} was given privilege by {interaction.user.name}", color=0x00ff00)
+            await interaction.response.send_message(embed=embed, delete_after=30)
+            return
+    
+    if action == constants.AddRemove.Remove:
+        if not user_is_privileged(user.id):
+            embed = discord.Embed(title="No Action", description=f"This user is not privileged!", color=0xff0000)
+            await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+            return
+        else:
+            privilege_user(user.id)
+            embed = discord.Embed(title="User Unprivileged", description=f"{user.name}'s privilege was removed by {interaction.user.name}", color=0x00ff00)
+            await interaction.response.send_message(embed=embed, delete_after=30)
+            return
+
+@bot.tree.command(name="sandboxes", description="Get all active sandboxes")
+async def sandbox_command(interaction: Interaction):
+    if not user_is_privileged(interaction.user.id):
+        await send_user_is_unprivileged_msg(interaction)
+        return
+    
+    embed = discord.Embed(title="Sandboxes")
+    total_sandboxes = 0
+    for sandbox in sandboxes:
+        clients = sandbox.get("clients", 0)
+        if clients:
+            total_sandboxes += 1
+            embed.add_field(name=f"#{sandbox.get("id")}", value=f"{clients}")
+            embed.set_footer(text=f"Total active sandboxes: {total_sandboxes}.")
+    
+    if total_sandboxes > 0:
+        await interaction.response.send_message(embed=embed, ephemeral=True)
+        return
+    else:
+        embed.add_field(name="No active sandboxes", value="No active sandboxes")
+        await interaction.response.send_message(embed=embed, ephemeral=True)
+        return
 
 @bot.tree.command(name="status", description="Get a server's status")
 async def status_command(interaction: Interaction, code: str):
@@ -73,8 +272,13 @@ async def status_command(interaction: Interaction, code: str):
     await interaction.response.send_message(f"Unable to find server \"{code}\"", ephemeral=True)
 
 @bot.tree.command(name="refresh", description="Refresh internal server list")
-async def status_command(interaction: Interaction):
+async def refresh_command(interaction: Interaction):
+    if not is_operator(interaction.user.id):
+        await operator_fail_message(interaction)
+        return
+
     fetch_status_then_parse()
+    await update_all_server_listings()
     await interaction.response.send_message("Refreshed internal server list", ephemeral=True, delete_after=30)
 
 def get_code_and_server_from_url(url):
@@ -103,7 +307,7 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
     tuple = get_code_and_server_from_url(url)
 
     if not tuple:
-        embed = discord.Embed(title="Error", description=f"Invalid URL!", color=0xff0000)
+        embed = discord.Embed(title="Error", description=f"Invalid URL!\n Example usage: `/submit https://arras.io/#ca3757 Red`", color=0xff0000)
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
         return
     
@@ -134,14 +338,13 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
     success = add_code_to_listing(server, code, team, interaction.user.id)
 
     if success:
+        await update_server_listing_embeds(server)
         embed = discord.Embed(title="Thank You", description=f"Your {team.name.lower()} code for #{server} was successfully submitted!", color=0x00ff00)
         print(f"Code: {code} submitted for Server: {server} by {interaction.user.display_name}")
-        await interaction.response.send_message(embed=embed, delete_after=60)
+        await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=60)
     else:
         embed = discord.Embed(title="Error", description=f"Something went wrong!", color=0xff0000)
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
-
-
 
 @bot.tree.command(name="codes", description="Get codes for a server")
 async def submit_command(interaction: Interaction, server: str):

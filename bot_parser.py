@@ -160,7 +160,7 @@ def server_builder():
         "uptime": None,
         "server_code": "",
         "server_name": "",
-        "coded": False,
+        "coded": 0,
         "gamemodes": []
     }
     return server
@@ -200,6 +200,13 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
             if code_string[-1] == '%':
                 #this server game mode is not set/unknown
                 continue
+
+            unlistable = False
+            server_hidden = server.get("hidden", False)
+            if not (code_string[-1] == 'z') and server_hidden:
+                #this server is hidden and not a sandbox
+                unlistable = True
+
             #We should have parsed out all sandboxes, offline, and unknown servers by now
             #Begin parsing the codes
 
@@ -310,6 +317,8 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
                     if game_slice_str[w_index:] == "w33olds5forge":
                         game_mode_w = "Old Forge"
                         #print(f"w mode found: Old Forge")
+                    if game_slice_str[w_index:] == "w33olds9labyrinth":
+                        game_mode_w = "Old Labyrinth"
                 elif game_varients_str:
                     for index in range(len(game_varients_str)):
                         if game_varients_str[index] in game_varients_map:
@@ -374,7 +383,7 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
                 saved_server["uptime"] = server.get("uptime")
                 saved_server["server_code"] = code_string
                 saved_server["server_name"] = full_game_str
-                if is_coded > 0:
+                if is_coded > 0 and not unlistable:
                     saved_server["coded"] = is_coded
 
                 servers.append(saved_server)

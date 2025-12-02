@@ -16,7 +16,7 @@ from bot_logger import get_logger
 @discord.ext.tasks.loop(seconds=30)
 async def update_server_list_task():
     fetch_status_then_parse()
-    update_all_server_listings()
+    await update_all_server_listings()
 
 async def init_on_ready():
     print("Bot initializing...")
