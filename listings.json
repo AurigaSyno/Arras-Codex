@@ -4,167 +4,6 @@
       {
         "1421300512472698902": [
           1445223687887388762,
-          1445235516638494750
-        ]
-      }
-    ],
-    "id": "wf",
-    "name": "Growth 2TDM Domination",
-    "server_code": "ovh-hil-g2d",
-    "server_uptime": 26.17,
-    "coded_num": 2,
-    "red_code": null,
-    "blue_code": null,
-    "green_code": null,
-    "purple_code": null,
-    "red_submitted": null,
-    "blue_submitted": null,
-    "green_submitted": null,
-    "purple_submitted": null
-  },
-  {
-    "guild_embeds": [
-      {
-        "1421300512472698902": [
-          1445223687887388762,
-          1445235519117201490
-        ]
-      }
-    ],
-    "id": "oc",
-    "name": "Assault Booster",
-    "server_code": "ovh-syd-m2ax17booster",
-    "server_uptime": 220.059,
-    "coded_num": 2,
-    "red_code": null,
-    "blue_code": null,
-    "green_code": null,
-    "purple_code": null,
-    "red_submitted": null,
-    "blue_submitted": null,
-    "green_submitted": null,
-    "purple_submitted": null
-  },
-  {
-    "guild_embeds": [
-      {
-        "1421300512472698902": [
-          1445223687887388762,
-          1445235520924942457
-        ]
-      }
-    ],
-    "id": "oa",
-    "name": "Growth Arms Race 4TDM ",
-    "server_code": "ovh-syd-ga4",
-    "server_uptime": 104511.594,
-    "coded_num": 4,
-    "red_code": null,
-    "blue_code": null,
-    "green_code": null,
-    "purple_code": null,
-    "red_submitted": null,
-    "blue_submitted": null,
-    "green_submitted": null,
-    "purple_submitted": null
-  },
-  {
-    "guild_embeds": [
-      {
-        "1421300512472698902": [
-          1445223687887388762,
-          1445235522715783279
-        ]
-      }
-    ],
-    "id": "cc",
-    "name": "Arms Race Maze Assault Trenches",
-    "server_code": "wsi-kci-am2ax18trenches",
-    "server_uptime": 2830.499,
-    "coded_num": 2,
-    "red_code": null,
-    "blue_code": null,
-    "green_code": null,
-    "purple_code": null,
-    "red_submitted": null,
-    "blue_submitted": null,
-    "green_submitted": null,
-    "purple_submitted": null
-  },
-  {
-    "guild_embeds": [
-      {
-        "1421300512472698902": [
-          1445223687887388762,
-          1445235525018714252
-        ]
-      }
-    ],
-    "id": "of",
-    "name": "Arms Race Maze Tag",
-    "server_code": "ovh-syd-aom3t",
-    "server_uptime": 3531.215,
-    "coded_num": 3,
-    "red_code": null,
-    "blue_code": null,
-    "green_code": null,
-    "purple_code": null,
-    "red_submitted": null,
-    "blue_submitted": null,
-    "green_submitted": null,
-    "purple_submitted": null
-  },
-  {
-    "guild_embeds": [
-      {
-        "1421300512472698902": [
-          1445223687887388762,
-          1445235532811599933
-        ]
-      }
-    ],
-    "id": "ca",
-    "name": "Maze 4TDM ",
-    "server_code": "wsi-kci-m4",
-    "server_uptime": 1483.228,
-    "coded_num": 4,
-    "red_code": null,
-    "blue_code": null,
-    "green_code": null,
-    "purple_code": null,
-    "red_submitted": null,
-    "blue_submitted": null,
-    "green_submitted": null,
-    "purple_submitted": null
-  },
-  {
-    "guild_embeds": [
-      {
-        "1421300512472698902": [
-          1445223687887388762,
-          1445235534929596527
-        ]
-      }
-    ],
-    "id": "oe",
-    "name": "Old Dreadnoughts",
-    "server_code": "ovh-syd-w33oldscdreadnoughts",
-    "server_uptime": 1371.325,
-    "coded_num": 3,
-    "red_code": null,
-    "blue_code": null,
-    "green_code": null,
-    "purple_code": null,
-    "red_submitted": null,
-    "blue_submitted": null,
-    "green_submitted": null,
-    "purple_submitted": null
-  },
-  {
-    "guild_embeds": [
-      {
-        "1421300512472698902": [
-          1445223687887388762,
           1445235537635184813
         ]
       }
@@ -184,18 +23,27 @@
     "purple_submitted": null
   },
   {
-    "guild_embeds": [
-      {
-        "1421300512472698902": [
-          1445223687887388762,
-          1445235539912687696
-        ]
-      }
-    ],
-    "id": "wd",
-    "name": "Growth Arms Race Soccer",
-    "server_code": "ovh-hil-ga2b",
-    "server_uptime": 671.375,
+    "guild_embeds": [],
+    "id": "oe",
+    "name": "Old Dreadnoughts",
+    "server_code": "ovh-syd-w33oldscdreadnoughts",
+    "server_uptime": 812.527,
+    "coded_num": 3,
+    "red_code": null,
+    "blue_code": null,
+    "green_code": null,
+    "purple_code": null,
+    "red_submitted": null,
+    "blue_submitted": null,
+    "green_submitted": null,
+    "purple_submitted": null
+  },
+  {
+    "guild_embeds": [],
+    "id": "oa",
+    "name": "Growth Arms Race Maze 2TDM ",
+    "server_code": "ovh-syd-gam2",
+    "server_uptime": 52510.811,
     "coded_num": 2,
     "red_code": null,
     "blue_code": null,
@@ -207,26 +55,115 @@
     "purple_submitted": null
   },
   {
-    "guild_embeds": [
-      {
-        "1421300512472698902": [
-          1445223687887388762,
-          1445235514797199521
-        ]
-      }
-    ],
-    "id": "wa",
-    "name": "Growth 2TDM ",
-    "server_code": "ovh-hil-g2",
-    "server_uptime": 5217.23,
-    "coded_num": 2,
+    "guild_embeds": null,
+    "id": "of",
+    "name": "Arms Race Maze 4TDM Domination",
+    "server_code": "ovh-syd-am4d",
+    "server_uptime": 8.245,
+    "coded_num": 4,
     "red_code": null,
-    "blue_code": "1409",
-    "green_code": "1409",
+    "blue_code": null,
+    "green_code": null,
     "purple_code": null,
     "red_submitted": null,
-    "blue_submitted": 1000953569689747507,
-    "green_submitted": 1000953569689747507,
+    "blue_submitted": null,
+    "green_submitted": null,
+    "purple_submitted": null
+  },
+  {
+    "guild_embeds": null,
+    "id": "wa",
+    "name": "Growth 4TDM ",
+    "server_code": "ovh-hil-g4",
+    "server_uptime": 12.043,
+    "coded_num": 4,
+    "red_code": null,
+    "blue_code": null,
+    "green_code": null,
+    "purple_code": null,
+    "red_submitted": null,
+    "blue_submitted": null,
+    "green_submitted": null,
+    "purple_submitted": null
+  },
+  {
+    "guild_embeds": null,
+    "id": "ce",
+    "name": "Growth Arms Race Soccer",
+    "server_code": "wsi-kci-ga2b",
+    "server_uptime": 23.966,
+    "coded_num": 2,
+    "red_code": null,
+    "blue_code": null,
+    "green_code": null,
+    "purple_code": null,
+    "red_submitted": null,
+    "blue_submitted": null,
+    "green_submitted": null,
+    "purple_submitted": null
+  },
+  {
+    "guild_embeds": null,
+    "id": "ca",
+    "name": "Growth Open 2TDM ",
+    "server_code": "wsi-kci-go2",
+    "server_uptime": 25.62,
+    "coded_num": 2,
+    "red_code": null,
+    "blue_code": null,
+    "green_code": null,
+    "purple_code": null,
+    "red_submitted": null,
+    "blue_submitted": null,
+    "green_submitted": null,
+    "purple_submitted": null
+  },
+  {
+    "guild_embeds": null,
+    "id": "wc",
+    "name": "Maze Assault Trenches",
+    "server_code": "ovh-hil-m2ax18trenches",
+    "server_uptime": 35.732,
+    "coded_num": 2,
+    "red_code": null,
+    "blue_code": null,
+    "green_code": null,
+    "purple_code": null,
+    "red_submitted": null,
+    "blue_submitted": null,
+    "green_submitted": null,
+    "purple_submitted": null
+  },
+  {
+    "guild_embeds": null,
+    "id": "od",
+    "name": "Maze Capture The Flag",
+    "server_code": "ovh-syd-m2c",
+    "server_uptime": 3.041,
+    "coded_num": 2,
+    "red_code": null,
+    "blue_code": null,
+    "green_code": null,
+    "purple_code": null,
+    "red_submitted": null,
+    "blue_submitted": null,
+    "green_submitted": null,
+    "purple_submitted": null
+  },
+  {
+    "guild_embeds": null,
+    "id": "wf",
+    "name": "Growth Arms Race Maze Mothership",
+    "server_code": "ovh-hil-gam2m",
+    "server_uptime": 11.5,
+    "coded_num": 2,
+    "red_code": null,
+    "blue_code": null,
+    "green_code": null,
+    "purple_code": null,
+    "red_submitted": null,
+    "blue_submitted": null,
+    "green_submitted": null,
     "purple_submitted": null
   }
 ]

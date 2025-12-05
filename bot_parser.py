@@ -165,6 +165,12 @@ def server_builder():
     }
     return server
 
+def server_is_coded(id):
+    for server in servers:
+        if server.get("id", None) == id:
+            return server.get("coded", 0)
+    return 0
+
 def fetch_status():
     try:
         response = requests.get(constants.STATUS_URL, stream=True)

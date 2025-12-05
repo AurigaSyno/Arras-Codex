@@ -1,7 +1,7 @@
 import os
 import json
 import discord
-from bot_parser import servers
+from bot_parser import servers, server_is_coded
 from bot_instance import bot
 from bot_utilities import load_config_file
 
@@ -175,9 +175,14 @@ async def update_all_server_listings():
                 print(f"Added listing for {server_id}")
                 continue
 
-    save_listings_file()
+    for listing in server_listings:
+        server_id = listing.get("id", None)
+        if server_id:
+            if not server_is_coded(server_id):
+                server_listings.remove(listing)
+                print(f"Server #{server_id} is no longer coded, removing")
 
-    #TODO: Delete listings whose server is no longer coded
+    save_listings_file()
 
 # How guild embed is stored:
 # #wa server listing:

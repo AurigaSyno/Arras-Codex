@@ -191,7 +191,7 @@ async def blacklistuser_command(interaction: Interaction, action: constants.AddR
             await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
             return
         else:
-            blacklist_user(user.id)
+            unblacklist_user(user.id)
             embed = discord.Embed(title="User Unblacklisted", description=f"{user.name} was removed from the codex blacklist by {interaction.user.name}", color=0x00ff00)
             await interaction.response.send_message(embed=embed, delete_after=30)
             return
@@ -219,7 +219,7 @@ async def privilege_command(interaction: Interaction, action: constants.AddRemov
             await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
             return
         else:
-            privilege_user(user.id)
+            unprivilege_user(user.id)
             embed = discord.Embed(title="User Unprivileged", description=f"{user.name}'s privilege was removed by {interaction.user.name}", color=0x00ff00)
             await interaction.response.send_message(embed=embed, delete_after=30)
             return
@@ -250,12 +250,12 @@ async def sandbox_command(interaction: Interaction):
 @bot.tree.command(name="status", description="Get a server's status")
 async def status_command(interaction: Interaction, code: str):
     if user_is_blacklisted(interaction.user.id):
-        send_user_is_blacklisted_msg(interaction)
+        await send_user_is_blacklisted_msg(interaction)
         return
     
     if guild_is_blacklisted(interaction.guild.id):
         reason = get_blacklist_reason(interaction.guild.id)
-        send_server_is_blacklisted_msg(interaction, reason)
+        await send_server_is_blacklisted_msg(interaction, reason)
         return
     
     for server in servers:
@@ -296,12 +296,12 @@ def get_code_and_server_from_url(url):
 @bot.tree.command(name="submit", description="Submit a code to the codex (URL)")
 async def submit_command(interaction: Interaction, url: str, team: constants.TeamColor):
     if user_is_blacklisted(interaction.user.id):
-        send_user_is_blacklisted_msg(interaction)
+        await send_user_is_blacklisted_msg(interaction)
         return
     
     if guild_is_blacklisted(interaction.guild.id):
         reason = get_blacklist_reason(interaction.guild.id)
-        send_server_is_blacklisted_msg(interaction, reason)
+        await send_server_is_blacklisted_msg(interaction, reason)
         return
 
     tuple = get_code_and_server_from_url(url)
@@ -338,7 +338,7 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
     success = add_code_to_listing(server, code, team, interaction.user.id)
 
     if success:
-        await update_server_listing_embeds(server)
+        #await update_server_listing_embeds(server) #FIXME: Re-enable when it works
         embed = discord.Embed(title="Thank You", description=f"Your {team.name.lower()} code for #{server} was successfully submitted!", color=0x00ff00)
         print(f"Code: {code} submitted for Server: {server} by {interaction.user.display_name}")
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=60)
@@ -349,12 +349,12 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
 @bot.tree.command(name="codes", description="Get codes for a server")
 async def submit_command(interaction: Interaction, server: str):
     if user_is_blacklisted(interaction.user.id):
-        send_user_is_blacklisted_msg(interaction)
+        await send_user_is_blacklisted_msg(interaction)
         return
     
     if guild_is_blacklisted(interaction.guild.id):
         reason = get_blacklist_reason(interaction.guild.id)
-        send_server_is_blacklisted_msg(interaction, reason)
+        await send_server_is_blacklisted_msg(interaction, reason)
         return
     
     if not server_is_valid(server):
