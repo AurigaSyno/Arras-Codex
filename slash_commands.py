@@ -100,7 +100,28 @@ async def send_user_is_unprivileged_msg(interaction):
     return
 
 
-#==================Command Block==================
+#==================Operator Block==================
+@bot.tree.command(name="refresh", description="Refresh internal server list")
+async def refresh_command(interaction: Interaction):
+    if not is_operator(interaction.user.id):
+        await operator_fail_message(interaction)
+        return
+
+    fetch_status_then_parse()
+    await update_all_server_listings()
+    await interaction.response.send_message("Refreshed internal server list", ephemeral=True, delete_after=30)
+
+def get_code_and_server_from_url(url):
+    index = url.find('#')
+    if index == -1:
+        return None
+
+    server = url[index+1:index+3]
+    code = url[index+3:]
+
+    return [code, server]
+    #https://arras.io/#aa2964
+    #arras.io/#aa2964
 
 @bot.tree.command(name="blacklistserver", description="Blacklist Servers")
 async def blacklistserver_command(interaction: Interaction, action: constants.AddRemove, server: str, reason : str = None):
@@ -151,22 +172,6 @@ async def blacklistserver_command(interaction: Interaction, action: constants.Ad
                 embed = discord.Embed(title="Server Unblacklisted", description=f"Server ID: {server} was unblacklisted.", color=0x00ff00)
                 await interaction.response.send_message(embed=embed, delete_after=30)
                 return
-
-@bot.tree.command(name="setcodeschannel", description="Sets the channel codes are automatically posted to")
-async def setcodeschannel_command(interaction: Interaction, channel: discord.TextChannel):
-    if not is_admin(interaction):
-        await admin_fail_message(interaction)
-        return
-
-    config = load_config_file(interaction.guild.id)
-    if config:
-        config["codes_channel_id"] = channel.id
-    
-    save_config_file(interaction.guild.id, config)
-
-    embed = discord.Embed(title="Channel Set", description=f"Successfully set code channel", color=0x00ff00)
-    await interaction.response.send_message(embed=embed, delete_after=30)
-    return
 
 @bot.tree.command(name="blacklistuser", description="Blacklist Users")
 async def blacklistuser_command(interaction: Interaction, action: constants.AddRemove, user: discord.User):
@@ -223,7 +228,54 @@ async def privilege_command(interaction: Interaction, action: constants.AddRemov
             embed = discord.Embed(title="User Unprivileged", description=f"{user.name}'s privilege was removed by {interaction.user.name}", color=0x00ff00)
             await interaction.response.send_message(embed=embed, delete_after=30)
             return
+        
+#==================Admin==================
+# @bot.tree.command(name="setcodeschannel", description="Sets the channel codes are automatically posted to")
+# async def setcodeschannel_command(interaction: Interaction, channel: discord.TextChannel):
+#     if not is_admin(interaction):
+#         await admin_fail_message(interaction)
+#         return
 
+#     config = load_config_file(interaction.guild.id)
+#     if config:
+#         config["codes_channel_id"] = channel.id
+    
+#     save_config_file(interaction.guild.id, config)
+
+#     embed = discord.Embed(title="Channel Set", description=f"Successfully set code channel", color=0x00ff00)
+#     await interaction.response.send_message(embed=embed, delete_after=30)
+#     return
+
+
+
+# async def clear(ctx, number):
+#     mgs = [] #Empty list to put all the messages in the log
+#     number = int(number) #Converting the amount of messages to delete to an integer
+#     async for x in Client.logs_from(ctx.message.channel, limit = number):
+#         mgs.append(x)
+#     await Client.delete_messages(mgs)
+
+# @bot.tree.command(name="clearcodeschannel", description="Clears codes channel")
+# async def clearcodeschannel_command(interaction: Interaction):
+#     if not is_admin(interaction):
+#         await admin_fail_message(interaction)
+#         return
+    
+#     config = load_config_file(interaction.guild.id)
+#     if config:
+#         channel_id = config["codes_channel_id"]
+#         if channel_id:
+#             channel = bot.fetch_channel(channel_id)
+#             if channel:
+#                 try:
+#                     msgs = []
+#                     async for x in bot.logs_from(channel, limit = 30):
+#                         msgs.append(x)
+#                     await bot.delete_messages(msgs)
+#                 except:
+#                     print("Bot lacks permissions!") #FIXME: This is shit
+
+#==================Privileged==================
 @bot.tree.command(name="sandboxes", description="Get all active sandboxes")
 async def sandbox_command(interaction: Interaction):
     if not user_is_privileged(interaction.user.id):
@@ -271,28 +323,8 @@ async def status_command(interaction: Interaction, code: str):
     
     await interaction.response.send_message(f"Unable to find server \"{code}\"", ephemeral=True)
 
-@bot.tree.command(name="refresh", description="Refresh internal server list")
-async def refresh_command(interaction: Interaction):
-    if not is_operator(interaction.user.id):
-        await operator_fail_message(interaction)
-        return
 
-    fetch_status_then_parse()
-    await update_all_server_listings()
-    await interaction.response.send_message("Refreshed internal server list", ephemeral=True, delete_after=30)
-
-def get_code_and_server_from_url(url):
-    index = url.find('#')
-    if index == -1:
-        return None
-
-    server = url[index+1:index+3]
-    code = url[index+3:]
-
-    return [code, server]
-    #https://arras.io/#aa2964
-    #arras.io/#aa2964
-
+#==================Normal Users==================
 @bot.tree.command(name="submit", description="Submit a code to the codex (URL)")
 async def submit_command(interaction: Interaction, url: str, team: constants.TeamColor):
     if user_is_blacklisted(interaction.user.id):
