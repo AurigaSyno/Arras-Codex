@@ -118,7 +118,7 @@ game_varients_map = {
     "t": ["Tag", ["2","3","4","o"]],
     "d": ["Domination", []],
     "m": ["Mothership", ["2","4"]],
-    "c": ["Capture The Flag", ["2"]],
+    "c": ["Capture The Flag", ["m", "2"]],
     "e": ["Elimination", ["o","m","4"]],
     "a": ["Assault", ["m","2"]],
     "s": ["Siege", ["1"]]
@@ -179,7 +179,7 @@ def fetch_status():
         with open(constants.STATUS_FILE, 'wb') as f:
             for chunk in response.iter_content(chunk_size=8192):
                 f.write(chunk)
-        print(f"Fetched server status from arras.io successfully")
+        #print(f"Fetched server status from arras.io successfully")
 
     except requests.exceptions.RequestException as e:
         print(f"Error downloading status: {e}")
