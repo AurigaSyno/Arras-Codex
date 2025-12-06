@@ -1,5 +1,6 @@
 .env
 .envold
+.envnew
 __pycache__/
 bot.log
 raw_status.json
@@ -7,3 +8,4 @@ blacklist.json
 guild_configs/
 privelege.json
 listings.json
+*.json
