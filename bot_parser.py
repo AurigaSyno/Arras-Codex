@@ -42,11 +42,11 @@ simple_region_map = {
     "o": ["Oceania", ServerRegion.OCEANIA]
 }
 def get_region_name(region_code):
-    region = region_code[1]
-    return simple_region_map.get(region, region_code)
+    region = region_code
+    return simple_region_map.get(region, region_code)[0]
 def get_region_int(region_code):
-    region = region_code[1]
-    return simple_region_map.get(region, region_code)
+    region = region_code
+    return simple_region_map.get(region, region_code)[1]
 
 #============Hosting Code============
 host_map = {
@@ -99,9 +99,9 @@ def get_game_mode_coded(game_mode):
     return tuple[2]
 
 game_modifiers_map = {
-    "r": ["Rock", GameModifiers.ROCK],
     "g": ["Growth", GameModifiers.GROWTH],
     "a": ["Arms Race", GameModifiers.ARMSRACE],
+    "r": ["Rock", GameModifiers.ROCK],
     "m": ["Maze", GameModifiers.MAZE],
     "o": ["Open", GameModifiers.OPEN]
 }
@@ -154,7 +154,9 @@ def server_builder():
     server = {
         "id": None,
         "region": None,
-        "region_str"
+        "region_str": None,
+        "host": None,
+        "location": None,
         "mspt": None,
         "clients": None,
         "uptime": None,
@@ -165,12 +167,18 @@ def server_builder():
     }
     return server
 
+#===================================================
 def server_is_coded(id):
     for server in servers:
         if server.get("id", None) == id:
             return server.get("coded", 0)
     return 0
 
+def fetch_status_then_parse():
+    fetch_status()
+    parse_status()
+
+#===================================================
 def fetch_status():
     try:
         response = requests.get(constants.STATUS_URL, stream=True)
@@ -183,18 +191,14 @@ def fetch_status():
 
     except requests.exceptions.RequestException as e:
         print(f"Error downloading status: {e}")
-
-def fetch_status_then_parse():
-    fetch_status()
-    parse_status()
-
+#FIXME: Europe and asia servers are not being parsed right or something
 def parse_status(): #FIXME: some Siege and Assault servers are still not displayed right, also some #a$ servers don't even get parsed
     raw_status = load_status()
     # pretty_status = json.dumps(raw_status, indent=4)
     # print(pretty_status)
 
-    if not raw_status:
-        #ERRRR
+    if not raw_status: #should never happen
+        print("Unable to parse, raw_status does not exist!")
         return
     
     clear_servers()
@@ -202,6 +206,8 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
     for server_id in raw_status:
         server = raw_status[f"{server_id}"]
         if server.get("online") == True:
+            name_string = server.get("name")
+            #print(f"Parsing server {name_string}")
             code_string = server.get("code")
             if code_string[-1] == '%':
                 #this server game mode is not set/unknown
@@ -219,14 +225,12 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
             #wsi-kci-4, 4TDM, this code is Host-Region-Gamecode, this code splits that apart
             strip_code = code_string #using this so I can slice various parts off
             index = strip_code.index('-')
-            if index:
-                host_str = strip_code[:index]
-                location_strip = strip_code[(index+1):]
-                index2 = location_strip.index('-')
-                if index2:
-                    location_str = location_strip[:index]
-                    strip_code = location_strip[(index+1):]
-                    gamecode_str = strip_code
+            host = strip_code[:index]
+            location_strip = strip_code[(index+1):]
+            index = location_strip.index('-')
+            location = location_strip[:index]
+            strip_code = location_strip[(index+1):]
+            gamecode_str = strip_code
 
             if gamecode_str == "z":
                 #this is a sandbox
@@ -377,13 +381,12 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
                         full_game_str += game_mode_e.capitalize()
 
                 #Parsing complete, save server
-                name_string = server.get("name")
-
-                
                 saved_server = server_builder()
                 saved_server["id"] = name_string
-                saved_server["region"] = get_region_int(name_string)
-                saved_server["region_str"] = get_region_name(name_string)
+                saved_server["region"] = get_region_int(name_string[0])
+                saved_server["region_str"] = get_region_name(name_string[0])
+                saved_server["host"] = host
+                saved_server["location"] = location
                 saved_server["mspt"] = server.get("mspt", 0)
                 saved_server["clients"] = server.get("clients")
                 saved_server["uptime"] = server.get("uptime")
@@ -397,3 +400,5 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
         else:
             continue
     
+    with open("saved_servers.json", "w", encoding="utf-8") as f:
+        json.dump(servers, f, indent=2, ensure_ascii=False)
