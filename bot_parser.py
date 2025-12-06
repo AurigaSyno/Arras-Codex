@@ -400,5 +400,5 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
         else:
             continue
     
-    with open("saved_servers.json", "w", encoding="utf-8") as f:
-        json.dump(servers, f, indent=2, ensure_ascii=False)
+    # with open("saved_servers.json", "w", encoding="utf-8") as f:
+    #     json.dump(servers, f, indent=2, ensure_ascii=False)

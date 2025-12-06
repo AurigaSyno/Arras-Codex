@@ -28,7 +28,7 @@ def save_listings_file():
     if os.path.exists(LISTINGS_FILE):
         with open(LISTINGS_FILE, "w", encoding="utf-8") as f:
             json.dump(server_listings, f, indent=2, ensure_ascii=False)
-        logger.info(f"Saved {len(server_listings)} listings to {LISTINGS_FILE}.")
+        #logger.info(f"Saved {len(server_listings)} listings to {LISTINGS_FILE}.")
 
 def get_listing_for_server(id):
     for server_listing in server_listings:
