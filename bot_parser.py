@@ -201,7 +201,7 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
     
     for server_id in raw_status:
         server = raw_status[f"{server_id}"]
-        if server.get("online") == True:
+        if server.get("online", False) == True:
             code_string = server.get("code")
             if code_string[-1] == '%':
                 #this server game mode is not set/unknown

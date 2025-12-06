@@ -389,12 +389,14 @@ async def submit_command(interaction: Interaction, server: str):
         await send_server_is_blacklisted_msg(interaction, reason)
         return
     
-    if not server_is_valid(server):
+    server_str = server.replace("#", "")
+    
+    if not server_is_valid(server_str):
         embed = discord.Embed(title="Error", description=f"#{server} is not a valid server!", color=0xff0000)
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
         return
 
-    embedtuple = await get_listing_embed_for_server(server)
+    embedtuple = await get_listing_embed_for_server(server_str)
     embed = embedtuple[0]
     view = embedtuple[1]
 
