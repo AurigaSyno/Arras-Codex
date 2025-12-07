@@ -18,9 +18,9 @@ try:
         logger.info(f"Loaded {len(server_listings)} listings from {LISTINGS_FILE}.")
     else:
         logger.warning(f"❌{LISTINGS_FILE} does not exist, creating blank file.")
-        matches = []
+        server_listings = []
         with open(LISTINGS_FILE, "w", encoding="utf-8") as f:
-            json.dump(matches, f, indent=2, ensure_ascii=False)
+            json.dump(server_listings, f, indent=2, ensure_ascii=False)
 except Exception:
     server_listings = []
 
