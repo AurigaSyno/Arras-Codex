@@ -153,6 +153,7 @@ def sandbox_data_builder():
 def server_builder():
     server = {
         "id": None,
+        "hidden": None,
         "region": None,
         "region_str": None,
         "host": None,
@@ -177,8 +178,18 @@ def server_is_coded(id):
 def fetch_status_then_parse():
     fetch_status()
     parse_status()
+    sort_servers()
 
 #===================================================
+def sort_servers():
+    global servers
+    sort1 = sorted(servers, key = lambda id: id["id"][1]) #sort by the secord letter in the id
+    sort2 = sorted(sort1, key = lambda region: region["region"]) #sort by region, US West, Europe, etc
+    servers = sort2
+
+    # with open("saved_servers.json", "w", encoding="utf-8") as f:
+    #     json.dump(servers, f, indent=2, ensure_ascii=False)
+
 def fetch_status():
     try:
         response = requests.get(constants.STATUS_URL, stream=True)
@@ -383,6 +394,7 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
                 #Parsing complete, save server
                 saved_server = server_builder()
                 saved_server["id"] = name_string
+                saved_server["hidden"] = server_hidden
                 saved_server["region"] = get_region_int(name_string[0])
                 saved_server["region_str"] = get_region_name(name_string[0])
                 saved_server["host"] = host
@@ -400,5 +412,3 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
         else:
             continue
     
-    # with open("saved_servers.json", "w", encoding="utf-8") as f:
-    #     json.dump(servers, f, indent=2, ensure_ascii=False)
