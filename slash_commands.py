@@ -323,6 +323,26 @@ async def status_command(interaction: Interaction, code: str):
     
     await interaction.response.send_message(f"Unable to find server \"{code}\"", ephemeral=True)
 
+@bot.tree.command(name="servers", description="List all servers")
+async def servers_command(interaction: Interaction, showhidden: bool = False):
+    if user_is_blacklisted(interaction.user.id):
+        await send_user_is_blacklisted_msg(interaction)
+        return
+    
+    if guild_is_blacklisted(interaction.guild.id):
+        reason = get_blacklist_reason(interaction.guild.id)
+        await send_server_is_blacklisted_msg(interaction, reason)
+        return
+    
+    server_list = ""
+    for server in servers:
+        hidden = server.get("hidden", False)
+        if not hidden or showhidden:
+            server_list = server_list + f"#{server.get("id","x")} {server.get("region_str", "N/A")} {server.get("server_name","Unknown")}: {server.get("clients", "0")}/80\n"
+    
+    embed = discord.Embed(title="Arras Server List", description=server_list)
+    await interaction.response.send_message(embed=embed)
+
 
 #==================Normal Users==================
 @bot.tree.command(name="submit", description="Submit a code to the codex (URL)")
