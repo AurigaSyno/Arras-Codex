@@ -292,11 +292,11 @@ async def sandbox_command(interaction: Interaction):
             embed.set_footer(text=f"Total active sandboxes: {total_sandboxes}.")
     
     if total_sandboxes > 0:
-        await interaction.response.send_message(embed=embed, ephemeral=True)
+        await interaction.response.send_message(embed=embed)
         return
     else:
         embed.add_field(name="No active sandboxes", value="No active sandboxes")
-        await interaction.response.send_message(embed=embed, ephemeral=True)
+        await interaction.response.send_message(embed=embed)
         return
 
 @bot.tree.command(name="status", description="Get a server's status")
@@ -304,11 +304,11 @@ async def status_command(interaction: Interaction, code: str):
     if user_is_blacklisted(interaction.user.id):
         await send_user_is_blacklisted_msg(interaction)
         return
-    
-    if guild_is_blacklisted(interaction.guild.id):
-        reason = get_blacklist_reason(interaction.guild.id)
-        await send_server_is_blacklisted_msg(interaction, reason)
-        return
+    if interaction.guild:
+        if guild_is_blacklisted(interaction.guild.id):
+            reason = get_blacklist_reason(interaction.guild.id)
+            await send_server_is_blacklisted_msg(interaction, reason)
+            return
     
     for server in servers:
         if server["id"] == code:
@@ -329,10 +329,11 @@ async def servers_command(interaction: Interaction, showhidden: bool = False):
         await send_user_is_blacklisted_msg(interaction)
         return
     
-    if guild_is_blacklisted(interaction.guild.id):
-        reason = get_blacklist_reason(interaction.guild.id)
-        await send_server_is_blacklisted_msg(interaction, reason)
-        return
+    if interaction.guild:
+        if guild_is_blacklisted(interaction.guild.id):
+            reason = get_blacklist_reason(interaction.guild.id)
+            await send_server_is_blacklisted_msg(interaction, reason)
+            return
     
     server_list = ""
     for server in servers:
@@ -351,10 +352,11 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
         await send_user_is_blacklisted_msg(interaction)
         return
     
-    if guild_is_blacklisted(interaction.guild.id):
-        reason = get_blacklist_reason(interaction.guild.id)
-        await send_server_is_blacklisted_msg(interaction, reason)
-        return
+    if interaction.guild:
+        if guild_is_blacklisted(interaction.guild.id):
+            reason = get_blacklist_reason(interaction.guild.id)
+            await send_server_is_blacklisted_msg(interaction, reason)
+            return
 
     tuple = get_code_and_server_from_url(url)
 
@@ -404,10 +406,11 @@ async def submit_command(interaction: Interaction, server: str):
         await send_user_is_blacklisted_msg(interaction)
         return
     
-    if guild_is_blacklisted(interaction.guild.id):
-        reason = get_blacklist_reason(interaction.guild.id)
-        await send_server_is_blacklisted_msg(interaction, reason)
-        return
+    if interaction.guild:
+        if guild_is_blacklisted(interaction.guild.id):
+            reason = get_blacklist_reason(interaction.guild.id)
+            await send_server_is_blacklisted_msg(interaction, reason)
+            return
     
     if not server_is_valid(server):
         embed = discord.Embed(title="Error", description=f"#{server} is not a valid server!", color=0xff0000)
