@@ -83,3 +83,42 @@ Siege Blitz = 1sx15blitz
 What the 15 represents is still unknown
 
 what "w" means
+
+
+{
+    "id": "on",
+    "region": 4,
+    "region_str": "Oceania",
+    "mspt": 0.9,
+    "clients": 1,
+    "uptime": 1717.829,
+    "server_code": "ovh-syd-e5nexus",
+    "server_name": "Nexus",
+    "coded": 0,
+    "gamemodes": []
+  },
+  {
+    "id": "en",
+    "region": 2,
+    "region_str": "Europe",
+    "mspt": 0.93,
+    "clients": 1,
+    "uptime": 6857.564,
+    "server_code": "hetzner-fsn-e5nexus",
+    "server_name": "",
+    "coded": 0,
+    "gamemodes": []
+  },
+  {
+    "id": "wn",
+    "region": 0,
+    "region_str": "US West",
+    "mspt": 0.46,
+    "clients": 0,
+    "uptime": 672.922,
+    "server_code": "ovh-hil-e5nexus",
+    "server_name": "Nexus",
+    "coded": 0,
+    "gamemodes": []
+  },
+  Why tf is en broken?

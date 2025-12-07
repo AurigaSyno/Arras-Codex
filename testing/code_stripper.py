@@ -85,14 +85,14 @@ def get_game_varient_ignore(game_mode):
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        gamecode_str = sys.argv[1]
-        # index = strip_code.index('-')
-        # host = strip_code[:index]
-        # location_strip = strip_code[(index+1):]
-        # index = location_strip.index('-')
-        # location = location_strip[:index]
-        # strip_code = location_strip[(index+1):]
-        # gamecode_str = strip_code
+        strip_code = sys.argv[1]
+        index = strip_code.index('-')
+        host = strip_code[:index]
+        location_strip = strip_code[(index+1):]
+        index = location_strip.index('-')
+        location = location_strip[:index]
+        strip_code = location_strip[(index+1):]
+        gamecode_str = strip_code
 
         #aom4e, Arms Race Elimination, (Arms Race Open 4TDM Elimination), this code parses gamecodes, details in code_examples.txt
         if gamecode_str:
