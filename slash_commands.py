@@ -339,13 +339,23 @@ async def servers_command(interaction: Interaction, showhidden: bool = False):
             await send_server_is_blacklisted_msg(interaction, reason)
             return
     
-    server_list = ""
+    link_str = ""
+    #region_str = ""
+    name_str = ""
+    clients_str = ""
     for server in servers:
         hidden = server.get("hidden", False)
         if not hidden or showhidden:
-            server_list = server_list + f"[#{server.get("id","x")}](https://arras.io/#{server.get("id","x")})  -  {server.get("region_str", "N/A")} {server.get("server_name","Unknown")}: {server.get("clients", "0")}/80\n"
+            link_str = link_str + f"[#{server.get("id","x")}](https://arras.io/#{server.get("id","x")})\n"
+            #region_str = region_str + f"{server.get("region_str", "N/A")}\n"
+            name_str = name_str + f"{server.get("region_str", "N/A")} {server.get("server_name","Unknown")}\n"
+            clients_str = clients_str + f"{server.get("clients", "0")}/80\n"
     
-    embed = discord.Embed(title="Arras Server List", description=server_list, color=0x00ff00)
+    embed = discord.Embed(title="Arras Server List", color=0x00ff00)
+    embed.add_field(name="Link", value=link_str, inline=True)
+    #embed.add_field(name="Region", value=region_str, inline=True)
+    embed.add_field(name="Name", value=name_str, inline=True)
+    embed.add_field(name="Players", value=clients_str, inline=True)
     await interaction.response.send_message(embed=embed)
 
 @bot.tree.command(name="submit", description="Submit a code to the codex (URL)")
