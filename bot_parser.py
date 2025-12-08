@@ -230,6 +230,9 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
                 #this server is hidden and not a sandbox
                 unlistable = True
 
+            if name_string[1] == 'z': #sandbox nexuses
+                server_hidden = True
+
             #We should have parsed out all sandboxes, offline, and unknown servers by now
             #Begin parsing the codes
 
