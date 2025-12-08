@@ -277,7 +277,7 @@ async def privilege_command(interaction: Interaction, action: constants.AddRemov
 
 #==================Privileged==================
 @bot.tree.command(name="sandboxes", description="Get all active sandboxes")
-async def sandbox_command(interaction: Interaction):
+async def sandboxes_command(interaction: Interaction):
     if not user_is_privileged(interaction.user.id):
         await send_user_is_unprivileged_msg(interaction)
         return
@@ -298,6 +298,9 @@ async def sandbox_command(interaction: Interaction):
         embed.add_field(name="No active sandboxes", value="No active sandboxes")
         await interaction.response.send_message(embed=embed)
         return
+    
+# @bot.tree.command(name="sandbox", description="Get information about a sandbox")
+# async def sandbox_command(interaction: Interaction):
 
 @bot.tree.command(name="status", description="Get a server's status")
 async def status_command(interaction: Interaction, code: str):
@@ -323,6 +326,7 @@ async def status_command(interaction: Interaction, code: str):
     
     await interaction.response.send_message(f"Unable to find server \"{code}\"", ephemeral=True)
 
+#==================Normal Users==================
 @bot.tree.command(name="servers", description="List all servers")
 async def servers_command(interaction: Interaction, showhidden: bool = False):
     if user_is_blacklisted(interaction.user.id):
@@ -339,13 +343,11 @@ async def servers_command(interaction: Interaction, showhidden: bool = False):
     for server in servers:
         hidden = server.get("hidden", False)
         if not hidden or showhidden:
-            server_list = server_list + f"#{server.get("id","x")} {server.get("region_str", "N/A")} {server.get("server_name","Unknown")}: {server.get("clients", "0")}/80\n"
+            server_list = server_list + f"[#{server.get("id","x")}](https://arras.io/#{server.get("id","x")})  -  {server.get("region_str", "N/A")} {server.get("server_name","Unknown")}: {server.get("clients", "0")}/80\n"
     
-    embed = discord.Embed(title="Arras Server List", description=server_list)
+    embed = discord.Embed(title="Arras Server List", description=server_list, color=0x00ff00)
     await interaction.response.send_message(embed=embed)
 
-
-#==================Normal Users==================
 @bot.tree.command(name="submit", description="Submit a code to the codex (URL)")
 async def submit_command(interaction: Interaction, url: str, team: constants.TeamColor):
     if user_is_blacklisted(interaction.user.id):
