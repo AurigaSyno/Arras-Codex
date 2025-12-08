@@ -264,7 +264,7 @@ async def listing_embed_builder(listing):
     if not description_str:
         description_str = "No codes have been submitted"
 
-    embed = discord.Embed(title=f"{name} #{id}", description=description_str)
+    embed = discord.Embed(title=f"{name} #{id}", description=description_str, color=0x87CEEB)
     view = ListingButtonView(listing)
     return [embed, view]
 
