@@ -178,7 +178,7 @@ def server_is_coded(id):
 def fetch_status_then_parse():
     fetch_status()
     parse_status()
-    sort_servers()
+    #sort_servers() #I suspect this is causing issues
 
 #===================================================
 def sort_servers():
