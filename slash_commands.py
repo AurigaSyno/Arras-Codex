@@ -2,8 +2,8 @@ import discord
 from discord import Interaction, Guild
 import constants
 from bot_utilities import load_blacklist, save_blacklist, load_config_file, save_config_file, load_privilege, save_privilege
-from server_listings import add_code_to_listing, get_listing_embed_for_server, get_code_for_server_team, update_server_listing_embeds
-from server_listings import server_is_valid, coded_for_server, update_all_server_listings
+from server_listings import add_code_to_listing, get_listing_embed_for_server, get_code_for_server_team, update_server_listing_messages
+from server_listings import server_is_valid, coded_for_server, update_all_server_listings, clear_all_listings
 from bot_instance import bot
 from bot_logger import get_logger
 
@@ -122,6 +122,18 @@ def get_code_and_server_from_url(url):
     return [code, server]
     #https://arras.io/#aa2964
     #arras.io/#aa2964
+
+@bot.tree.command(name="deletelistings", description="Operator Only")
+async def del_listings_command(interaction: Interaction):
+    if not is_operator(interaction.user.id):
+        await operator_fail_message(interaction)
+        return
+    
+    clear_all_listings()
+
+    embed = discord.Embed(title="Cleared Listings", description=f"Listings deleted and file cleared", color=0x00ff00)
+    await interaction.response.send_message(embed=embed, delete_after=30)
+    return
 
 @bot.tree.command(name="blacklistserver", description="Blacklist Servers")
 async def blacklistserver_command(interaction: Interaction, action: constants.AddRemove, server: str, reason : str = None):
@@ -404,7 +416,7 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
     success = add_code_to_listing(server, code, team, interaction.user.id)
 
     if success:
-        #await update_server_listing_embeds(server) #FIXME: Re-enable when it works
+        await update_server_listing_messages(server) #FIXME: Re-enable when it works
         embed = discord.Embed(title="Thank You", description=f"Your {team.name.lower()} code for #{server} was successfully submitted!", color=0x00ff00)
         print(f"Code: {code} submitted for Server: {server} by {interaction.user.display_name}")
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=60)
