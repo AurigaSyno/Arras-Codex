@@ -7,6 +7,15 @@ from bot_instance import bot
 
 logger = get_logger("utilities")
 
+bot_initialized = False
+
+def is_bot_initialized():
+    return bot_initialized
+
+def finish_initializing():
+    global bot_initialized
+    bot_initialized = True
+
 def new_config_builder():
     config = {
             "guild_name": None,

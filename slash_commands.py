@@ -1,7 +1,7 @@
 import discord
 from discord import Interaction, Guild
 import constants
-from bot_utilities import load_blacklist, save_blacklist, load_config_file, save_config_file, load_privilege, save_privilege
+from bot_utilities import load_blacklist, save_blacklist, load_config_file, save_config_file, load_privilege, save_privilege, is_bot_initialized
 from server_listings import add_code_to_listing, get_listing_embed_for_server, get_code_for_server_team, update_server_listing_messages
 from server_listings import server_is_valid, coded_for_server, update_all_server_listings, clear_all_listings, remove_code_from_listing
 from bot_instance import bot
@@ -35,6 +35,10 @@ def is_admin(interaction: Interaction):
 
 async def admin_fail_message(interaction: Interaction):
     embed = discord.Embed(title="Permission Denied", description="You do not have administrator permissions.", color=0xff0000)
+    await interaction.response.send_message(embed=embed, ephemeral=True)
+
+async def bot_not_initialized_message(interaction: Interaction):
+    embed = discord.Embed(title="Bot Not Initialized", description="Wait a minute or two to allow the bot to start", color=0xff0000)
     await interaction.response.send_message(embed=embed, ephemeral=True)
 
 def user_is_blacklisted(id):
@@ -125,6 +129,10 @@ def get_code_and_server_from_url(url):
 
 @bot.tree.command(name="deletelistings", description="Operator Only")
 async def del_listings_command(interaction: Interaction):
+    if not is_bot_initialized():
+        await bot_not_initialized_message(interaction)
+        return
+    
     if not is_operator(interaction.user.id):
         await operator_fail_message(interaction)
         return
@@ -340,6 +348,10 @@ async def status_command(interaction: Interaction, code: str):
 
 @bot.tree.command(name="removecode", description="Remove a code from codex")
 async def remove_code_command(interaction: Interaction, server: str, team: constants.TeamColor):
+    if not is_bot_initialized():
+        await bot_not_initialized_message(interaction)
+        return
+
     if not user_is_privileged(interaction.user.id):
         await send_user_is_unprivileged_msg(interaction)
         return
@@ -391,6 +403,10 @@ async def servers_command(interaction: Interaction, showhidden: bool = False):
 
 @bot.tree.command(name="submit", description="Submit a code to the codex (URL)")
 async def submit_command(interaction: Interaction, url: str, team: constants.TeamColor):
+    if not is_bot_initialized():
+        await bot_not_initialized_message(interaction)
+        return
+    
     if user_is_blacklisted(interaction.user.id):
         await send_user_is_blacklisted_msg(interaction)
         return
@@ -435,7 +451,7 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
     success = add_code_to_listing(server, code, team, interaction.user.id)
 
     if success:
-        await update_server_listing_messages(server) #FIXME: Re-enable when it works
+        await update_server_listing_messages(server)
         embed = discord.Embed(title="Thank You", description=f"Your {team.name.lower()} code for #{server} was successfully submitted!", color=0x00ff00)
         print(f"Code: {code} submitted for Server: {server} by {interaction.user.display_name}")
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=60)
@@ -444,7 +460,11 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
 
 @bot.tree.command(name="codes", description="Get codes for a server")
-async def submit_command(interaction: Interaction, server: str):
+async def codes_command(interaction: Interaction, server: str):
+    if not is_bot_initialized():
+        await bot_not_initialized_message(interaction)
+        return
+    
     if user_is_blacklisted(interaction.user.id):
         await send_user_is_blacklisted_msg(interaction)
         return

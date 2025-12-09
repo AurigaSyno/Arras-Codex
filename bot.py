@@ -9,7 +9,7 @@ from bot_instance import bot
 
 from bot_parser import fetch_status_then_parse
 from server_listings import update_all_server_listings, send_all_available_listing_messages
-from bot_utilities import load_config_file, save_config_file
+from bot_utilities import load_config_file, save_config_file, finish_initializing
 
 from dotenv import load_dotenv
 from bot_logger import get_logger
@@ -71,6 +71,7 @@ async def init_on_ready():
     update_server_list_task.start()
 
     print("Bot initialized") 
+    finish_initializing()
 
 load_dotenv()
 
