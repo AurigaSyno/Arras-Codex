@@ -139,11 +139,15 @@ async def get_listing_message_for_server(guild, server_id):
         msg_id = guild_embed_data[1]
         channel = await bot.fetch_channel(channel_id)
         if channel:
-            message = await channel.fetch_message(msg_id)
-            if message:
-                #print("returned message")
-                return message
-            
+            try:
+                message = await channel.fetch_message(msg_id)
+                if message:
+                    #print("returned message")
+                    return message
+            except:
+                print("Unable to fetch message: get_listing_message_for_server")
+                pass
+                
     return None
 
 async def send_listing_message_for_server(guild, server_id):
@@ -305,6 +309,11 @@ class ListingButtonView(discord.ui.View):
 async def listing_embed_builder(listing):
     id = listing.get("id", "?")
     name = listing.get("name", "?")
+
+    color_str = ""
+    code_str = ""
+    submitter_str = ""
+
     red_code = listing.get("red_code", None)
     if red_code:
         red_supplier = await bot.fetch_user(listing.get("red_submitted", None))
@@ -318,16 +327,35 @@ async def listing_embed_builder(listing):
     if purple_code:
         purple_supplier = await bot.fetch_user(listing.get("purple_submitted", None))
 
-    red_str = f"🟥 Red: #{id}{red_code}   ({red_supplier.name})\n" if red_code else ""
-    blue_str = f"🟦 Blue: #{id}{blue_code}   ({blue_supplier.name})\n" if blue_code else ""
-    green_str = f"🟩 Green: #{id}{green_code}   ({green_supplier.name})\n" if green_code else ""
-    purple_str = f"🟪 Purple: #{id}{purple_code}   ({purple_supplier.name})\n" if purple_code else ""
+    if red_code:
+        color_str = color_str + "🟥 Red\n"
+        code_str = code_str + f"{red_code}\n"
+        submitter_str = submitter_str + f"{red_supplier.name}\n"
 
-    description_str = red_str + blue_str + green_str + purple_str
-    if not description_str:
+    if blue_code:
+        color_str = color_str + "🟦 Blue\n"
+        code_str = code_str + f"{blue_code}\n"
+        submitter_str = submitter_str + f"{blue_supplier.name}\n"
+    
+    if green_code:
+        color_str = color_str + "🟩 Green\n"
+        code_str = code_str + f"{green_code}\n"
+        submitter_str = submitter_str + f"{green_supplier.name}\n"
+    
+    if purple_code:
+        color_str = color_str + "🟪 Purple\n"
+        code_str = code_str + f"{purple_code}\n"
+        submitter_str = submitter_str + f"{purple_supplier.name}\n"
+
+    if color_str:
+        embed = discord.Embed(title=f"#{id} {name}", color=0x87CEEB)
+        embed.add_field(name="Team", value=color_str, inline=True)
+        embed.add_field(name="Code", value=code_str, inline = True)
+        embed.add_field(name="Submitted By", value=submitter_str, inline = True)
+    else:
         description_str = "No codes have been submitted"
+        embed = discord.Embed(title=f"#{id} {name}", description=description_str, color=0x87CEEB)
 
-    embed = discord.Embed(title=f"{name} #{id}", description=description_str, color=0x87CEEB)
     view = ListingButtonView(listing)
     return [embed, view]
 
