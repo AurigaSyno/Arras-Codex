@@ -338,12 +338,13 @@ async def status_command(interaction: Interaction, code: str):
     
     for server in servers:
         if server["id"] == code:
-            embed = discord.Embed(title=f"#{code} {server.get("server_name")}")
+            embed = discord.Embed(title=f"#{code} {server.get("server_name")}", color=0x00ff00)
             embed.add_field(name="Status", value="Ok")
             embed.add_field(name="Clients", value=server.get("clients"))
             embed.add_field(name="Mspt", value=server.get("mspt"))
             embed.add_field(name="Code String", value=server.get("server_code"))
             embed.add_field(name="Has Codes", value=server.get("coded"))
+            embed.set_footer(text=f"Requested by {interaction.user.name}")
             await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
             return
     
@@ -402,6 +403,7 @@ async def servers_command(interaction: Interaction, showhidden: bool = False):
     #embed.add_field(name="Region", value=region_str, inline=True)
     embed.add_field(name="Name", value=name_str, inline=True)
     embed.add_field(name="Players", value=clients_str, inline=True)
+    embed.set_footer(text=f"Requested by {interaction.user.name}")
     await interaction.response.send_message(embed=embed)
 
 @bot.tree.command(name="submit", description="Submit a code to the codex (URL)")
@@ -490,6 +492,7 @@ async def codes_command(interaction: Interaction, server: str):
     view = embedtuple[1]
 
     if embed:
+        embed.set_footer(text=f"Requested by {interaction.user.name}")
         await interaction.response.send_message(embed=embed, view=view, delete_after=360)
         return
     else:

@@ -190,12 +190,12 @@ async def send_all_available_listing_messages():
 async def send_available_listing_messages_in_guild(guild):
     for i in range(len(server_listings)):
         listing = server_listings[i]
-        print(f"listing num: {i}")
+        #print(f"listing num: {i}")
         if is_guild_accepts_codes(guild):
             server_id = listing.get("id")
-            print(f"Listing id for i {i} is: {server_id}")
+            #print(f"Listing id for i {i} is: {server_id}")
             if server_listing_has_codes(server_id):
-                print(f"Valid listing with codes for {server_id}")
+                #print(f"Valid listing with codes for {server_id}")
                 await send_listing_message_for_server(guild, server_id)
 
 async def update_listing_message(message, server_id):
@@ -369,7 +369,7 @@ async def listing_embed_builder(listing):
         submitter_str = submitter_str + f"{purple_supplier.name}\n"
 
     if color_str:
-        embed = discord.Embed(title=f"#{id} {name}", color=0x87CEEB)
+        embed = discord.Embed(title=f"#{id} {name}", color=0x00ff00)
         embed.add_field(name="Team", value=color_str, inline=True)
         embed.add_field(name="Code", value=code_str, inline = True)
         embed.add_field(name="Submitted By", value=submitter_str, inline = True)
