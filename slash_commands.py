@@ -1,9 +1,10 @@
 import discord
 from discord import Interaction, Guild
 import constants
-from bot_utilities import load_blacklist, save_blacklist, load_config_file, save_config_file, load_privilege, save_privilege, is_bot_initialized
+from bot_utilities import load_blacklist, save_blacklist, load_config_file, save_config_file, load_privilege, save_privilege, is_bot_initialized, clear_guild_code_channel
 from server_listings import add_code_to_listing, get_listing_embed_for_server, get_code_for_server_team, update_server_listing_messages
 from server_listings import server_is_valid, coded_for_server, update_all_server_listings, clear_all_listings, remove_code_from_listing
+from server_listings import send_available_listing_messages_in_guild
 from bot_instance import bot
 from bot_logger import get_logger
 
@@ -250,50 +251,52 @@ async def privilege_command(interaction: Interaction, action: constants.AddRemov
             return
         
 #==================Admin==================
-# @bot.tree.command(name="setcodeschannel", description="Sets the channel codes are automatically posted to")
-# async def setcodeschannel_command(interaction: Interaction, channel: discord.TextChannel):
-#     if not is_admin(interaction):
-#         await admin_fail_message(interaction)
-#         return
+@bot.tree.command(name="setcodeschannel", description="Sets the channel codes are automatically posted to")
+async def setcodeschannel_command(interaction: Interaction, channel: discord.TextChannel):
+    if not interaction.guild:
+        await interaction.response.send_message("This command can only be used in a server!", ephemeral=True)
+        return
 
-#     config = load_config_file(interaction.guild.id)
-#     if config:
-#         config["codes_channel_id"] = channel.id
+    if not is_admin(interaction):
+        await admin_fail_message(interaction)
+        return
+
+    config = load_config_file(interaction.guild.id)
+    if config:
+        config["codes_channel_id"] = channel.id
     
-#     save_config_file(interaction.guild.id, config)
+    save_config_file(interaction.guild.id, config)
 
-#     embed = discord.Embed(title="Channel Set", description=f"Successfully set code channel", color=0x00ff00)
-#     await interaction.response.send_message(embed=embed, delete_after=30)
-#     return
+    clear_guild_code_channel(interaction.guild)
 
+    embed = discord.Embed(title="Channel Set", description=f"Successfully set code channel", color=0x00ff00)
+    await interaction.response.send_message(embed=embed, delete_after=30)
+    return
 
-
-# async def clear(ctx, number):
-#     mgs = [] #Empty list to put all the messages in the log
-#     number = int(number) #Converting the amount of messages to delete to an integer
-#     async for x in Client.logs_from(ctx.message.channel, limit = number):
-#         mgs.append(x)
-#     await Client.delete_messages(mgs)
-
-# @bot.tree.command(name="clearcodeschannel", description="Clears codes channel")
-# async def clearcodeschannel_command(interaction: Interaction):
-#     if not is_admin(interaction):
-#         await admin_fail_message(interaction)
-#         return
+@bot.tree.command(name="clearcodeschannel", description="Clears codes channel")
+async def clearcodeschannel_command(interaction: Interaction):
+    if not interaction.guild:
+        await interaction.response.send_message("This command can only be used in a server!", ephemeral=True)
+        return
     
-#     config = load_config_file(interaction.guild.id)
-#     if config:
-#         channel_id = config["codes_channel_id"]
-#         if channel_id:
-#             channel = bot.fetch_channel(channel_id)
-#             if channel:
-#                 try:
-#                     msgs = []
-#                     async for x in bot.logs_from(channel, limit = 30):
-#                         msgs.append(x)
-#                     await bot.delete_messages(msgs)
-#                 except:
-#                     print("Bot lacks permissions!") #FIXME: This is shit
+    if not is_admin(interaction):
+        await admin_fail_message(interaction)
+        return
+    
+    clear_guild_code_channel(interaction.guild)
+
+@bot.tree.command(name="reloadcodeschannel", description="Reloads codes channel")
+async def reloadcodeschannel_command(interaction: Interaction):
+    if not interaction.guild:
+        await interaction.response.send_message("This command can only be used in a server!", ephemeral=True)
+        return
+    
+    if not is_admin(interaction):
+        await admin_fail_message(interaction)
+        return
+    
+    clear_guild_code_channel(interaction.guild)
+    send_available_listing_messages_in_guild(interaction.guild)
 
 #==================Privileged==================
 @bot.tree.command(name="sandboxes", description="Get all active sandboxes")

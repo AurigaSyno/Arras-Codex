@@ -1,5 +1,6 @@
 import os
 import json
+import discord
 
 import constants
 from bot_logger import get_logger
@@ -114,3 +115,24 @@ def save_config_file(guild_id, config):
     config_path = os.path.join(constants.GUILDS_CONFIG_PATH, f"{guild_id}.json")
     with open(config_path, "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
+
+async def clear_guild_code_channel(guild):
+    config = load_config_file(guild.id)
+    if config:
+        channel_id = config.get("codes_channel_id", None)
+        if channel_id:
+            channel = await bot.fetch_channel(channel_id)
+            if channel:
+                try:
+                    def check_message(message):
+                        return message.author == bot.user
+                    
+                    await channel.purge(limit=None, check=check_message)
+                
+                except discord.Forbidden:
+                    print(f"Bot lacks purge permissions for guild: {guild.name}")
+                    pass
+                        #TODO:Don't allow codes to be posted in this channel
+                except Exception as e:
+                    print(f"Error in clear_all_code_channels: {e}")
+                    pass
