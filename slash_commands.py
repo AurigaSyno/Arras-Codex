@@ -296,7 +296,7 @@ async def reloadcodeschannel_command(interaction: Interaction):
         return
     
     await clear_guild_code_channel(interaction.guild)
-    send_available_listing_messages_in_guild(interaction.guild)
+    await send_available_listing_messages_in_guild(interaction.guild)
 
 #==================Privileged==================
 @bot.tree.command(name="sandboxes", description="Get all active sandboxes")
