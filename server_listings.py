@@ -169,13 +169,34 @@ async def send_listing_message_for_server(guild, server_id):
 
     return False
 
+# Valid listing with codes for aa
+# Valid listing with codes for eb
+# Valid listing with codes for aa
+# Valid listing with codes for aa
+# The offending crime shown above
+# async def send_all_available_listing_messages(): #I'm leaving this here to remind myself for loops are shit and cannot be trusted
+#     for listing in server_listings: #what the actual fuck is happening, why doesn't this work
+#         for guild in bot.guilds:
+#             if is_guild_accepts_codes(guild):
+#                 server_id = listing.get("id")
+#                 if server_listing_has_codes(server_id):
+#                     print(f"Valid listing with codes for {server_id}")
+#                     await send_listing_message_for_server(guild, server_id)
+
 async def send_all_available_listing_messages():
-    for server in server_listings:
-        for guild in bot.guilds:
-            if is_guild_accepts_codes(guild):
-                server_id = server.get("id")
-                if server_listing_has_codes(server_id):
-                    await send_listing_message_for_server(guild, server_id)
+    for guild in bot.guilds:
+        await send_available_listing_messages_in_guild(guild)
+
+async def send_available_listing_messages_in_guild(guild):
+    for i in range(len(server_listings)):
+        listing = server_listings[i]
+        print(f"listing num: {i}")
+        if is_guild_accepts_codes(guild):
+            server_id = listing.get("id")
+            print(f"Listing id for i {i} is: {server_id}")
+            if server_listing_has_codes(server_id):
+                print(f"Valid listing with codes for {server_id}")
+                await send_listing_message_for_server(guild, server_id)
 
 async def update_listing_message(message, server_id):
     #print("update_listing_message called" )
