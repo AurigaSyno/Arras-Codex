@@ -96,21 +96,44 @@ def add_code_to_listing(id, code, team, user_id):
         print(f"Error, tried to add code to server [{id}] that has no listing!")
         return False
     
+def remove_code_from_listing(id, team):
+    server_listing = get_listing_for_server(id)
+
+    if server_listing:
+        if team == TeamColor.Red:
+            server_listing["red_code"] = None
+            server_listing["red_submitted"] = None
+        if team == TeamColor.Blue:
+            server_listing["blue_code"] = None
+            server_listing["blue_submitted"] = None
+        if team == TeamColor.Green:
+            server_listing["green_code"] = None
+            server_listing["green_submitted"] = None
+        if team == TeamColor.Purple:
+            server_listing["purple_code"] = None
+            server_listing["purple_submitted"] = None
+
+        save_listing(server_listing, id)
+        return True
+    else:
+        print(f"Error, tried to remove code from server [{id}] that has no listing!")
+        return False
+
 async def get_listing_message_for_server(guild, server_id):
     server_listing = get_listing_for_server(server_id)
     guild_embeds = server_listing.get("guild_embeds", {})
-    print(guild_embeds)
+    #print(guild_embeds)
     if str(guild.id) in guild_embeds:
-        print(guild.id)
+        #print(guild.id)
         guild_embed_data = guild_embeds[str(guild.id)]
-        print(guild_embed_data)
+        #print(guild_embed_data)
         channel_id = guild_embed_data[0]
         msg_id = guild_embed_data[1]
         channel = await bot.fetch_channel(channel_id)
         if channel:
             message = await channel.fetch_message(msg_id)
             if message:
-                print("returned message")
+                #print("returned message")
                 return message
             
     return None
@@ -135,7 +158,7 @@ async def send_listing_message_for_server(guild, server_id):
     return False
 
 async def update_listing_message(message, server_id):
-    print("update_listing_message called" )
+    #print("update_listing_message called" )
     code_embed = await get_listing_embed_for_server(server_id)
     await message.edit(embed=code_embed[0], view=code_embed[1])
     
@@ -173,7 +196,7 @@ async def update_all_server_listings():
             if server_listing:
                 server_changed = not (server.get("server_code") == server_listing.get("server_code"))
                 if server_changed:
-                    remove_listing_messages(server_id)
+                    await remove_listing_messages(server_id)
                     new_listing = server_listing_builder()
                     new_listing["id"] = server_id
                     new_listing["name"] = server.get("server_name")
@@ -202,7 +225,7 @@ async def update_all_server_listings():
         server_id = listing.get("id", None)
         if server_id:
             if not server_is_coded(server_id):
-                remove_listing_messages(server_id)
+                await remove_listing_messages(server_id)
                 server_listings.remove(listing)
                 print(f"Server #{server_id} is no longer coded, removing listing")
 

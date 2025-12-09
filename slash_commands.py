@@ -3,7 +3,7 @@ from discord import Interaction, Guild
 import constants
 from bot_utilities import load_blacklist, save_blacklist, load_config_file, save_config_file, load_privilege, save_privilege
 from server_listings import add_code_to_listing, get_listing_embed_for_server, get_code_for_server_team, update_server_listing_messages
-from server_listings import server_is_valid, coded_for_server, update_all_server_listings, clear_all_listings
+from server_listings import server_is_valid, coded_for_server, update_all_server_listings, clear_all_listings, remove_code_from_listing
 from bot_instance import bot
 from bot_logger import get_logger
 
@@ -337,6 +337,25 @@ async def status_command(interaction: Interaction, code: str):
             return
     
     await interaction.response.send_message(f"Unable to find server \"{code}\"", ephemeral=True)
+
+@bot.tree.command(name="removecode", description="Remove a code from codex")
+async def remove_code_command(interaction: Interaction, server: str, team: constants.TeamColor):
+    if not user_is_privileged(interaction.user.id):
+        await send_user_is_unprivileged_msg(interaction)
+        return
+    
+    server_str = server.replace("#", "")
+    
+    success = remove_code_from_listing(server_str, team)
+
+    if success:
+        await update_server_listing_messages(server)
+        embed = discord.Embed(title="Code Removed", description=f"The {team.name.lower()} code for #{server} was successfully removed!", color=0x00ff00)
+        print(f"Code removed from server: {server} by {interaction.user.display_name}")
+        await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=60)
+    else:
+        embed = discord.Embed(title="Error", description=f"Something went wrong!", color=0xff0000)
+        await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
 
 #==================Normal Users==================
 @bot.tree.command(name="servers", description="List all servers")
