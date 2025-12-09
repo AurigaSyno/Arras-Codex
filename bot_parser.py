@@ -216,7 +216,7 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
     
     for server_id in raw_status:
         server = raw_status[f"{server_id}"]
-        if server.get("online") == True:
+        if server.get("online", False) == True:
             name_string = server.get("name")
             #print(f"Parsing server {name_string}")
             code_string = server.get("code")
