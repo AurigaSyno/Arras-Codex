@@ -394,6 +394,9 @@ def parse_status(): #FIXME: some Siege and Assault servers are still not display
                     if not full_game_str and game_mode_e:
                         full_game_str += game_mode_e.capitalize()
 
+                if full_game_str == "Labyrinth": #HAAAAACKZ
+                    is_coded = 4
+
                 #Parsing complete, save server
                 saved_server = server_builder()
                 saved_server["id"] = name_string
