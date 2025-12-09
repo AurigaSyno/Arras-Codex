@@ -202,8 +202,13 @@ def fetch_status():
 
     except requests.exceptions.RequestException as e:
         print(f"Error downloading status: {e}")
-#FIXME: Europe and asia servers are not being parsed right or something
-def parse_status(): #FIXME: some Siege and Assault servers are still not displayed right, also some #a$ servers don't even get parsed
+        pass
+
+    except Exception as e:
+        print(f"Unknown error fetching status: {e}")
+        pass
+
+def parse_status(): #FIXME: Siege maps with more than one word are a bit buggy
     raw_status = load_status()
     # pretty_status = json.dumps(raw_status, indent=4)
     # print(pretty_status)
