@@ -61,6 +61,14 @@ def coded_for_server(id):
         return listing.get("coded_num", 0)
     return 0
 
+def server_listing_has_codes(id):
+    for server_listing in server_listings:
+        if server_listing.get("id", None) == id:
+            if server_listing.get("red_code", None) or server_listing.get("blue_code", None) or server_listing.get("green_code", None) or server_listing.get("purple_code", None):
+                return True
+
+    return False
+
 def get_code_for_server_team(id, team):
     for server_listing in server_listings:
         if server_listing.get("id", None) == id:
@@ -156,6 +164,14 @@ async def send_listing_message_for_server(guild, server_id):
                         return True
 
     return False
+
+async def send_all_available_listing_messages():
+    for server in server_listings:
+        for guild in bot.guilds:
+            if is_guild_accepts_codes(guild):
+                server_id = server.get("id")
+                if server_listing_has_codes(server_id):
+                    await send_listing_message_for_server(guild, server_id)
 
 async def update_listing_message(message, server_id):
     #print("update_listing_message called" )
