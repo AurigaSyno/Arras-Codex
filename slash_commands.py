@@ -267,7 +267,7 @@ async def setcodeschannel_command(interaction: Interaction, channel: discord.Tex
     
     save_config_file(interaction.guild.id, config)
 
-    clear_guild_code_channel(interaction.guild)
+    await clear_guild_code_channel(interaction.guild)
 
     embed = discord.Embed(title="Channel Set", description=f"Successfully set code channel", color=0x00ff00)
     await interaction.response.send_message(embed=embed, delete_after=30)
@@ -283,7 +283,7 @@ async def clearcodeschannel_command(interaction: Interaction):
         await admin_fail_message(interaction)
         return
     
-    clear_guild_code_channel(interaction.guild)
+    await clear_guild_code_channel(interaction.guild)
 
 @bot.tree.command(name="reloadcodeschannel", description="Reloads codes channel")
 async def reloadcodeschannel_command(interaction: Interaction):
@@ -295,7 +295,7 @@ async def reloadcodeschannel_command(interaction: Interaction):
         await admin_fail_message(interaction)
         return
     
-    clear_guild_code_channel(interaction.guild)
+    await clear_guild_code_channel(interaction.guild)
     send_available_listing_messages_in_guild(interaction.guild)
 
 #==================Privileged==================
