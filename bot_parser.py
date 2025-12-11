@@ -24,15 +24,17 @@ class GameMode(IntEnum):
     TDM2 = 2
     TDM3 = 3
     TDM4 = 4
-    CLANWARS = 5
+    DUOS = 5
+    CLANWARS = 6
 
 class GameModifiers(IntEnum):
     NONE = 0
     GROWTH = 1
-    ROCK = 2
-    ARMSRACE = 4
-    MAZE = 8
-    OPEN = 16
+    ARMSRACE = 2
+    PORTAL = 4
+    ROCK = 8
+    MAZE = 16
+    OPEN = 32
 
 simple_region_map = {
     "w": ["US West", ServerRegion.US_WEST],
@@ -84,6 +86,7 @@ game_modes_map = {
     "4": [GameMode.TDM4, "4TDM", 4],
     "1": [GameMode.TDM1, "1TDM", 0],
     "f": [GameMode.FFA, "FFA", 0],
+    "d": [GameMode.DUOS, "Duos", 0],
     "c": [GameMode.CLANWARS, "Clan Wars", 0]
 }
 def get_game_mode_int(game_mode):
@@ -101,6 +104,7 @@ def get_game_mode_coded(game_mode):
 game_modifiers_map = {
     "g": ["Growth", GameModifiers.GROWTH],
     "a": ["Arms Race", GameModifiers.ARMSRACE],
+    "p": ["Portal", GameModifiers.PORTAL],
     "r": ["Rock", GameModifiers.ROCK],
     "m": ["Maze", GameModifiers.MAZE],
     "o": ["Open", GameModifiers.OPEN]
@@ -120,6 +124,8 @@ game_varients_map = {
     "m": ["Mothership", ["2","4"]],
     "c": ["Capture The Flag", ["m", "2"]],
     "e": ["Elimination", ["o","m","4"]],
+    "p": ["Pandemic", ["o"]],
+    "g": ["Grudge Ball", ["m", "o"]],
     "a": ["Assault", ["m","2"]],
     "s": ["Siege", ["1"]]
 }
