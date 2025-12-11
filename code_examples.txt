@@ -81,9 +81,10 @@ Portal, Tetromino, Zombies, and Squads somehow fit into this,
 Siege Blitz = 1sx15blitz
 1 team, siege, ???, map Blitz
 What the 15 represents is still unknown
+It means 1 word, 5 letters
 
 what "w" means
-
+It means words, how to interpret it is still unknown
 
 {
     "id": "on",

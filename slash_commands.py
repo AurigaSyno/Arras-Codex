@@ -112,8 +112,9 @@ async def refresh_command(interaction: Interaction):
         await operator_fail_message(interaction)
         return
 
-    fetch_status_then_parse()
-    await update_all_server_listings()
+    if fetch_status_then_parse():
+        await update_all_server_listings()
+        
     await interaction.response.send_message("Refreshed internal server list", ephemeral=True, delete_after=30)
 
 def get_code_and_server_from_url(url):
@@ -285,6 +286,10 @@ async def clearcodeschannel_command(interaction: Interaction):
     
     await clear_guild_code_channel(interaction.guild)
 
+    embed = discord.Embed(title="Channel Cleared", description=f"Successfully cleared code channel", color=0x00ff00)
+    await interaction.response.send_message(embed=embed, delete_after=30)
+    return
+
 @bot.tree.command(name="reloadcodeschannel", description="Reloads codes channel")
 async def reloadcodeschannel_command(interaction: Interaction):
     if not interaction.guild:
@@ -297,6 +302,10 @@ async def reloadcodeschannel_command(interaction: Interaction):
     
     await clear_guild_code_channel(interaction.guild)
     await send_available_listing_messages_in_guild(interaction.guild)
+
+    embed = discord.Embed(title="Channel Reloaded", description=f"Successfully reloaded code channel", color=0x00ff00)
+    await interaction.response.send_message(embed=embed, delete_after=30)
+    return
 
 #==================Privileged==================
 @bot.tree.command(name="sandboxes", description="Get all active sandboxes")

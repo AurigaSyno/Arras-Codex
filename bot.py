@@ -16,8 +16,8 @@ from bot_logger import get_logger
 
 @discord.ext.tasks.loop(seconds=30)
 async def update_server_list_task():
-    fetch_status_then_parse()
-    await update_all_server_listings()
+    if fetch_status_then_parse():
+        await update_all_server_listings()
 
 async def clear_all_code_channels():
     for guild in bot.guilds:
@@ -43,10 +43,10 @@ async def init_on_ready():
     await clear_all_code_channels()
 
     print("Fetching server list...")
-    fetch_status_then_parse()
+    if fetch_status_then_parse():
+        await update_all_server_listings()
 
     print("Posting all relevant listings...")
-    await update_all_server_listings()
     await send_all_available_listing_messages()
 
     print("Starting server refresh loop...")

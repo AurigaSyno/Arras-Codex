@@ -176,8 +176,11 @@ def server_is_coded(id):
     return 0
 
 def fetch_status_then_parse():
-    fetch_status()
-    parse_status()
+    if fetch_status():
+        if parse_status():
+            return True
+        
+    return False
     #sort_servers() #I suspect this is causing issues
 
 #===================================================
@@ -199,6 +202,7 @@ def fetch_status():
             for chunk in response.iter_content(chunk_size=8192):
                 f.write(chunk)
         #print(f"Fetched server status from arras.io successfully")
+        return True
 
     except requests.exceptions.RequestException as e:
         print(f"Error downloading status: {e}")
@@ -208,6 +212,8 @@ def fetch_status():
         print(f"Unknown error fetching status: {e}")
         pass
 
+    return False
+
 def parse_status(): #FIXME: Siege maps with more than one word are a bit buggy
     raw_status = load_status()
     # pretty_status = json.dumps(raw_status, indent=4)
@@ -215,7 +221,7 @@ def parse_status(): #FIXME: Siege maps with more than one word are a bit buggy
 
     if not raw_status: #should never happen
         print("Unable to parse, raw_status does not exist!")
-        return
+        return False
     
     clear_servers()
     
@@ -305,7 +311,7 @@ def parse_status(): #FIXME: Siege maps with more than one word are a bit buggy
 
                 # if not game_mode_char:
                 #     print("No game mode found, assuming e or w")
-                if game_mode_char:
+                if game_mode_char: #TODO: The proper way to parse siege x15 or whatever, as outlined in code_examples.txt
                     if game_mode_char == "1": #This is a siege server, most likely
                         if len(game_slice_str) > game_mode_char_index + 1:
                             if game_slice_str[game_mode_char_index+1] == "s": #Siege Server
@@ -423,3 +429,4 @@ def parse_status(): #FIXME: Siege maps with more than one word are a bit buggy
         else:
             continue
     
+    return True

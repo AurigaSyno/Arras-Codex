@@ -133,7 +133,7 @@ async def get_listing_message_for_server(guild, server_id):
     #print(guild_embeds)
     if str(guild.id) in guild_embeds:
         #print(guild.id)
-        guild_embed_data = guild_embeds[str(guild.id)]
+        guild_embed_data = guild_embeds.get(str(guild.id))
         #print(guild_embed_data)
         channel_id = guild_embed_data[0]
         msg_id = guild_embed_data[1]
@@ -161,11 +161,18 @@ async def send_listing_message_for_server(guild, server_id):
             if channel:
                 code_embed = await get_listing_embed_for_server(server_id)
                 if code_embed:
-                    new_message = await channel.send(embed=code_embed[0], view=code_embed[1])
-                    if new_message:
-                        guild_embeds[str(guild.id)] = [channel_id, new_message.id]
-                        save_listing(server_listing, server_id)
-                        return True
+                    try:
+                        new_message = await channel.send(embed=code_embed[0], view=code_embed[1])
+                        if new_message:
+                            guild_embeds[str(guild.id)] = [channel_id, new_message.id]
+                            save_listing(server_listing, server_id)
+                            return True
+                    except discord.Forbidden:
+                        print(f"Bot lacks posting permissions for {channel.name} in {guild.name}")
+                        pass
+                    except Exception as e:
+                        print(f"Error in send_listing_message_for_server: {e}")
+                        pass
 
     return False
 
@@ -190,12 +197,12 @@ async def send_all_available_listing_messages():
 async def send_available_listing_messages_in_guild(guild):
     for i in range(len(server_listings)):
         listing = server_listings[i]
-        #print(f"listing num: {i}")
+        print(f"listing num: {i}")
         if is_guild_accepts_codes(guild):
             server_id = listing.get("id")
-            #print(f"Listing id for i {i} is: {server_id}")
+            print(f"Listing id for i {i} is: {server_id}")
             if server_listing_has_codes(server_id):
-                #print(f"Valid listing with codes for {server_id}")
+                print(f"Valid listing with codes for {server_id}")
                 await send_listing_message_for_server(guild, server_id)
 
 async def update_listing_message(message, server_id):
@@ -235,6 +242,7 @@ async def update_all_server_listings():
             server_listing = get_listing_for_server(server_id)
 
             if server_listing:
+                recorded_listing = server_listing.get("server_code")
                 server_changed = not (server.get("server_code") == server_listing.get("server_code"))
                 if server_changed:
                     await remove_listing_messages(server_id)
@@ -247,7 +255,7 @@ async def update_all_server_listings():
                     new_listing["guild_embeds"] = {}
 
                     save_listing(new_listing, server_id)
-                    print(f"Reset listing for {server_id}")
+                    print(f"Reset listing for {server_id} ({recorded_listing} -> {server.get("server_code")})")
                     continue
             
             if not server_listing or server_changed: #we need a new listing
@@ -275,16 +283,16 @@ async def update_all_server_listings():
 # How guild embed is stored:
 # #wa server listing:
 # listing {
-#     "guild_embeds" : [
+#     "guild_embeds" : {
 #         guild_id: [code_channel_id, msg_id]
 #         guild_id: [code_channel_id, msg_id]
 #         ...
-#     ]
+#     }
 # }
 
 def server_listing_builder():
     server_listing = {
-        "guild_embeds": None,
+        "guild_embeds": {},
         "id": None, #wpd
         "name": None,
         "server_code": None,
