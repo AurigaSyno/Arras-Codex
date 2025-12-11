@@ -114,7 +114,7 @@ async def refresh_command(interaction: Interaction):
 
     if fetch_status_then_parse():
         await update_all_server_listings()
-        
+
     await interaction.response.send_message("Refreshed internal server list", ephemeral=True, delete_after=30)
 
 def get_code_and_server_from_url(url):
@@ -268,7 +268,7 @@ async def setcodeschannel_command(interaction: Interaction, channel: discord.Tex
     
     save_config_file(interaction.guild.id, config)
 
-    await clear_guild_code_channel(interaction.guild)
+    #await clear_guild_code_channel(interaction.guild) #doesn't need to be here
 
     embed = discord.Embed(title="Channel Set", description=f"Successfully set code channel", color=0x00ff00)
     await interaction.response.send_message(embed=embed, delete_after=30)
@@ -284,10 +284,12 @@ async def clearcodeschannel_command(interaction: Interaction):
         await admin_fail_message(interaction)
         return
     
+    await interaction.response.defer(ephemeral=True)
+
     await clear_guild_code_channel(interaction.guild)
 
     embed = discord.Embed(title="Channel Cleared", description=f"Successfully cleared code channel", color=0x00ff00)
-    await interaction.response.send_message(embed=embed, delete_after=30)
+    await interaction.followup.send(embed=embed)
     return
 
 @bot.tree.command(name="reloadcodeschannel", description="Reloads codes channel")
@@ -300,11 +302,13 @@ async def reloadcodeschannel_command(interaction: Interaction):
         await admin_fail_message(interaction)
         return
     
+    await interaction.response.defer(ephemeral=True)
+    
     await clear_guild_code_channel(interaction.guild)
     await send_available_listing_messages_in_guild(interaction.guild)
 
     embed = discord.Embed(title="Channel Reloaded", description=f"Successfully reloaded code channel", color=0x00ff00)
-    await interaction.response.send_message(embed=embed, delete_after=30)
+    await interaction.followup.send(embed=embed)
     return
 
 #==================Privileged==================
@@ -465,13 +469,14 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
     success = add_code_to_listing(server, code, team, interaction.user.id)
 
     if success:
-        await update_server_listing_messages(server)
         embed = discord.Embed(title="Thank You", description=f"Your {team.name.lower()} code for #{server} was successfully submitted!", color=0x00ff00)
         print(f"Code: {code} submitted for Server: {server} by {interaction.user.display_name}")
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=60)
     else:
         embed = discord.Embed(title="Error", description=f"Something went wrong!", color=0xff0000)
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+
+    await update_server_listing_messages(server) #Put this at the end to avoid the interaction timing out
 
 @bot.tree.command(name="codes", description="Get codes for a server")
 async def codes_command(interaction: Interaction, server: str):
