@@ -5,7 +5,7 @@ import json
 import discord
 from bot_parser import servers, server_is_coded
 from bot_instance import bot
-from bot_utilities import load_config_file
+from bot_utilities import load_config_file, bot_has_manage_msg_perms
 
 from constants import TeamColor, LISTINGS_FILE
 from bot_logger import get_logger
@@ -154,6 +154,10 @@ async def send_listing_message_for_server(guild, server_id):
     server_listing = get_listing_for_server(server_id)
     guild_embeds = server_listing.get("guild_embeds", {})
     config = load_config_file(guild.id)
+    
+    if not bot_has_manage_msg_perms(guild):
+        return
+    
     if config:
         channel_id = config.get("codes_channel_id", None)
         if channel_id:
@@ -176,9 +180,31 @@ async def send_listing_message_for_server(guild, server_id):
 
     return False
 
+async def send_server_closed_message(listing):
+    for guild in bot.guilds:
+        config = load_config_file(guild.id)
+        if config:
+            channel_id = config.get("codes_channel_id", None)
+            if channel_id:
+                channel = await bot.fetch_channel(channel_id)
+                if channel:
+                    try:
+                        name = listing.get("name", "Unknown")
+                        id = listing.get("id", "N/A")
+                        embed = discord.Embed(title="Server Closed", description=f"Server #{id} ({name}) closed, removing codes", color=0x00ff00)
+                        new_message = await channel.send(embed=embed, delete_after=120)
+                    except discord.Forbidden:
+                        print(f"Bot lacks posting permissions for {channel.name} in {guild.name}")
+                        pass
+                    except Exception as e:
+                        print(f"Error in send_server_closed_message: {e}")
+                        pass
+
+
 async def send_all_available_listing_messages():
     for guild in bot.guilds:
-        await send_available_listing_messages_in_guild(guild)
+        if bot_has_manage_msg_perms(guild):
+            await send_available_listing_messages_in_guild(guild)
 
 async def send_available_listing_messages_in_guild(guild):
     server_str_list = []
@@ -297,17 +323,26 @@ async def update_all_server_listings():
                 server_changed = not (server.get("server_code") == server_listing.get("server_code"))
                 if server_changed:
                     await remove_listing_messages(server_id)
-                    new_listing = server_listing_builder()
-                    new_listing["id"] = server_id
-                    new_listing["name"] = server.get("server_name")
-                    new_listing["server_code"] = server.get("server_code")
-                    new_listing["server_uptime"] = server.get("uptime")
-                    new_listing["coded_num"] = coded_num
-                    new_listing["guild_embeds"] = {}
 
-                    save_listing(new_listing, server_id)
-                    print(f"Reset listing for {server_id} ({recorded_listing} -> {server.get("server_code")})")
-                    continue
+                    if server_listing_has_codes(server_listing):
+                        await send_server_closed_message(server_listing)
+
+                    if server_is_coded(server_id):
+                        new_listing = server_listing_builder()
+                        new_listing["id"] = server_id
+                        new_listing["name"] = server.get("server_name")
+                        new_listing["server_code"] = server.get("server_code")
+                        new_listing["server_uptime"] = server.get("uptime")
+                        new_listing["coded_num"] = coded_num
+                        new_listing["guild_embeds"] = {}
+
+                        save_listing(new_listing, server_id)
+                        print(f"Reset listing for {server_id} ({recorded_listing} -> {server.get("server_code")})")
+                        continue
+                    else:
+                        server_listings.remove(server_listing)
+                        print(f"Server #{server_id} is no longer coded, removing listing ({recorded_listing} -> {server.get("server_code")})")
+                        save_listings_file()
             
             if not server_listing or server_changed: #we need a new listing
                 new_listing = server_listing_builder()
@@ -318,18 +353,18 @@ async def update_all_server_listings():
                 new_listing["coded_num"] = coded_num
                 new_listing["guild_embeds"] = {}
                 save_listing(new_listing, server_id)
-                print(f"Added listing for {server_id}")
+                print(f"Added listing for {server_id} ({server.get("server_code")})")
                 continue
 
-    for listing in server_listings:
-        server_id = listing.get("id", None)
-        if server_id:
-            if not server_is_coded(server_id):
-                await remove_listing_messages(server_id)
-                server_listings.remove(listing)
-                print(f"Server #{server_id} is no longer coded, removing listing")
+    # for listing in server_listings:
+    #     server_id = listing.get("id", None)
+    #     if server_id:
+    #         if not server_is_coded(server_id):
+    #             await remove_listing_messages(server_id)
+    #             server_listings.remove(listing)
+    #             print(f"Server #{server_id} is no longer coded, removing listing ({listing.get("server_code")})")
 
-    save_listings_file()
+    # save_listings_file()
 
 # How guild embed is stored:
 # #wa server listing:

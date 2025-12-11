@@ -1,7 +1,8 @@
 import discord
 from discord import Interaction, Guild
 import constants
-from bot_utilities import load_blacklist, save_blacklist, load_config_file, save_config_file, load_privilege, save_privilege, is_bot_initialized, clear_guild_code_channel
+from bot_utilities import load_blacklist, save_blacklist, load_config_file, save_config_file, load_privilege, save_privilege
+from bot_utilities import is_bot_initialized, clear_guild_code_channel, bot_has_manage_msg_perms
 from server_listings import add_code_to_listing, get_listing_embed_for_server, get_code_for_server_team, update_server_listing_messages
 from server_listings import server_is_valid, coded_for_server, update_all_server_listings, clear_all_listings, remove_code_from_listing
 from server_listings import send_available_listing_messages_in_guild
@@ -101,6 +102,11 @@ def unprivilege_user(id):
 
 async def send_user_is_unprivileged_msg(interaction):
     embed = discord.Embed(title="Permissions Error", description="You don't have permission to use this command.", color=0xff0000)
+    await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+    return
+
+async def bot_does_not_have_permission_msg(interaction):
+    embed = discord.Embed(title="Permissions Error", description="Bot does not have manage_messages permissions for this server, this feature is unavailable.", color=0xff0000)
     await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
     return
 
@@ -261,6 +267,10 @@ async def setcodeschannel_command(interaction: Interaction, channel: discord.Tex
     if not is_admin(interaction):
         await admin_fail_message(interaction)
         return
+    
+    if not bot_has_manage_msg_perms:
+        await bot_does_not_have_permission_msg(interaction)
+        return
 
     config = load_config_file(interaction.guild.id)
     if config:
@@ -284,6 +294,10 @@ async def clearcodeschannel_command(interaction: Interaction):
         await admin_fail_message(interaction)
         return
     
+    if not bot_has_manage_msg_perms:
+        await bot_does_not_have_permission_msg(interaction)
+        return
+    
     await interaction.response.defer(ephemeral=True)
 
     await clear_guild_code_channel(interaction.guild)
@@ -300,6 +314,10 @@ async def reloadcodeschannel_command(interaction: Interaction):
     
     if not is_admin(interaction):
         await admin_fail_message(interaction)
+        return
+    
+    if not bot_has_manage_msg_perms:
+        await bot_does_not_have_permission_msg(interaction)
         return
     
     await interaction.response.defer(ephemeral=True)

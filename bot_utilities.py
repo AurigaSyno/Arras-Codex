@@ -136,3 +136,10 @@ async def clear_guild_code_channel(guild):
                 except Exception as e:
                     print(f"Error in clear_all_code_channels: {e}")
                     pass
+
+def bot_has_manage_msg_perms(guild):
+    bot_member = guild.me
+    if bot_member.guild_permissions.manage_messages:
+        return True
+    
+    return False
