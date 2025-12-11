@@ -1,4 +1,6 @@
 import os
+from copy import deepcopy
+import asyncio
 import json
 import discord
 from bot_parser import servers, server_is_coded
@@ -61,11 +63,9 @@ def coded_for_server(id):
         return listing.get("coded_num", 0)
     return 0
 
-def server_listing_has_codes(id):
-    for server_listing in server_listings:
-        if server_listing.get("id", None) == id:
-            if server_listing.get("red_code", None) or server_listing.get("blue_code", None) or server_listing.get("green_code", None) or server_listing.get("purple_code", None):
-                return True
+def server_listing_has_codes(listing):
+    if listing.get("red_code", None) or listing.get("blue_code", None) or listing.get("green_code", None) or listing.get("purple_code", None):
+        return True
 
     return False
 
@@ -176,6 +176,22 @@ async def send_listing_message_for_server(guild, server_id):
 
     return False
 
+async def send_all_available_listing_messages():
+    for guild in bot.guilds:
+        await send_available_listing_messages_in_guild(guild)
+
+async def send_available_listing_messages_in_guild(guild):
+    server_str_list = []
+
+    if is_guild_accepts_codes(guild):
+        for listing in server_listings:
+            #print(listing.get("id"))
+            if server_listing_has_codes(listing):
+                server_str_list.append(listing.get("id"))
+
+        for server_str in server_str_list:
+            await send_listing_message_for_server(guild, server_str)
+
 # Valid listing with codes for aa
 # Valid listing with codes for eb
 # Valid listing with codes for aa
@@ -190,20 +206,55 @@ async def send_listing_message_for_server(guild, server_id):
 #                     print(f"Valid listing with codes for {server_id}")
 #                     await send_listing_message_for_server(guild, server_id)
 
-async def send_all_available_listing_messages():
-    for guild in bot.guilds:
-        await send_available_listing_messages_in_guild(guild)
+# async def send_available_listing_messages_in_guild(guild):
+#     for listing in server_listings:
+#         await asyncio.sleep(0.1)
+#         if is_guild_accepts_codes(guild):
+#             server_id = listing.get("id")
+#             if server_listing_has_codes(server_id):
+#                 await send_listing_message_for_server(guild, server_id)
 
-async def send_available_listing_messages_in_guild(guild):
-    for i in range(len(server_listings)):
-        listing = server_listings[i]
-        print(f"listing num: {i}")
-        if is_guild_accepts_codes(guild):
-            server_id = listing.get("id")
-            print(f"Listing id for i {i} is: {server_id}")
-            if server_listing_has_codes(server_id):
-                print(f"Valid listing with codes for {server_id}")
-                await send_listing_message_for_server(guild, server_id)
+# async def send_available_listing_messages_in_guild(guild):
+#     copy_listings = deepcopy(server_listings)
+#     # pretty_json = json.dumps(copy_listings, indent=4)
+#     # print(pretty_json)
+#     server_str_list = []
+#     for listing in copy_listings:
+#         print(listing.get("id"))
+#         server_str_list.append(listing.get("id"))
+
+#     for server_str in server_str_list:
+#         print(f"server_str: {server_str}")
+
+#     for server_str in server_str_list:
+#         for i in range(len(copy_listings)):
+#             await asyncio.sleep(0.1)
+#             listing = server_listings[i]
+#             if not listing["id"] == server_str:
+#                 continue
+
+#             print(f"listing num: {i}")
+#             if is_guild_accepts_codes(guild):
+#                 server_unique_id = server_listings[i]["id"]
+#                 print(f"Listing id for i {i} is: {server_unique_id}")
+#                 if server_listing_has_codes(listing):
+#                     print(f"Valid listing with codes for {server_unique_id}")
+#                     await send_listing_message_for_server(guild, server_unique_id)
+
+# async def send_available_listing_messages_in_guild(guild):
+#     sent_servers = []
+#     for i in range(len(server_listings)):
+#         await asyncio.sleep(0.1)
+#         listing = server_listings[i]
+#         print(f"listing num: {i}")
+#         if is_guild_accepts_codes(guild):
+#             server_id = listing.get("id")
+#             print(f"Listing id for i {i} is: {server_id}")
+#             if server_listing_has_codes(listing):
+#                 if server_id not in sent_servers:
+#                     sent_servers.append(server_id)
+#                     print(f"Valid listing with codes for {server_id}")
+#                     await send_listing_message_for_server(guild, server_id)
 
 async def update_listing_message(message, server_id):
     #print("update_listing_message called" )
