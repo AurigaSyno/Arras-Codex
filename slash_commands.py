@@ -303,6 +303,7 @@ async def reloadcodeschannel_command(interaction: Interaction):
         return
     
     await interaction.response.defer(ephemeral=True)
+    print(f"{interaction.user.name} is reloading a code channel in {interaction.guild.name}.")
     
     await clear_guild_code_channel(interaction.guild)
     await send_available_listing_messages_in_guild(interaction.guild)
