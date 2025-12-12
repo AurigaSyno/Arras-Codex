@@ -6,11 +6,14 @@ import discord
 from bot_parser import servers, server_is_coded
 from bot_instance import bot
 from bot_utilities import load_config_file, bot_has_manage_msg_perms
+from leaderboard import add_click_credit_to_user, add_code_credit_to_user, get_leaderboard_embed
 
 from constants import TeamColor, LISTINGS_FILE
 from bot_logger import get_logger
 
 logger = get_logger("listings")
+
+leaderboard_embeds = { }
 
 print("Loading listings into memory...")
 try:
@@ -50,6 +53,7 @@ def save_listing(listing, id):
             server_listings.remove(server_listing)
 
     server_listings.append(listing)
+    save_listings_file()
     return
 
 def server_is_valid(id):
@@ -99,6 +103,7 @@ def add_code_to_listing(id, code, team, user_id):
             server_listing["purple_submitted"] = user_id
 
         save_listing(server_listing, id)
+        add_code_credit_to_user(user_id)
         return True
     else:
         print(f"Error, tried to add code to server [{id}] that has no listing!")
@@ -126,6 +131,24 @@ def remove_code_from_listing(id, team):
     else:
         print(f"Error, tried to remove code from server [{id}] that has no listing!")
         return False
+    
+async def get_leaderboard_message_for_guild(guild):
+    if str(guild.id) in leaderboard_embeds:
+        leaderboard_embed_data = leaderboard_embeds[str(guild.id)]
+        channel_id = leaderboard_embed_data[0]
+        msg_id = leaderboard_embed_data[1]
+        channel = await bot.fetch_channel(channel_id)
+        if channel:
+            try:
+                message = await channel.fetch_message(msg_id)
+                if message:
+                    #print("returned message")
+                    return message
+            except:
+                print("Unable to fetch message: get_leaderboard_embed_for_guild")
+                pass
+                
+    return None
 
 async def get_listing_message_for_server(guild, server_id):
     server_listing = get_listing_for_server(server_id)
@@ -150,11 +173,34 @@ async def get_listing_message_for_server(guild, server_id):
                 
     return None
 
+async def send_leaderboard_message(guild):
+    config = load_config_file(guild.id)
+    if config:
+        channel_id = config.get("codes_channel_id", None)
+        if channel_id:
+            channel = await bot.fetch_channel(channel_id)
+            if channel:
+                embed = await get_leaderboard_embed()
+                if embed:
+                    try:
+                        new_message = await channel.send(embed=embed)
+                        if new_message:
+                            leaderboard_embeds[str(guild.id)] = [channel_id, new_message.id]
+                            return True
+                    except discord.Forbidden:
+                        print(f"Bot lacks posting permissions for {channel.name} in {guild.name}")
+                        pass
+                    except Exception as e:
+                        print(f"Error in send_leaderboard_message: {e}")
+                        pass
+
+    return False
+
 async def send_listing_message_for_server(guild, server_id):
     server_listing = get_listing_for_server(server_id)
     guild_embeds = server_listing.get("guild_embeds", {})
     config = load_config_file(guild.id)
-    
+
     if not bot_has_manage_msg_perms(guild):
         return
     
@@ -202,6 +248,7 @@ async def send_server_closed_message(listing):
 
 
 async def send_all_available_listing_messages():
+    await update_leaderboard_messages()
     for guild in bot.guilds:
         if bot_has_manage_msg_perms(guild):
             await send_available_listing_messages_in_guild(guild)
@@ -282,6 +329,10 @@ async def send_available_listing_messages_in_guild(guild):
 #                     print(f"Valid listing with codes for {server_id}")
 #                     await send_listing_message_for_server(guild, server_id)
 
+async def update_leaderboard_message(message):
+    embed = await get_leaderboard_embed()
+    await message.edit(embed=embed)
+
 async def update_listing_message(message, server_id):
     #print("update_listing_message called" )
     code_embed = await get_listing_embed_for_server(server_id)
@@ -296,7 +347,16 @@ def is_guild_accepts_codes(guild):
         
     return False
 
+async def update_leaderboard_messages():
+    for guild in bot.guilds:
+        message = await get_leaderboard_message_for_guild(guild)
+        if message:
+            await update_leaderboard_message(message)
+        else:
+            await send_leaderboard_message(guild)
+
 async def update_server_listing_messages(server_id):
+    await update_leaderboard_messages()
     for guild in bot.guilds:
         if is_guild_accepts_codes(guild):
             message = await get_listing_message_for_server(guild, server_id)
@@ -364,7 +424,7 @@ async def update_all_server_listings():
     #             server_listings.remove(listing)
     #             print(f"Server #{server_id} is no longer coded, removing listing ({listing.get("server_code")})")
 
-    # save_listings_file()
+    save_listings_file()
 
 # How guild embed is stored:
 # #wa server listing:
@@ -395,6 +455,8 @@ def server_listing_builder():
     }
     return server_listing
 
+
+
 class ListingButtonView(discord.ui.View):
     def __init__(self, listing):
         super().__init__(timeout=3600)
@@ -407,19 +469,43 @@ class ListingButtonView(discord.ui.View):
         if red_code:
             url = f"https://arras.io/#{server_id}{red_code}"
             button = discord.ui.Button(emoji="🟥", url=url)
+            self.red_contributor = listing.get("red_submitted")
+            button.callback = self.click_redcallback
             self.add_item(button)
         if blue_code:
             url = f"https://arras.io/#{server_id}{blue_code}"
             button = discord.ui.Button(emoji="🟦", url=url)
+            self.blue_contributor = listing.get("blue_submitted")
+            button.callback = self.click_bluecallback
             self.add_item(button)
         if green_code:
             url = f"https://arras.io/#{server_id}{green_code}"
             button = discord.ui.Button(emoji="🟩", url=url)
+            self.green_contributor = listing.get("green_submitted")
+            button.callback = self.click_greencallback
             self.add_item(button)
         if purple_code:
             url = f"https://arras.io/#{server_id}{purple_code}"
             button = discord.ui.Button(emoji="🟪", url=url)
+            self.purple_contributor = listing.get("purple_submitted")
+            button.callback = self.click_purplecallback
             self.add_item(button)
+
+    async def click_redcallback(self, interaction: discord.Interaction):
+        add_click_credit_to_user(self.red_contributor)
+        await interaction.response.defer()
+
+    async def click_bluecallback(self, interaction: discord.Interaction):
+        add_click_credit_to_user(self.blue_contributor)
+        await interaction.response.defer()
+
+    async def click_greencallback(self, interaction: discord.Interaction):
+        add_click_credit_to_user(self.green_contributor)
+        await interaction.response.defer()
+
+    async def click_purplecallback(self, interaction: discord.Interaction):
+        add_click_credit_to_user(self.purple_contributor)
+        await interaction.response.defer()
 
 async def listing_embed_builder(listing):
     id = listing.get("id", "?")

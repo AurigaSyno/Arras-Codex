@@ -8,7 +8,8 @@ import slash_commands
 from bot_instance import bot
 
 from bot_parser import fetch_status_then_parse
-from server_listings import update_all_server_listings, send_all_available_listing_messages
+from leaderboard import save_leaderboard_data
+from server_listings import update_all_server_listings, send_all_available_listing_messages, update_leaderboard_messages
 from bot_utilities import load_config_file, save_config_file, finish_initializing, clear_guild_code_channel
 
 from dotenv import load_dotenv
@@ -17,6 +18,8 @@ from bot_logger import get_logger
 @discord.ext.tasks.loop(seconds=30)
 async def update_server_list_task():
     if fetch_status_then_parse():
+        await update_leaderboard_messages()
+        save_leaderboard_data()
         await update_all_server_listings()
 
 async def clear_all_code_channels():
@@ -45,6 +48,9 @@ async def init_on_ready():
     print("Fetching server list...")
     if fetch_status_then_parse():
         await update_all_server_listings()
+
+    print("Sending leaderboards")
+    await update_leaderboard_messages()
 
     print("Posting all relevant listings...")
     await send_all_available_listing_messages()

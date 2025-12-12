@@ -332,25 +332,34 @@ async def reloadcodeschannel_command(interaction: Interaction):
 
 #==================Privileged==================
 @bot.tree.command(name="sandboxes", description="Get all active sandboxes")
-async def sandboxes_command(interaction: Interaction):
+async def sandboxes_command(interaction: Interaction, show_hidden: bool = False):
     if not user_is_privileged(interaction.user.id):
         await send_user_is_unprivileged_msg(interaction)
         return
     
-    embed = discord.Embed(title="Sandboxes")
-    total_sandboxes = 0
-    for sandbox in sandboxes:
-        clients = sandbox.get("clients", 0)
-        if clients:
-            total_sandboxes += 1
-            embed.add_field(name=f"#{sandbox.get("id")}", value=f"{clients}")
-            embed.set_footer(text=f"Total active sandboxes: {total_sandboxes}.")
+    if not show_hidden:
+        embed = discord.Embed(title="Sandboxes")
+        total_sandboxes = 0
+        for sandbox in sandboxes:
+            clients = sandbox.get("clients", 0)
+            if clients:
+                total_sandboxes += 1
+                embed.add_field(name=f"#{sandbox.get("id")}", value=f"{clients}")
+                embed.set_footer(text=f"Total active sandboxes: {total_sandboxes}.")
+        
+        if total_sandboxes > 0:
+            await interaction.response.send_message(embed=embed)
+            return
+        else:
+            embed.add_field(name="No active sandboxes", value="No active sandboxes")
+            await interaction.response.send_message(embed=embed)
+            return
     
-    if total_sandboxes > 0:
-        await interaction.response.send_message(embed=embed)
-        return
     else:
-        embed.add_field(name="No active sandboxes", value="No active sandboxes")
+        desc = ""
+        for sandbox in sandboxes:
+            desc = desc + f"#{sandbox.get("id")}: {sandbox.get("clients", 0)}\n"
+        embed = discord.Embed(title="Sandboxes", description=desc)
         await interaction.response.send_message(embed=embed)
         return
     

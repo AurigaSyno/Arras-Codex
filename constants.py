@@ -10,6 +10,7 @@ GUILDS_CONFIG_PATH = "guild_configs"
 BLACKLIST_FILE = "blacklist.json"
 PRIVILEGE_FILE = "privelege.json"
 LISTINGS_FILE = "listings.json"
+LEADERBOARD_FILE = "leaderboard.json"
 
 OPERATOR_IDS = [1000953569689747507] #auriga
 #                 854537568654065675 #xeroc
