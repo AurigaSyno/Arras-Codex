@@ -5,7 +5,7 @@ import json
 import discord
 from bot_parser import servers, server_is_coded
 from bot_instance import bot
-from bot_utilities import load_config_file, bot_has_manage_msg_perms
+from bot_utilities import load_config_file, bot_has_manage_msg_perms, get_emoji_for_tank
 from leaderboard import add_click_credit_to_user, add_code_credit_to_user, get_leaderboard_embed
 
 from constants import TeamColor, LISTINGS_FILE
@@ -84,6 +84,18 @@ def get_code_for_server_team(id, team):
                 return server_listing.get("green_code", None)
             if team == TeamColor.Purple:
                 return server_listing.get("purple_code", None)
+            
+def get_submitter_for_server_team(id, team):
+    for server_listing in server_listings:
+        if server_listing.get("id", None) == id:
+            if team == TeamColor.Red:
+                return server_listing.get("red_submitted", None)
+            if team == TeamColor.Blue:
+                return server_listing.get("blue_submitted", None)
+            if team == TeamColor.Green:
+                return server_listing.get("green_submitted", None)
+            if team == TeamColor.Purple:
+                return server_listing.get("purple_submitted", None)
 
 def add_code_to_listing(id, code, team, user_id):
     server_listing = get_listing_for_server(id)
@@ -468,25 +480,25 @@ class ListingButtonView(discord.ui.View):
 
         if red_code:
             url = f"https://arras.io/#{server_id}{red_code}"
-            button = discord.ui.Button(emoji="🟥", url=url)
+            button = discord.ui.Button(emoji=get_emoji_for_tank("red"), url=url)
             self.red_contributor = listing.get("red_submitted")
             button.callback = self.click_redcallback
             self.add_item(button)
         if blue_code:
             url = f"https://arras.io/#{server_id}{blue_code}"
-            button = discord.ui.Button(emoji="🟦", url=url)
+            button = discord.ui.Button(emoji=get_emoji_for_tank("blue"), url=url)
             self.blue_contributor = listing.get("blue_submitted")
             button.callback = self.click_bluecallback
             self.add_item(button)
         if green_code:
             url = f"https://arras.io/#{server_id}{green_code}"
-            button = discord.ui.Button(emoji="🟩", url=url)
+            button = discord.ui.Button(emoji=get_emoji_for_tank("green"), url=url)
             self.green_contributor = listing.get("green_submitted")
             button.callback = self.click_greencallback
             self.add_item(button)
         if purple_code:
             url = f"https://arras.io/#{server_id}{purple_code}"
-            button = discord.ui.Button(emoji="🟪", url=url)
+            button = discord.ui.Button(emoji=get_emoji_for_tank("purple"), url=url)
             self.purple_contributor = listing.get("purple_submitted")
             button.callback = self.click_purplecallback
             self.add_item(button)

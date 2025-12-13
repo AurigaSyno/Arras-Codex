@@ -1,6 +1,8 @@
 import os
 import json
+import re
 import discord
+from discord import PartialEmoji
 
 import constants
 from bot_logger import get_logger
@@ -143,3 +145,24 @@ def bot_has_manage_msg_perms(guild):
         return True
     
     return False
+
+tank_emojis = {
+    "red": "<:basicred:1449457381082791956>",
+    "blue": "<:basicblue:1449457376624119971>",
+    "green": "<:basicgreen:1449457378004304002>",
+    "purple": "<:basicpurple:1449457379644280964>"
+}
+
+def get_emoji_for_tank(name):
+    emoji_str = tank_emojis.get(name, None)
+
+    if emoji_str:
+        m = re.match(r"<:([a-zA-Z0-9_]+):(\d+)>", emoji_str)
+        if m:
+            emoji_obj = PartialEmoji(name=m.group(1), id=int(m.group(2)))
+            return emoji_obj
+        
+    return "❌"
+
+def get_emoji_str_for_tank(name):
+    return tank_emojis.get(str(name), "❌")

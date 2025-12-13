@@ -5,7 +5,7 @@ from bot_utilities import load_blacklist, save_blacklist, load_config_file, save
 from bot_utilities import is_bot_initialized, clear_guild_code_channel, bot_has_manage_msg_perms
 from server_listings import add_code_to_listing, get_listing_embed_for_server, get_code_for_server_team, update_server_listing_messages
 from server_listings import server_is_valid, coded_for_server, update_all_server_listings, clear_all_listings, remove_code_from_listing
-from server_listings import send_available_listing_messages_in_guild
+from server_listings import send_available_listing_messages_in_guild, get_submitter_for_server_team
 from bot_instance import bot
 from bot_logger import get_logger
 
@@ -447,6 +447,46 @@ async def servers_command(interaction: Interaction, showhidden: bool = False):
     embed.set_footer(text=f"Requested by {interaction.user.name}")
     await interaction.response.send_message(embed=embed)
 
+class EditCodeView(discord.ui.View):
+    def __init__(self, server_id, code, team):
+        self.used = False
+        self.server_id = server_id
+        self.code = code
+        self.team = team
+        super().__init__()
+
+    @discord.ui.button(label="Cancel", style=discord.ButtonStyle.secondary, custom_id="cancel")
+    async def cancel_button_callback(self, interaction: discord.Interaction, button):
+        if self.used == True:
+            await interaction.response.send_message("This interaction is expired", ephemeral=True)
+            return
+        for btn in self.children:
+            btn.disabled = True
+        self.used = True
+        await interaction.response.defer()
+
+    @discord.ui.button(label="Change Code", style=discord.ButtonStyle.success, custom_id="change")
+    async def change_button_callback(self, interaction: discord.Interaction, button):
+        if self.used == True:
+            await interaction.response.send_message("This interaction is expired", ephemeral=True)
+            return
+        
+        success = add_code_to_listing(self.server_id, self.code, self.team, interaction.user.id)
+
+        if success:
+            embed = discord.Embed(title="Thank You", description=f"Your {self.team.name.lower()} code for #{self.server_id} was successfully changed!", color=0x00ff00)
+            print(f"Code: {self.code} submitted for Server: {self.server_id} by {interaction.user.display_name}")
+            await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=60)
+        else:
+            embed = discord.Embed(title="Error", description=f"Something went wrong!", color=0xff0000)
+            await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+        
+        for btn in self.children:
+            btn.disabled = True
+        self.used = True
+
+        await update_server_listing_messages(self.server_id) #Put this at the end to avoid the interaction timing out
+
 @bot.tree.command(name="submit", description="Submit a code to the codex (URL)")
 async def submit_command(interaction: Interaction, url: str, team: constants.TeamColor):
     if not is_bot_initialized():
@@ -473,15 +513,6 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
     code = tuple[0]
     server = tuple[1]
 
-    existing_code = get_code_for_server_team(server, team)
-    if existing_code:
-        if existing_code == code:
-            embed = discord.Embed(title="Thank You", description=f"This code has already been submitted by another user.", color=0x00ff00)
-            await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
-            return
-        # else:
-        #     #TODO: Warning message about already submitted code
-
     coded_num = coded_for_server(server)
 
     if team.name.lower() == "purple" and coded_num < 4:
@@ -493,6 +524,32 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
         embed = discord.Embed(title="Error", description=f"This server has no red team!", color=0xff0000)
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
         return
+    
+    existing_code = get_code_for_server_team(server, team)
+    if existing_code:
+        if existing_code == code:
+            embed = discord.Embed(title="Thank You", description=f"This code has already been submitted by another user.", color=0x00ff00)
+            await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+            return
+        else:
+            if not (get_submitter_for_server_team(server, team) == interaction.user.id): #if this is not the user who submitted this code
+                embed = discord.Embed(title="Confirm Code Change", description="You are about to submit a different code than the one that is already submitted.\nOnly confirm this if the current code is wrong!", color=0x00ff00)
+                view = EditCodeView(server, code, team)
+                await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
+                return
+            else:
+                success = add_code_to_listing(server, code, team, interaction.user.id)
+
+                if success:
+                    embed = discord.Embed(title="Thank You", description=f"Your {team.name.lower()} code for #{server} was successfully updated!", color=0x00ff00)
+                    print(f"Code: {code} submitted for Server: {server} by {interaction.user.display_name}")
+                    await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=60)
+                    await update_server_listing_messages(server) #Put this at the end to avoid the interaction timing out
+                    return
+                else:
+                    embed = discord.Embed(title="Error", description=f"Something went wrong!", color=0xff0000)
+                    await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+                    return
     
     success = add_code_to_listing(server, code, team, interaction.user.id)
 
