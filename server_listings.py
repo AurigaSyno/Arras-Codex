@@ -15,12 +15,18 @@ logger = get_logger("listings")
 
 leaderboard_embeds = { }
 
+def clear_guild_embeds_messages_ids():
+    print("Clearing old message IDs")
+    for listing in server_listings:
+        listing["guild_embeds"] = {}
+
 print("Loading listings into memory...")
 try:
     if os.path.exists(LISTINGS_FILE):
         with open(LISTINGS_FILE, "r", encoding="utf-8") as f:
             server_listings = json.load(f)
         logger.info(f"Loaded {len(server_listings)} listings from {LISTINGS_FILE}.")
+        clear_guild_embeds_messages_ids()
     else:
         logger.warning(f"❌{LISTINGS_FILE} does not exist, creating blank file.")
         server_listings = []
