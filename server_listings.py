@@ -97,7 +97,7 @@ def get_submitter_for_server_team(id, team):
             if team == TeamColor.Purple:
                 return server_listing.get("purple_submitted", None)
 
-def add_code_to_listing(id, code, team, user_id):
+def add_code_to_listing(id, code, team, user_id, user_name):
     server_listing = get_listing_for_server(id)
 
     if server_listing:
@@ -115,7 +115,7 @@ def add_code_to_listing(id, code, team, user_id):
             server_listing["purple_submitted"] = user_id
 
         save_listing(server_listing, id)
-        add_code_credit_to_user(user_id)
+        add_code_credit_to_user(user_id, user_name)
         return True
     else:
         print(f"Error, tried to add code to server [{id}] that has no listing!")
@@ -482,42 +482,42 @@ class ListingButtonView(discord.ui.View):
             url = f"https://arras.io/#{server_id}{red_code}"
             button = discord.ui.Button(emoji=get_emoji_for_tank("red"), url=url)
             self.red_contributor = listing.get("red_submitted")
-            button.callback = self.click_redcallback
+            #button.callback = self.click_redcallback
             self.add_item(button)
         if blue_code:
             url = f"https://arras.io/#{server_id}{blue_code}"
             button = discord.ui.Button(emoji=get_emoji_for_tank("blue"), url=url)
             self.blue_contributor = listing.get("blue_submitted")
-            button.callback = self.click_bluecallback
+            #button.callback = self.click_bluecallback
             self.add_item(button)
         if green_code:
             url = f"https://arras.io/#{server_id}{green_code}"
             button = discord.ui.Button(emoji=get_emoji_for_tank("green"), url=url)
             self.green_contributor = listing.get("green_submitted")
-            button.callback = self.click_greencallback
+            #button.callback = self.click_greencallback
             self.add_item(button)
         if purple_code:
             url = f"https://arras.io/#{server_id}{purple_code}"
             button = discord.ui.Button(emoji=get_emoji_for_tank("purple"), url=url)
             self.purple_contributor = listing.get("purple_submitted")
-            button.callback = self.click_purplecallback
+            #button.callback = self.click_purplecallback
             self.add_item(button)
 
-    async def click_redcallback(self, interaction: discord.Interaction):
-        add_click_credit_to_user(self.red_contributor)
-        await interaction.response.defer()
+    # async def click_redcallback(self, interaction: discord.Interaction):
+    #     add_click_credit_to_user(self.red_contributor)
+    #     await interaction.response.defer()
 
-    async def click_bluecallback(self, interaction: discord.Interaction):
-        add_click_credit_to_user(self.blue_contributor)
-        await interaction.response.defer()
+    # async def click_bluecallback(self, interaction: discord.Interaction):
+    #     add_click_credit_to_user(self.blue_contributor)
+    #     await interaction.response.defer()
 
-    async def click_greencallback(self, interaction: discord.Interaction):
-        add_click_credit_to_user(self.green_contributor)
-        await interaction.response.defer()
+    # async def click_greencallback(self, interaction: discord.Interaction):
+    #     add_click_credit_to_user(self.green_contributor)
+    #     await interaction.response.defer()
 
-    async def click_purplecallback(self, interaction: discord.Interaction):
-        add_click_credit_to_user(self.purple_contributor)
-        await interaction.response.defer()
+    # async def click_purplecallback(self, interaction: discord.Interaction):
+    #     add_click_credit_to_user(self.purple_contributor)
+    #     await interaction.response.defer()
 
 async def listing_embed_builder(listing):
     id = listing.get("id", "?")

@@ -32,7 +32,6 @@ async def update_server_list_task():
     try:
         if fetch_status_then_parse():
             await update_leaderboard_messages()
-            save_leaderboard_data()
             await update_all_server_listings()
     except Exception as e:
         await print_error_to_operator(e)

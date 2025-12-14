@@ -471,7 +471,7 @@ class EditCodeView(discord.ui.View):
             await interaction.response.send_message("This interaction is expired", ephemeral=True)
             return
         
-        success = add_code_to_listing(self.server_id, self.code, self.team, interaction.user.id)
+        success = add_code_to_listing(self.server_id, self.code, self.team, interaction.user.id, interaction.user.name)
 
         if success:
             embed = discord.Embed(title="Thank You", description=f"Your {self.team.name.lower()} code for #{self.server_id} was successfully changed!", color=0x00ff00)
@@ -538,7 +538,7 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
                 await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
                 return
             else:
-                success = add_code_to_listing(server, code, team, interaction.user.id)
+                success = add_code_to_listing(server, code, team, interaction.user.id, interaction.user.name)
 
                 if success:
                     embed = discord.Embed(title="Thank You", description=f"Your {team.name.lower()} code for #{server} was successfully updated!", color=0x00ff00)
@@ -551,7 +551,7 @@ async def submit_command(interaction: Interaction, url: str, team: constants.Tea
                     await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
                     return
     
-    success = add_code_to_listing(server, code, team, interaction.user.id)
+    success = add_code_to_listing(server, code, team, interaction.user.id, interaction.user.name)
 
     if success:
         embed = discord.Embed(title="Thank You", description=f"Your {team.name.lower()} code for #{server} was successfully submitted!", color=0x00ff00)

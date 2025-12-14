@@ -40,41 +40,46 @@ def save_leaderboard_data():
         with open(LEADERBOARD_FILE, "w", encoding="utf-8") as f:
             json.dump(leaderboard_users, f, indent=2, ensure_ascii=False)
 
-def user_data_builder(id):
+def user_data_builder(id, name):
     user_data = {}
     user_data["id"] = id
+    user_data["name"] = name
     user_data["codes"] = 0
     user_data["clicks"] = 0
     return user_data
 
-def create_user_data(user_id):
-    user_data = user_data_builder(user_id)
+def create_user_data(user_id, name):
+    user_data = user_data_builder(user_id, name)
     leaderboard_users.append(user_data)
 
-def add_code_credit_to_user(user_id):
+def add_code_credit_to_user(user_id, name):
     for user in leaderboard_users:
         if user["id"] == user_id:
             user["codes"] += 1
+            save_leaderboard_data()
             return
 
     #user must not exist
-    create_user_data(user_id)
+    create_user_data(user_id, name)
     for user in leaderboard_users:
         if user["id"] == user_id:
             user["codes"] += 1
+            save_leaderboard_data()
             return
 
-def add_click_credit_to_user(user_id):
+def add_click_credit_to_user(user_id, name):
     for user in leaderboard_users:
         if user["id"] == user_id:
             user["clicks"] += 1
+            save_leaderboard_data()
             return
 
     #user must not exist
-    create_user_data(user_id)
+    create_user_data(user_id, name)
     for user in leaderboard_users:
         if user["id"] == user_id:
             user["clicks"] += 1
+            save_leaderboard_data()
             return
 
 def get_top_ten_users():
