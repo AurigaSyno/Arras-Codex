@@ -15,12 +15,28 @@ from bot_utilities import load_config_file, save_config_file, finish_initializin
 from dotenv import load_dotenv
 from bot_logger import get_logger
 
+async def print_error_to_operator(string):
+    operator_ids = constants.OPERATOR_IDS
+    for operator_id in operator_ids:
+        operator = await bot.fetch_user(operator_id)
+        if operator:
+            try:
+                await operator.send(f"Error in main loop: {string}")
+                print(f"Sent error message to {operator.name}")
+            except:
+                print(f"Could not send error message to operator: {operator_id}")
+                continue
+
 @discord.ext.tasks.loop(seconds=30)
 async def update_server_list_task():
-    if fetch_status_then_parse():
-        await update_leaderboard_messages()
-        save_leaderboard_data()
-        await update_all_server_listings()
+    try:
+        if fetch_status_then_parse():
+            await update_leaderboard_messages()
+            save_leaderboard_data()
+            await update_all_server_listings()
+    except Exception as e:
+        await print_error_to_operator(e)
+        pass
 
 async def clear_all_code_channels():
     for guild in bot.guilds:
