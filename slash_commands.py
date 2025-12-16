@@ -400,19 +400,27 @@ async def remove_code_command(interaction: Interaction, server: str, team: const
     if not user_is_privileged(interaction.user.id):
         await send_user_is_unprivileged_msg(interaction)
         return
-    
+
     server_str = server.replace("#", "")
+
+    existing_code = get_code_for_server_team(server_str, team)
+    if not existing_code:
+        embed = discord.Embed(title="No code", description=f"There is no {team.name.lower()} code for #{server_str}", color=0x00ff00)
+        await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+        return
     
     success = remove_code_from_listing(server_str, team)
 
     if success:
-        await update_server_listing_messages(server)
-        embed = discord.Embed(title="Code Removed", description=f"The {team.name.lower()} code for #{server} was successfully removed!", color=0x00ff00)
-        print(f"Code removed from server: {server} by {interaction.user.display_name}")
+        embed = discord.Embed(title="Code Removed", description=f"The {team.name.lower()} code for #{server_str} was successfully removed!", color=0x00ff00)
+        print(f"Code removed from server: {server_str} by {interaction.user.display_name}")
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=60)
     else:
         embed = discord.Embed(title="Error", description=f"Something went wrong!", color=0xff0000)
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+
+    if success:
+        await update_server_listing_messages(server_str)
 
 #==================Normal Users==================
 @bot.tree.command(name="servers", description="List all servers")
