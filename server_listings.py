@@ -59,7 +59,7 @@ def save_listing(listing, id):
             server_listings.remove(server_listing)
 
     server_listings.append(listing)
-    save_listings_file()
+    #save_listings_file() #reduce the number of writes to disk please
     return
 
 def server_is_valid(id):
@@ -121,6 +121,7 @@ def add_code_to_listing(id, code, team, user_id, user_name):
             server_listing["purple_submitted"] = user_id
 
         save_listing(server_listing, id)
+        save_listings_file()
         add_code_credit_to_user(user_id, user_name)
         return True
     else:
@@ -145,6 +146,7 @@ def remove_code_from_listing(id, team):
             server_listing["purple_submitted"] = None
 
         save_listing(server_listing, id)
+        save_listings_file()
         return True
     else:
         print(f"Error, tried to remove code from server [{id}] that has no listing!")
@@ -234,6 +236,7 @@ async def send_listing_message_for_server(guild, server_id):
                         if new_message:
                             guild_embeds[str(guild.id)] = [channel_id, new_message.id]
                             save_listing(server_listing, server_id)
+                            save_listings_file()
                             return True
                     except discord.Forbidden:
                         print(f"Bot lacks posting permissions for {channel.name} in {guild.name}")
@@ -421,7 +424,12 @@ async def update_all_server_listings():
                         server_listings.remove(server_listing)
                         print(f"Server #{server_id} is no longer coded, removing listing ({recorded_listing} -> {server.get("server_code")})")
                         save_listings_file()
-            
+
+                else:
+                    #Not changing or reseting or removing, just update the time
+                    server_listing["server_uptime"] = server.get("uptime")
+                    save_listing(server_listing, server_id)
+
             if not server_listing or server_changed: #we need a new listing
                 new_listing = server_listing_builder()
                 new_listing["id"] = server_id
@@ -433,15 +441,7 @@ async def update_all_server_listings():
                 save_listing(new_listing, server_id)
                 print(f"Added listing for {server_id} ({server.get("server_code")})")
                 continue
-
-    # for listing in server_listings:
-    #     server_id = listing.get("id", None)
-    #     if server_id:
-    #         if not server_is_coded(server_id):
-    #             await remove_listing_messages(server_id)
-    #             server_listings.remove(listing)
-    #             print(f"Server #{server_id} is no longer coded, removing listing ({listing.get("server_code")})")
-
+    
     save_listings_file()
 
 # How guild embed is stored:
