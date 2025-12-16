@@ -32,7 +32,8 @@ try:
         leaderboard_users = []
         with open(LEADERBOARD_FILE, "w", encoding="utf-8") as f:
             json.dump(leaderboard_users, f, indent=2, ensure_ascii=False)
-except Exception:
+except Exception as e:
+    logger.error(f"Error loading leaderboard file {e}.")
     leaderboard_users = []
 
 def save_leaderboard_data():
