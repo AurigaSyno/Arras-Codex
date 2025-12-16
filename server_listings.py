@@ -398,7 +398,7 @@ async def update_all_server_listings():
 
             if server_listing:
                 recorded_listing = server_listing.get("server_code")
-                server_changed = not (server.get("server_code") == server_listing.get("server_code"))
+                server_changed = (not (server.get("server_code") == server_listing.get("server_code"))) or (server.get("uptime") < server_listing.get("server_uptime"))
                 if server_changed:
                     await remove_listing_messages(server_id)
 
