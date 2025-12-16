@@ -411,8 +411,10 @@ def parse_status(): #FIXME: Siege maps with more than one word are a bit buggy
                     if not full_game_str and game_mode_e:
                         full_game_str += game_mode_e.capitalize()
 
-                if full_game_str == "Labyrinth": #HAAAAACKZ
+                hacklist = ["Labyrinth", "Old Labyrinth"] #I know old laby can have anywhere from 2-4 codes, but there's no way to get that info so this will have to do
+                if full_game_str in hacklist: #HAAAAACKZ
                     is_coded = 4
+
 
                 #Parsing complete, save server
                 saved_server = server_builder()
