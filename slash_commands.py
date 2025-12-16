@@ -585,6 +585,8 @@ async def codes_command(interaction: Interaction, server: str):
         embed = discord.Embed(title="Error", description=f"#{server_str} is not a valid server!", color=0xff0000)
         await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
         return
+    
+    await interaction.response.defer(ephemeral=True)
 
     embedtuple = await get_listing_embed_for_server(server_str)
     embed = embedtuple[0]
@@ -592,9 +594,9 @@ async def codes_command(interaction: Interaction, server: str):
 
     if embed:
         embed.set_footer(text=f"Requested by {interaction.user.name}")
-        await interaction.response.send_message(embed=embed, view=view, delete_after=360)
+        await interaction.followup.send(embed=embed, view=view)
         return
     else:
         embed = discord.Embed(title="Error", description=f"Something went wrong!", color=0xff0000)
-        await interaction.response.send_message(embed=embed, ephemeral=True, delete_after=30)
+        await interaction.followup.send(embed=embed)
         return
