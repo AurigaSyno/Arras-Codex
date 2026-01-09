@@ -123,21 +123,24 @@ async def clear_guild_code_channel(guild):
     if config:
         channel_id = config.get("codes_channel_id", None)
         if channel_id:
-            channel = await bot.fetch_channel(channel_id)
-            if channel:
-                try:
-                    def check_message(message):
-                        return message.author == bot.user
-                    
-                    await channel.purge(limit=None, check=check_message)
+            try:
+                channel = await bot.fetch_channel(channel_id)
+                if channel:
+                        def check_message(message):
+                            return message.author == bot.user
+                        
+                        await channel.purge(limit=None, check=check_message)
                 
-                except discord.Forbidden:
-                    print(f"Bot lacks purge permissions for guild: {guild.name}")
-                    pass
-                        #TODO:Don't allow codes to be posted in this channel
-                except Exception as e:
-                    print(f"Error in clear_all_code_channels: {e}")
-                    pass
+            except discord.Forbidden:
+                print(f"Bot lacks purge permissions for guild: {guild.name}")
+                pass
+                    #TODO:Don't allow codes to be posted in this channel
+            except discord.NotFound:
+                print(f"Unable to find channel for guild {guild.name}")
+                pass
+            except Exception as e:
+                print(f"Error in clear_all_code_channels: {e}")
+                pass
 
 def bot_has_manage_msg_perms(guild):
     bot_member = guild.me
