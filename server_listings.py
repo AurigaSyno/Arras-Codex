@@ -157,16 +157,16 @@ async def get_leaderboard_message_for_guild(guild):
         leaderboard_embed_data = leaderboard_embeds[str(guild.id)]
         channel_id = leaderboard_embed_data[0]
         msg_id = leaderboard_embed_data[1]
-        channel = await bot.fetch_channel(channel_id)
-        if channel:
-            try:
+        try:
+            channel = await bot.fetch_channel(channel_id)
+            if channel:
                 message = await channel.fetch_message(msg_id)
                 if message:
                     #print("returned message")
                     return message
-            except:
-                print("Unable to fetch message: get_leaderboard_embed_for_guild")
-                pass
+        except:
+            print("Unable to fetch message: get_leaderboard_embed_for_guild")
+            pass
                 
     return None
 
@@ -180,16 +180,16 @@ async def get_listing_message_for_server(guild, server_id):
         #print(guild_embed_data)
         channel_id = guild_embed_data[0]
         msg_id = guild_embed_data[1]
-        channel = await bot.fetch_channel(channel_id)
-        if channel:
-            try:
+        try:
+            channel = await bot.fetch_channel(channel_id)
+            if channel:
                 message = await channel.fetch_message(msg_id)
                 if message:
                     #print("returned message")
                     return message
-            except:
-                print("Unable to fetch message: get_listing_message_for_server")
-                pass
+        except:
+            print("Unable to fetch message: get_listing_message_for_server")
+            pass
                 
     return None
 
@@ -198,21 +198,21 @@ async def send_leaderboard_message(guild):
     if config:
         channel_id = config.get("codes_channel_id", None)
         if channel_id:
-            channel = await bot.fetch_channel(channel_id)
-            if channel:
-                embed = await get_leaderboard_embed()
-                if embed:
-                    try:
+            try:
+                channel = await bot.fetch_channel(channel_id)
+                if channel:
+                    embed = await get_leaderboard_embed()
+                    if embed:
                         new_message = await channel.send(embed=embed)
                         if new_message:
                             leaderboard_embeds[str(guild.id)] = [channel_id, new_message.id]
                             return True
-                    except discord.Forbidden:
-                        print(f"Bot lacks posting permissions for {channel.name} in {guild.name}")
-                        pass
-                    except Exception as e:
-                        print(f"Error in send_leaderboard_message: {e}")
-                        pass
+            except discord.Forbidden:
+                print(f"Bot lacks posting permissions for {channel.name} in {guild.name}")
+                pass
+            except Exception as e:
+                print(f"Error in send_leaderboard_message: {e}")
+                pass
 
     return False
 
@@ -227,23 +227,23 @@ async def send_listing_message_for_server(guild, server_id):
     if config:
         channel_id = config.get("codes_channel_id", None)
         if channel_id:
-            channel = await bot.fetch_channel(channel_id)
-            if channel:
-                code_embed = await get_listing_embed_for_server(server_id)
-                if code_embed:
-                    try:
+            try:
+                channel = await bot.fetch_channel(channel_id)
+                if channel:
+                    code_embed = await get_listing_embed_for_server(server_id)
+                    if code_embed:
                         new_message = await channel.send(embed=code_embed[0], view=code_embed[1])
                         if new_message:
                             guild_embeds[str(guild.id)] = [channel_id, new_message.id]
                             save_listing(server_listing, server_id)
                             save_listings_file()
                             return True
-                    except discord.Forbidden:
-                        print(f"Bot lacks posting permissions for {channel.name} in {guild.name}")
-                        pass
-                    except Exception as e:
-                        print(f"Error in send_listing_message_for_server: {e}")
-                        pass
+            except discord.Forbidden:
+                print(f"Bot lacks posting permissions for {channel.name} in {guild.name}")
+                pass
+            except Exception as e:
+                print(f"Error in send_listing_message_for_server: {e}")
+                pass
 
     return False
 
@@ -253,19 +253,19 @@ async def send_server_closed_message(listing):
         if config:
             channel_id = config.get("codes_channel_id", None)
             if channel_id:
-                channel = await bot.fetch_channel(channel_id)
-                if channel:
-                    try:
+                try:
+                    channel = await bot.fetch_channel(channel_id)
+                    if channel:
                         name = listing.get("name", "Unknown")
                         id = listing.get("id", "N/A")
                         embed = discord.Embed(title="Server Closed", description=f"Server #{id} ({name}) closed, removing codes", color=0x00ff00)
                         new_message = await channel.send(embed=embed, delete_after=120)
-                    except discord.Forbidden:
-                        print(f"Bot lacks posting permissions for {channel.name} in {guild.name}")
-                        pass
-                    except Exception as e:
-                        print(f"Error in send_server_closed_message: {e}")
-                        pass
+                except discord.Forbidden:
+                    print(f"Bot lacks posting permissions for {channel.name} in {guild.name}")
+                    pass
+                except Exception as e:
+                    print(f"Error in send_server_closed_message: {e}")
+                    pass
 
 
 async def send_all_available_listing_messages():
